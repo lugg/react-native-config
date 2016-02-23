@@ -14,10 +14,10 @@ API_URL=https://myapi.com
 LOG_ERRORS=true
 ```
 
-Then access those from javascript:
+Then access from your app:
 
 ```js
-var Config = require('react-native-android-config');
+import Config from 'react-native-config'
 
 Config.API_URL     // 'https://myapi.com'
 Config.SHOW_ERRORS // 'true'
@@ -25,6 +25,8 @@ Config.SHOW_ERRORS // 'true'
 
 
 ## Setup
+
+### Android
 
 1. Include this module in `android/settings.gradle`:
   
@@ -35,7 +37,7 @@ Config.SHOW_ERRORS // 'true'
   project(':react-native-android-config').projectDir = new File(rootProject.projectDir,
     '../node_modules/react-native-android-config/android')
   ```
-2. Apply a plugin and add dependency to your app build in `android/app/build.gradle`:
+2. Apply a plugin and add dependency to your app build, in `android/app/build.gradle`:
   
   ```
   // first line
