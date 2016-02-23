@@ -37,54 +37,46 @@ Then follow the platform-specific instructions below:
 
 ### iOS
 
-Make sure you have rnpm installed:
-
-```
-$ npm install rnpm --global
-```
-
-Then link this package to your project:
-
-```
-$ rnpm link react-native-config
-```
+Rnpm is not working with this at the moment. So you'll need to add the `.xcodeproj` as an external library, and add the `.a` file manually to "Link Binary with Libraries". [Similar to this](https://github.com/marcshilling/react-native-image-picker#ios-1).
 
 ### Android
 
-1. Include this module in `android/settings.gradle`:
+Include this module in `android/settings.gradle`:
   
-  ```
-  include ':react-native-android-config'
-  include ':app'
+```
+include ':react-native-android-config'
+include ':app'
 
-  project(':react-native-android-config').projectDir = new File(rootProject.projectDir,
-    '../node_modules/react-native-android-config/android')
-  ```
-2. Apply a plugin and add dependency to your app build, in `android/app/build.gradle`:
-  
-  ```
-  // first line
-  apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+project(':react-native-android-config').projectDir = new File(rootProject.projectDir,
+  '../node_modules/react-native-android-config/android')
+```
 
-  // down below
-  dependencies {
-      ...
-      compile project(':react-native-android-config')
-  }
-  ```
-3. Change your main activity to add a new package, in `android/app/src/main/.../MainActivity.java`:
-  
-  ```java
-  import com.lugg.ReactConfig.ReactConfigPackage; // add import
+Apply a plugin and add dependency to your app build, in `android/app/build.gradle`:
 
-  public class MainActivity extends ReactActivity {
-      // ...
+```
+// first line
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
-      @Override
-      protected List<ReactPackage> getPackages() {
-          return Arrays.<ReactPackage>asList(
-              new MainReactPackage(),
-              new ReactNativeConfigPackage() // add package
-          );
-      }
-  ```
+// down below
+dependencies {
+    ...
+    compile project(':react-native-android-config')
+}
+```
+
+Change your main activity to add a new package, in `android/app/src/main/.../MainActivity.java`:
+
+```java
+import com.lugg.ReactConfig.ReactConfigPackage; // add import
+
+public class MainActivity extends ReactActivity {
+    // ...
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+        return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new ReactNativeConfigPackage() // add package
+        );
+    }
+```
