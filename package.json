@@ -7,6 +7,7 @@
   "author": "Pedro Belo",
   "files": [
     "android/",
+    "ios/",
     "index.android.js",
     "index.ios.js"
   ],
