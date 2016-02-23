@@ -15,7 +15,7 @@ class Example extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          FOO={Config.FOO}
+          {JSON.stringify(Config)}
         </Text>
       </View>
     );
