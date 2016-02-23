@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Dotenv.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>ReactNativeConfig.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>EB2648DE1C7BE17A00B8F155</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBE4E83A1C7D1D11000F8875</key>
 		<dict>
 			<key>primary</key>
 			<true/>

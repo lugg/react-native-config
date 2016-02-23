@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
-		EBE4E82D1C7C0026000F8875 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E82C1C7C0026000F8875 /* ReactNativeConfig.m */; };
+		EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,13 +22,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EBE4E8351C7D1668000F8875 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
 		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildDotenvConfig.ruby; sourceTree = "<group>"; };
-		EBE4E82C1C7C0026000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
+		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */,
-				EBE4E82C1C7C0026000F8875 /* ReactNativeConfig.m */,
+				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
 				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */,
 			);
 			path = ReactNativeConfig;
@@ -75,10 +85,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */;
 			buildPhases = (
+				EBE4E8281C7BF689000F8875 /* ShellScript */,
 				EB2648DB1C7BE17A00B8F155 /* Sources */,
 				EB2648DC1C7BE17A00B8F155 /* Frameworks */,
 				EB2648DD1C7BE17A00B8F155 /* CopyFiles */,
-				EBE4E8281C7BF689000F8875 /* ShellScript */,
+				EBE4E8351C7D1668000F8875 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -141,7 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE4E82D1C7C0026000F8875 /* ReactNativeConfig.m in Sources */,
+				EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

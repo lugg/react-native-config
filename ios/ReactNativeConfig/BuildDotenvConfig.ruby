@@ -8,10 +8,14 @@ dotenv = File.read(File.join(Dir.pwd, "../../../.env")).split("\n").inject({}) d
   h.merge!(key => val)
 end
 
-puts ENV.inspect
+# create obj file that sets DOT_ENV as a NSDictionary
+dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v}") }.join(",")
+template = <<EOF
+  #define DOT_ENV @{ #{dotenv_objc} };
+EOF
 
-# dump as json
-path = File.join(ENV["TARGET_TEMP_DIR"], "dotenv.json")
-File.open(path, "w") { |f| f.puts dotenv.to_json }
+# write it so that ReactNativeConfig.m can return it
+path = File.join(ENV["SYMROOT"], "GeneratedDotEnv.m")
+File.open(path, "w") { |f| f.puts template }
 
 puts "Wrote to #{path}"

@@ -1,4 +1,5 @@
 #import "ReactNativeConfig.h"
+#import "GeneratedDotEnv.m" // written during build by BuildDotenvConfig.ruby
 
 @implementation ReactNativeConfig
 
@@ -6,13 +7,7 @@ RCT_EXPORT_MODULE()
 
 - (NSDictionary *)constantsToExport {
 
-    NSError *jsonError = nil;
-    NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"dotenv.json"];
-    NSData *jsonData = [NSData dataWithContentsOfFile:filePath options:kNilOptions error:&jsonError ];
+    return DOT_ENV
 
-    NSLog(@"here");
-    NSDictionary *env = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:jsonData];
-    return env;
 }
-
 @end
