@@ -1,0 +1,20 @@
+def readDotEnv = {
+    def env = [:]
+    def envFile = System.env['DOTENV'] ?: "$project.rootDir/../.env"
+    new File(envFile).eachLine { line ->
+        def (key, val) = line.tokenize('=')
+        if (key && val) {
+            env.put(key, val)
+        }
+    }
+    env
+}
+
+android {
+    defaultConfig {
+        readDotEnv().each { k, v ->
+            buildConfigField "String", k, "\"$v\""
+            resValue "string", k, "\"$v\""
+        }
+    }
+}
