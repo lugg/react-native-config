@@ -26,6 +26,29 @@ Config.SHOW_ERRORS // 'true'
 
 ## Setup
 
+Install the package:
+
+```
+$ npm install react-native-config --save
+```
+
+Then follow the platform-specific instructions below:
+
+
+### iOS
+
+Make sure you have rnpm installed:
+
+```
+$ npm install rnpm --global
+```
+
+Then link this package to your project:
+
+```
+$ rnpm link react-native-config
+```
+
 ### Android
 
 1. Include this module in `android/settings.gradle`:
