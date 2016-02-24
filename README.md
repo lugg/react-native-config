@@ -23,6 +23,46 @@ Config.API_URL     // 'https://myapi.com'
 Config.SHOW_ERRORS // 'true'
 ```
 
+### Android
+
+These variables are also available for use in your Gradle configuration, via `project.env`:
+
+```groovy
+signingConfigs {
+    release {
+        storeFile file(project.env.get("RELEASE_STORE_FILE"))
+        storePassword project.env.get("RELEASE_STORE_PASSWORD")
+        keyAlias project.env.get("RELEASE_KEY_ALIAS")
+        keyPassword project.env.get("RELEASE_KEY_PASSWORD")
+    }
+}
+```
+
+And automatically made available in `AndroidManifest.xml` and others:
+
+```xml
+<meta-data
+  android:name="com.google.android.geo.API_KEY"
+  android:value="@string/GOOGLE_MAPS_API_KEY" />
+```
+
+### iOS
+
+Xcode support is missing; variables declared in `.env`. can be consumed from React Native apps in iOS via `Config`, but not from `plist` files.
+
+
+### Different environments
+
+Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
+
+By default react-native-config will read from `.env`, but you can change it setting  `ENVFILE` before running it, like:
+
+```
+$ ENVFILE=.env.staging react-native run-android
+```
+
+This is only support in Android at the moment – The iOS equivalent should be coming soon.
+
 
 ## Setup
 
