@@ -11,7 +11,7 @@ Declare config variables in `.env`:
 
 ```
 API_URL=https://myapi.com
-LOG_ERRORS=true
+GOOGLE_MAPS_API_KEY=abcdefgh
 ```
 
 Then access from your app:
@@ -19,13 +19,13 @@ Then access from your app:
 ```js
 import Config from 'react-native-config'
 
-Config.API_URL     // 'https://myapi.com'
-Config.SHOW_ERRORS // 'true'
+Config.API_URL  // 'https://myapi.com'
+Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 ```
 
 ### Android
 
-These variables are also available for use in your Gradle configuration, via `project.env`:
+You can also refer to any variables set in `.env` from your Gradle configuration:
 
 ```groovy
 signingConfigs {
@@ -38,7 +38,7 @@ signingConfigs {
 }
 ```
 
-And automatically made available in `AndroidManifest.xml` and others:
+They are also available to settings in `AndroidManifest.xml` and others:
 
 ```xml
 <meta-data
