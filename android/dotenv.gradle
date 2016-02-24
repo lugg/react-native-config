@@ -1,6 +1,6 @@
 def readDotEnv = {
     def env = [:]
-    def envFile = System.env['DOTENV'] ?: "$project.rootDir/../.env"
+    def envFile = System.env['ENVFILE'] ?: "$project.rootDir/../.env"
     new File(envFile).eachLine { line ->
         def (key, val) = line.tokenize('=')
         if (key && val) {
