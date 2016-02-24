@@ -37,9 +37,11 @@ Then follow the platform-specific instructions below:
 
 ### iOS
 
-Rnpm is not working with this at the moment (please let me know if you can help!).
+Link the library with [rnpm](https://github.com/rnpm/rnpm):
 
-In the meantime you'll need to add the `.xcodeproj` as an external library and flag the `.a` file manually under "Link Binary with Libraries". [Similar to this](https://github.com/marcshilling/react-native-image-picker#ios-1).
+```
+$ rnpm link react-native-config
+```
 
 
 ### Android
