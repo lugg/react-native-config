@@ -25,7 +25,16 @@ Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 
 ### Android
 
-You can also refer to any variables set in `.env` from your Gradle configuration:
+Config variables set in `.env` are available to your Java classes via `BuildConfig`:
+
+```java
+public HttpURLConnection getApiClient() {
+    URL url = new URL(BuildConfig.API_URL);
+    // ...
+}
+```
+
+You can also read them from your Gradle configuration:
 
 ```groovy
 signingConfigs {
@@ -38,7 +47,7 @@ signingConfigs {
 }
 ```
 
-They are also available to settings in `AndroidManifest.xml` and others:
+And use them to configure libraries in `AndroidManifest.xml` and others:
 
 ```xml
 <meta-data
