@@ -105,7 +105,7 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 // down below, add new compile:
 dependencies {
     ...
-    compile project(':react-native-android-config')
+    compile project(':react-native-config')
 }
 ```
 
