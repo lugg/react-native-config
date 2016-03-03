@@ -15,7 +15,7 @@ class Example extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {JSON.stringify(Config)}
+          API_URL={Config.API_URL}
         </Text>
       </View>
     );
