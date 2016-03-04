@@ -64,13 +64,40 @@ Xcode support is missing; variables declared in `.env`. can be consumed from Re
 
 Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
 
-By default react-native-config will read from `.env`, but you can change it setting  `ENVFILE` before running it, like:
+By default react-native-config will read from `.env`, but you can change it when building or releasing your app.
+
+
+#### Android
+
+To pick which file to use in Android, just set `ENVFILE` before building/running your app. For instance:
 
 ```
 $ ENVFILE=.env.staging react-native run-android
 ```
 
-This is only support in Android at the moment – The iOS equivalent should be coming soon.
+#### iOS
+
+Support for Xcode is still a bit experimental – but at this moment the recommendation is to create a new scheme for your app, and configure it to use a different env file.
+
+To create a new scheme, open your app in Xcode and then:
+
+- Click the current app scheme (button with your app name next to the stop button)
+- Click "Manage Schemes..."
+- Select your current scheme (the one on top)
+- Click the settings gear below the list and select "Duplicate"
+- Give it a proper name on the top left. For instance: "Myapp (staging)"
+
+To make a scheme use a different env file, on the manage scheme window:
+
+- Expand the "Build" settings on left
+- Click "Pre-actions", and under the plus sign select "New Run Script Action"
+- Fill in with this script on the dark box, replacing `.env.staging` for the file you want:
+
+```
+echo ".env.staging" > /tmp/envfile
+```
+
+This is still experimental and obviously a bit dirty – let me know if you have better ideas on this front!
 
 
 ## Setup
