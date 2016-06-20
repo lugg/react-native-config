@@ -3,6 +3,7 @@ package com.lugg.ReactNativeConfig;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.util.Log;
 
