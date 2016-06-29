@@ -4,6 +4,12 @@
   "description": "Expose config variables to React Native apps",
   "keywords": ["env", "config", "config-var", "react-native", "android", "ios", "12factor"],
   "homepage": "https://github.com/luggg/react-native-config",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luggg/react-native-config"
+  },
+  "private": false,
   "author": "Pedro Belo",
   "files": [
     "android/",
