@@ -161,3 +161,15 @@ public class MainActivity extends ReactActivity {
         );
     }
 ```
+
+##### Advanced Setup
+
+In `android/app/build.gradle`, if you use `applicationIdSuffix` or `applicationId` that is different from the package name indicated in `AndroidManifest.xml` in `<manifest package="...">` tag, for example, to support different build variants:
+Add this in `android/app/build.gradle`
+
+```
+defaultConfig {
+    ...
+    resValue "string", "build_config_package", "YOUR_PACKAGE_NAME_IN_ANDROIDMANIFEST.XML"
+}
+```
