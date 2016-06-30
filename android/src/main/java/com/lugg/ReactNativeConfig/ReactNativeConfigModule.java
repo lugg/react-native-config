@@ -1,18 +1,11 @@
 package com.lugg.ReactNativeConfig;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.location.LocationManager;
 import android.util.Log;
 
-import com.facebook.react.common.ReactConstants;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 import java.lang.ClassNotFoundException;
 import java.lang.IllegalAccessException;
