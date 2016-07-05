@@ -5,6 +5,12 @@
 
 RCT_EXPORT_MODULE()
 
++ (NSDictionary *) constantsToExport {
+
+    return DOT_ENV
+
+}
+
 - (NSDictionary *)constantsToExport {
 
     return DOT_ENV
