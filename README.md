@@ -97,7 +97,23 @@ To make a scheme use a different env file, on the manage scheme window:
 echo ".env.staging" > /tmp/envfile
 ```
 
-This is still experimental and obviously a bit dirty – let me know if you have better ideas on this front!
+**UPDATE**
+It is also possible to add a `.xcconfig` extention to the env files, e.g. `.env.production.xcconfig`, then drag and drop them into your Xcode project.
+- When the dialog pops up just chose to reference these files, don't copy them.
+- Then select the project on the left (the root in project navigator)
+- On the right side under Configuration select the `.env` file you want to use for each scheme. e.g. `Debug -> .env.debug` and `Release -> .env.production`
+Since we added the `.xcconfig` Xcode can pick the `.env` file as its own configuration settings, and it uses the same format as we do.
+
+Now you can use the env variables inside `Info.plist` just like
+```xml
+<key>CFBundleIdentifier</key>¬
+<string>$(MY_BUNDLE_IDENTIFIER)</string>¬
+<key>CFBundleInfoDictionaryVersion</key>¬
+<string>6.0</string>¬
+<key>CFBundleName</key>¬
+<string>$(MY_PRODUCT_NAME)</string>
+```
+You can find a good tutorial and more information about Xcode Config files [here](http://www.jontolof.com/cocoa/using-xcconfig-files-for-you-xcode-project/)
 
 
 ## Setup
@@ -123,7 +139,7 @@ $ rnpm link react-native-config
 ### Android
 
 Include this module in `android/settings.gradle`:
-  
+
 ```
 include ':react-native-config'
 include ':app'
