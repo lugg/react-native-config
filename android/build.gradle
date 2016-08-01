@@ -30,5 +30,5 @@ repositories {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:0.13.+'
+    compile 'com.facebook.react:react-native:+' // from node_modules
 }
