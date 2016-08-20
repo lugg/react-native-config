@@ -16,8 +16,9 @@ readDotEnv()
 android {
     defaultConfig {
         project.env.each { k, v ->
+            def escaped = v.replaceAll("%","\\\\u0025")
             buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$v\""
+            resValue "string", k, "\"$escaped\""
         }
     }
 }
