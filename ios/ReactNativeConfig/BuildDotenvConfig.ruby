@@ -9,15 +9,21 @@ custom_env = false
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
-  file = File.read("/tmp/envfile").strip
+  file = "/tmp/envfile"
+else
+  file = File.join(Dir.pwd, "../../../#{file}")
 end
 
 puts "Reading env from #{file}"
 
 # find that above node_modules/react-native-config/ios/
-dotenv = File.read(File.join(Dir.pwd, "../../../#{file}")).split("\n").inject({}) do |h, line|
-  key, val = line.split("=", 2)
-  h.merge!(key => val)
+dotenv = File.read(file).split("\n").inject({}) do |h, line|
+  if line.strip.empty? or line.start_with?('#')
+    h
+  else
+    key, val = line.split("=", 2)
+    h.merge!(key => val)
+  end
 end
 
 # create obj file that sets DOT_ENV as a NSDictionary
