@@ -18,7 +18,7 @@ puts "Reading env from #{file}"
 dotenv = File.read(File.join(Dir.pwd, "../../../#{file}")).split("\n").inject({}) do |h, line|
   key, val = line.split("=", 2)
   h.merge!(key => val)
-end
+end rescue {}
 
 # create obj file that sets DOT_ENV as a NSDictionary
 dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v}") }.join(",")
