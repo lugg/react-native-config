@@ -57,7 +57,20 @@ And use them to configure libraries in `AndroidManifest.xml` and others:
 
 ### iOS
 
-Xcode support is missing; variables declared in `.env`. can be consumed from React Native apps in iOS via `Config`, but not from `plist` files.
+Read variables declared in `.env` from your Obj-C classes like:
+
+```objective-c
+// import header
+#import "ReactNativeConfig.h"
+
+// then read individual keys like:
+NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"]];
+
+// or just fetch the whole config
+NSDictionary *config = [ReactNativeConfig env];
+```
+
+Support for `plist` files is missing. We'd love to be able to refer to config from `.env` there, but haven't found a way to support this yet. Let us know if you have ideas!
 
 
 ### Different environments
