@@ -2,11 +2,17 @@ def readDotEnv = {
     def env = [:]
     def envFile = System.env['ENVFILE'] ?: ".env"
     println("Reading env from: $envFile")
-    new File("$project.rootDir/../$envFile").eachLine { line ->
-        def (key, val) = line.tokenize('=')
-        if (key && val && key.substring(0, 1) != "#") {
-            env.put(key, val)
-        }
+    try {
+      new File("$project.rootDir/../$envFile").eachLine { line ->
+          def (key, val) = line.tokenize('=')
+          if (key && val && key.substring(0, 1) != "#") {
+              env.put(key, val)
+          }
+      }
+    } catch (Exception ex) {
+      println("**************************")
+      println("*** Missing .env file ****")
+      println("**************************")
     }
     project.ext.set("env", env)
 }
