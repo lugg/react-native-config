@@ -158,20 +158,20 @@ dependencies {
 }
 ```
 
-Change your main activity to add a new package, in `android/app/src/main/.../MainActivity.java`:
+Change your main application to add a new package, in `android/app/src/main/.../MainApplication.java`:
 
 ```java
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage; // add import
 
-public class MainActivity extends ReactActivity {
+public class MainApplication extends Application implements ReactApplication {
     // ...
 
     @Override
     protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new ReactNativeConfigPackage() // add package
-        );
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new ReactNativeConfigPackage() // add package
+      );
     }
 ```
 
