@@ -173,3 +173,13 @@ defaultConfig {
     resValue "string", "build_config_package", "YOUR_PACKAGE_NAME_IN_ANDROIDMANIFEST.XML"
 }
 ```
+
+## Troubleshooting
+
+### Problems with Proguard
+
+When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
+
+    -keep class com.mypackage.BuildConfig { *; }
+    
+`mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
