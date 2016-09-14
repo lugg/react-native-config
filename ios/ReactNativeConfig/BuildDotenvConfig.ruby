@@ -2,21 +2,20 @@
 
 require "json"
 
-# defaults
-file = ".env"
-custom_env = false
-
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
   file = File.read("/tmp/envfile").strip
+else
+  custom_env = false
+  file = File.join(Dir.pwd, "../../../.env")
 end
 
 puts "Reading env from #{file}"
 
 dotenv = begin
   # find that above node_modules/react-native-config/ios/
-  raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
+  raw = File.read(file)
   raw.split("\n").inject({}) do |h, line|
     key, val = line.split("=", 2)
     if line.strip.empty? or line.start_with?('#')
