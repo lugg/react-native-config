@@ -14,11 +14,24 @@ end
 
 puts "Reading env from #{file}"
 
-# find that above node_modules/react-native-config/ios/
-dotenv = File.read(File.join(Dir.pwd, "../../../#{file}")).split("\n").inject({}) do |h, line|
-  key, val = line.split("=", 2)
-  h.merge!(key => val)
-end rescue {}
+dotenv = begin
+  # find that above node_modules/react-native-config/ios/
+  raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
+  raw.split("\n").inject({}) do |h, line|
+    key, val = line.split("=", 2)
+    if line.strip.empty? or line.start_with?('#')
+      h
+    else
+      key, val = line.split("=", 2)
+      h.merge!(key => val)
+    end
+  end
+rescue Errno::ENOENT
+  puts("**************************")
+  puts("*** Missing .env file ****")
+  puts("**************************")
+  {} # set dotenv as an empty hash
+end
 
 # create obj file that sets DOT_ENV as a NSDictionary
 dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v}") }.join(",")
