@@ -57,7 +57,16 @@ And use them to configure libraries in `AndroidManifest.xml` and others:
 
 ### iOS
 
-Xcode support is missing; variables declared in `.env`. can be consumed from React Native apps in iOS via `Config`, but not from `plist` files.
+Xcode support is missing; variables declared in `.env`. Can not be used from `plist` files, but in JS (via `Config`) or native Objective-C code like this:
+
+```Objective-C
+#import "ReactNativeConfig.h"
+
+...
+
+NSDictionary *config = [ReactNativeConfig constantsToExport];
+NSString password = config[@"RELEASE_STORE_PASSWORD"]
+```
 
 
 ### Different environments
