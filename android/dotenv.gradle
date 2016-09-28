@@ -4,7 +4,9 @@ def readDotEnv = {
     println("Reading env from: $envFile")
     try {
       new File("$project.rootDir/../$envFile").eachLine { line ->
-          def (key, val) = line.tokenize('=')
+          def splitted = line.tokenize('=')
+          def key = splitted[0]
+          def val = splitted.subList(1, splitted.size()).join('=')
           if (key && val && key.substring(0, 1) != "#") {
               env.put(key, val)
           }
