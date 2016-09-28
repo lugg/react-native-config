@@ -6,7 +6,7 @@ def readDotEnv = {
       new File("$project.rootDir/../$envFile").eachLine { line ->
           def splitAt = line.indexOf("=")
           def key = line.substring(0, splitAt)
-          def value = line.substring(splitAt + 1, line.size())
+          def val = line.substring(splitAt + 1, line.size())
           if (key && val && key.substring(0, 1) != "#") {
               env.put(key, val)
           }
