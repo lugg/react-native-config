@@ -41,6 +41,9 @@ EOF
 # write it so that ReactNativeConfig.m can return it
 path = File.join(ENV["SYMROOT"], "GeneratedDotEnv.m")
 File.open(path, "w") { |f| f.puts template }
+# for archive 
+path = File.join(Dir.pwd, "GeneratedDotEnv.m")
+File.open(path, "w") { |f| f.puts template }
 
 if custom_env
   File.delete("/tmp/envfile")
