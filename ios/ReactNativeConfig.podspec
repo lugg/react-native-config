@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.author             = { "lugg" => "hello@lugg.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/luggit/react-native-config.git", :tag => "master" }
-  s.source_files  = "ReactNativeConfig/**/*.{h,m}"
+  s.source_files  = "ReactNativeConfig/**/*.{h,m,ruby}"
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
