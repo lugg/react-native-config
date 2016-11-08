@@ -1,6 +1,6 @@
 {
   "name": "react-native-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Expose config variables to React Native apps",
   "keywords": ["env", "config", "config-var", "react-native", "android", "ios", "12factor"],
   "homepage": "https://github.com/luggg/react-native-config",
