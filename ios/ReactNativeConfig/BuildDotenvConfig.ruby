@@ -8,14 +8,14 @@ if File.exists?("/tmp/envfile")
   file = File.read("/tmp/envfile").strip
 else
   custom_env = false
-  file = File.join(Dir.pwd, "../../../.env")
+  file = ".env"
 end
 
 puts "Reading env from #{file}"
 
 dotenv = begin
   # find that above node_modules/react-native-config/ios/
-  raw = File.read(file)
+  raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
   raw.split("\n").inject({}) do |h, line|
     key, val = line.split("=", 2)
     if line.strip.empty? or line.start_with?('#')
