@@ -121,61 +121,23 @@ Install the package:
 $ npm install react-native-config --save
 ```
 
-Then follow the platform-specific instructions below:
-
-
-### iOS
-
-Link the library with [rnpm](https://github.com/rnpm/rnpm):
+Link the library:
 
 ```
-$ rnpm link react-native-config
+$ react-native link react-native-config
 ```
 
+### Extra step for Android
 
-### Android
-
-Include this module in `android/settings.gradle`:
-  
-```
-include ':react-native-config'
-include ':app'
-
-project(':react-native-config').projectDir = new File(rootProject.projectDir,
-  '../node_modules/react-native-config/android')
-```
-
-Apply a plugin and add dependency to your app build, in `android/app/build.gradle`:
+Apply a plugin to your app build in `android/app/build.gradle`:
 
 ```
 // 2nd line, add a new apply:
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-
-// down below, add new compile:
-dependencies {
-    ...
-    compile project(':react-native-config')
-}
 ```
 
-Change your main application to add a new package, in `android/app/src/main/.../MainApplication.java`:
 
-```java
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage; // add import
-
-public class MainApplication extends Application implements ReactApplication {
-    // ...
-
-    @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-          new ReactNativeConfigPackage() // add package
-      );
-    }
-```
-
-##### Advanced Setup
+#### Advanced Android Setup
 
 In `android/app/build.gradle`, if you use `applicationIdSuffix` or `applicationId` that is different from the package name indicated in `AndroidManifest.xml` in `<manifest package="...">` tag, for example, to support different build variants:
 Add this in `android/app/build.gradle`
