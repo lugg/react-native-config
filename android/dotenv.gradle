@@ -1,6 +1,31 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests()[0].args
+
+    Matcher matcher = Pattern.compile("([A-Z]\\w+)").matcher( tskReqStr )
+    if( matcher.find() ) {
+        return matcher.group(1).toLowerCase()
+    } else {
+        return "";
+    }
+}
+
 def readDotEnv = {
+    def envFile = ".env"
+
+    if (System.env['ENVFILE']) {
+      envFile = System.env['ENVFILE'];
+    } else if (project.hasProperty("envConfigFiles")) {
+      def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
+      if (possibleFile) {
+        envFile = possibleFile;
+      }
+    }
+
     def env = [:]
-    def envFile = System.env['ENVFILE'] ?: ".env"
     println("Reading env from: $envFile")
     try {
       new File("$project.rootDir/../$envFile").eachLine { line ->
