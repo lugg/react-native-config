@@ -75,7 +75,7 @@ Read variables in your Info.plist by appending `__RN_CONFIG_` to the name:
 ```
 __RN_CONFIG_API_URL
 ```
-Note: Requires specific setup (see below)
+Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
 
 
 ### Different environments
