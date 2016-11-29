@@ -5,4 +5,4 @@
 // iOS: config vars set in xcconfig and exposed via ReactNativeConfig.m
 import { NativeModules } from 'react-native';
 
-export default NativeModules.ReactNativeConfig;
+export default NativeModules.ReactNativeConfig || {};
