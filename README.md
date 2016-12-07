@@ -71,11 +71,12 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-Read variables in your Info.plist by appending `__RN_CONFIG_` to the name:
+They're also available for configuration in `Info.plist`, by appending `__RN_CONFIG_` to their name:
 
 ```
 __RN_CONFIG_API_URL
 ```
+
 Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
 
 
@@ -151,6 +152,7 @@ $ react-native link react-native-config
 * Search for "preprocess" 
 * Set `Preprocess Info.plist File` to `Yes`
 * Set `Info.plist Preprocessor Prefix File` to `${CONFIGURATION_BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
+* Set `Info.plist Other Preprocessor Flags` to `-traditional`
 * If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
 ### Extra step for Android
