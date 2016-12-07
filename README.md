@@ -71,7 +71,12 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-Support for `plist` files is missing. We'd love to be able to refer to config from `.env` there, but haven't found a way to support this yet. Let us know if you have ideas!
+Read variables in your Info.plist by appending `__RN_CONFIG_` to the name:
+
+```
+__RN_CONFIG_API_URL
+```
+Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
 
 
 ### Different environments
@@ -139,6 +144,14 @@ Link the library:
 ```
 $ react-native link react-native-config
 ```
+
+### Extra step for iOS to support Info.plist
+
+* Go to your project -> Build Settings -> All
+* Search for "preprocess" 
+* Set `Preprocess Info.plist File` to `Yes`
+* Set `Info.plist Preprocessor Prefix File` to `${CONFIGURATION_BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
+* If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
 ### Extra step for Android
 
