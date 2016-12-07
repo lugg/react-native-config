@@ -88,13 +88,13 @@ By default react-native-config will read from `.env`, but you can change it when
 
 #### Android
 
-To pick which file to use in Android, set a variable in your `build.config` before the `apply from:`:
+To pick which file to use in Android, set a variable in your `build.config` before the `apply from:` using all lowercase names:
 
 ```
 project.ext.envConfigFiles = [
     debug: ".env.development",
     release: ".env.production",
-    anyCustomBuildTypeName: ".env",
+    anycustombuildlowercase: ".env",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
