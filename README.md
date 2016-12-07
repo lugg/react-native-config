@@ -40,13 +40,8 @@ public HttpURLConnection getApiClient() {
 You can also read them from your Gradle configuration:
 
 ```groovy
-signingConfigs {
-    release {
-        storeFile file(project.env.get("RELEASE_STORE_FILE"))
-        storePassword project.env.get("RELEASE_STORE_PASSWORD")
-        keyAlias project.env.get("RELEASE_KEY_ALIAS")
-        keyPassword project.env.get("RELEASE_KEY_PASSWORD")
-    }
+defaultConfig {
+    applicationId project.env.get("APP_ID")
 }
 ```
 
@@ -57,6 +52,9 @@ And use them to configure libraries in `AndroidManifest.xml` and others:
   android:name="com.google.android.geo.API_KEY"
   android:value="@string/GOOGLE_MAPS_API_KEY" />
 ```
+
+Once again keep in mind variables stored in `.env` are published with your code, so do not put anything sensitive there like your app `signingConfigs`.
+
 
 ### iOS
 
