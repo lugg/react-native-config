@@ -1,55 +1,63 @@
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-def getCurrentFlavor() {
-    Gradle gradle = getGradle()
-    String tskReqStr = gradle.getStartParameter().getTaskRequests()[0].args
-
-    Matcher matcher = Pattern.compile("([A-Z]\\w+)").matcher( tskReqStr )
-    if( matcher.find() ) {
-        return matcher.group(1).toLowerCase()
-    } else {
-        return "";
+def readFile = { envFile ->
+  def env = [:]
+  println("Reading env from: $envFile")
+  try {
+    new File("$project.rootDir/../$envFile").eachLine { line ->
+        def (key, val) = line.tokenize('=')
+        if (key && val && key.substring(0, 1) != "#") {
+            env.put(key, val)
+        }
     }
+  } catch (Exception ex) {
+    println("**************************")
+    println("*** Missing .env file ****")
+    println("**************************")
+  }
+  return env;
 }
 
 def readDotEnv = {
-    def envFile = ".env"
-
     if (System.env['ENVFILE']) {
-      envFile = System.env['ENVFILE'];
+        project.ext.set("env", readFile(System.env['ENVFILE']))
     } else if (project.hasProperty("envConfigFiles")) {
-      def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
-      if (possibleFile) {
-        envFile = possibleFile;
-      }
+        for (Map.Entry<String, String> entry : project.envConfigFiles.entrySet()) {
+            def buildType = entry.getKey();
+            def envFile = entry.getValue();
+            project.ext.set("env_$buildType", readFile(envFile))
+        }
+    } else {
+        project.ext.set("env", readFile(".env"))
     }
-
-    def env = [:]
-    println("Reading env from: $envFile")
-    try {
-      new File("$project.rootDir/../$envFile").eachLine { line ->
-          def (key, val) = line.tokenize('=')
-          if (key && val && key.substring(0, 1) != "#") {
-              env.put(key, val)
-          }
-      }
-    } catch (Exception ex) {
-      println("**************************")
-      println("*** Missing .env file ****")
-      println("**************************")
-    }
-    project.ext.set("env", env)
 }
 
 readDotEnv()
 
-android {
-    defaultConfig {
-        project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
-        }
+// Sets the constants at project.env_{build_type_name} when doing multiple builds (and therefore using multiple config files)
+// Example: project.env_Release.get("APP_ID") in build.gradle
+android.buildTypes.all { type ->
+    def envFile = "env_" + type.name;
+    if (project.ext.has(envFile)) {
+      project.ext.get(envFile).each { k, v ->
+          def escaped = v.replaceAll("%","\\\\u0025")
+          buildConfigField "String", k, "\"$v\""
+          resValue "string", k, "\"$escaped\""
+      }
     }
+}
+
+// Sets the constants at project.env when using only one config file
+// Example: project.env.get("APP_ID") in build.gradle
+if (project.ext.has("env")) {
+  android {
+      defaultConfig {
+          project.ext.get("env").each { k, v ->
+              def escaped = v.replaceAll("%","\\\\u0025")
+              buildConfigField "String", k, "\"$v\""
+              resValue "string", k, "\"$escaped\""
+          }
+      }
+  }
 }
