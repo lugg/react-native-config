@@ -34,7 +34,7 @@ def readDotEnv = {
                 env.put(key, val)
             }
         }
-    } catch (Exception ex) {
+    } catch (FileNotFoundException ex) {
         println("**************************")
         println("*** Missing .env file ****")
         println("**************************")
