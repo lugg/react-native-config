@@ -101,6 +101,23 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
+When doing this you can no longer use `project.env.get("APP_ID")` since it is possible to build multiple versions at once.  Instead in your build.gradle use `project.env_{build_type}.get("APP_ID")` (example: `project.env_release.get("APP_ID")`).
+
+If you want to use a constant for all the builds types you can do the following before your existing `android` section in the `build.gradle`.
+
+```
+android.buildTypes.all { type ->
+    def envFile = "env_" + type.name;
+    type.applicationId = project.ext.get(envFile).get("APP_ID");
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+    ...
+}
+```
+
 Alternatively, you can set `ENVFILE` before building/running your app. For instance:
 
 ```
