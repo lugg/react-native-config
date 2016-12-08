@@ -17,27 +17,27 @@ def readDotEnv = {
     def envFile = ".env"
 
     if (System.env['ENVFILE']) {
-      envFile = System.env['ENVFILE'];
+        envFile = System.env['ENVFILE'];
     } else if (project.hasProperty("envConfigFiles")) {
-      def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
-      if (possibleFile) {
-        envFile = possibleFile;
-      }
+        def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
+        if (possibleFile) {
+            envFile = possibleFile;
+        }
     }
 
     def env = [:]
     println("Reading env from: $envFile")
     try {
-      new File("$project.rootDir/../$envFile").eachLine { line ->
-          def (key, val) = line.tokenize('=')
-          if (key && val && key.substring(0, 1) != "#") {
-              env.put(key, val)
-          }
-      }
+        new File("$project.rootDir/../$envFile").eachLine { line ->
+            def (key, val) = line.tokenize('=')
+            if (key && val && key.substring(0, 1) != "#") {
+                env.put(key, val)
+            }
+        }
     } catch (Exception ex) {
-      println("**************************")
-      println("*** Missing .env file ****")
-      println("**************************")
+        println("**************************")
+        println("*** Missing .env file ****")
+        println("**************************")
     }
     project.ext.set("env", env)
 }
