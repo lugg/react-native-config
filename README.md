@@ -89,7 +89,7 @@ By default react-native-config will read from `.env`, but you can change it when
 
 #### Android
 
-To pick which file to use in Android, set a variable in your `build.config` before the `apply from:` using all lowercase names:
+To pick which file to use in Android, set a variable in your `build.gradle` before the `apply from:` using all lowercase names:
 
 ```
 project.ext.envConfigFiles = [
