@@ -153,7 +153,7 @@ $ react-native link react-native-config
 ### Extra step for iOS to support Info.plist
 
 * Go to your project -> Build Settings -> All
-* Search for "preprocess"
+* Search for "preprocess" 
 * Set `Preprocess Info.plist File` to `Yes`
 * Set `Info.plist Preprocessor Prefix File` to `${CONFIGURATION_BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
 * Set `Info.plist Other Preprocessor Flags` to `-traditional`
@@ -188,5 +188,5 @@ defaultConfig {
 When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
 
     -keep class com.mypackage.BuildConfig { *; }
-    
+
 `mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
