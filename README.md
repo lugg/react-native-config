@@ -104,11 +104,19 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 Alternatively, you can set `ENVFILE` before building/running/releasing your app. For instance:
 
 ```
+# On Unix or Mac OS X
 # building/running
 $ ENVFILE=.env.staging react-native run-android
 
 # releasing
 $ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
+
+# On Windows
+# building/running
+$ SET ENVFILE=.env.staging && react-native run-android
+
+# releasing
+$ cd android && SET ENVFILE=.env.staging && bash ./gradlew assembleRelease
 ```
 
 #### iOS
@@ -153,7 +161,7 @@ $ react-native link react-native-config
 ### Extra step for iOS to support Info.plist
 
 * Go to your project -> Build Settings -> All
-* Search for "preprocess" 
+* Search for "preprocess"
 * Set `Preprocess Info.plist File` to `Yes`
 * Set `Info.plist Preprocessor Prefix File` to `${CONFIGURATION_BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
 * Set `Info.plist Other Preprocessor Flags` to `-traditional`
