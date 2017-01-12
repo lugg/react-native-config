@@ -138,12 +138,13 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby";
+			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
 		};
 /* End PBXShellScriptBuildPhase section */
 
