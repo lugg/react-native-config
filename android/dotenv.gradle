@@ -1,55 +1,51 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
-def getCurrentFlavor() {
-    Gradle gradle = getGradle()
-    String tskReqStr = gradle.getStartParameter().getTaskRequests()[0].args
-
-    Matcher matcher = Pattern.compile("([A-Z]\\w+)").matcher( tskReqStr )
-    if( matcher.find() ) {
-        return matcher.group(1).toLowerCase()
+def readDotEnv = {
+    if (System.env['ENVFILE']) {
+        def envFile = System.env['ENVFILE'];
+        prepareEnvConfig(envFile)
+    } else if (project.hasProperty("envConfigFiles")) {
+        tasks.whenTaskAdded { task ->
+            if (task.name ==~ /prepare.*Dependencies/) {
+                def possibleFile = project.envConfigFiles.find {
+                    task.name.equalsIgnoreCase("prepare" + it.key + "Dependencies")
+                }?.value
+                def envFile = possibleFile ?: ".env"
+                def flavorName = task.name - "prepare" - "Dependencies"
+                def newTaskName = "prepare" + flavorName + "EnvFile"
+                project.task(newTaskName) {
+                    doLast {
+                        prepareEnvConfig(envFile)
+                    }
+                }
+                task.dependsOn(newTaskName);
+            }
+        }
     } else {
-        return "";
+        prepareEnvConfig(".env")
     }
 }
 
-def readDotEnv = {
-    def envFile = ".env"
-
-    if (System.env['ENVFILE']) {
-        envFile = System.env['ENVFILE'];
-    } else if (project.hasProperty("envConfigFiles")) {
-        def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
-        if (possibleFile) {
-            envFile = possibleFile;
-        }
-    }
-
+private void prepareEnvConfig(envFile) {
     def env = [:]
     println("Reading env from: $envFile")
     try {
         new File("$project.rootDir/../$envFile").eachLine { line ->
             def matcher = (line =~ /^\s*([\w\d\.\-_]+)\s*=\s*(.*)?\s*$/)
-            if (matcher.getCount() == 1 && matcher[0].size() == 3){
+            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
                 env.put(matcher[0][1], matcher[0][2])
             }
         }
+
     } catch (FileNotFoundException ex) {
         println("**************************")
         println("*** Missing .env file ****")
         println("**************************")
     }
-    project.ext.set("env", env)
+    env.each {
+        key, value ->
+            def escaped = value.replaceAll("%", "\\\\u0025")
+            android.defaultConfig.buildConfigField "String", key, "\"$value\""
+            android.defaultConfig.resValue "string", key, "\"$escaped\""
+    }
 }
 
 readDotEnv()
-
-android {
-    defaultConfig {
-        project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
-        }
-    }
-}
