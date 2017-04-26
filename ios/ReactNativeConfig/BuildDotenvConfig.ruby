@@ -14,16 +14,17 @@ end
 puts "Reading env from #{file}"
 
 dotenv = begin
+  # https://regex101.com/r/SLdbes/1
+  dotenv_pattern = /^(?<key>[[:upper:]_]+)=((?<quote>["'])(?<val>.*?[^\\])\k<quote>|)$/
   # find that above node_modules/react-native-config/ios/
   raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
   raw.split("\n").inject({}) do |h, line|
-    key, val = line.split("=", 2)
-    if line.strip.empty? or line.start_with?('#')
-      h
-    else
-      key, val = line.split("=", 2)
-      h.merge!(key => val)
-    end
+    m = line.match(dotenv_pattern)
+    next h if m.nil?
+    key = m[:key]
+    # Ensure string (in case of empty value) and escape any quotes present in the value.
+    val = m[:val].to_s.gsub('"', '\"')
+    h.merge(key => val)
   end
 rescue Errno::ENOENT
   puts("**************************")
