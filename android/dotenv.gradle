@@ -16,6 +16,10 @@ def getCurrentFlavor() {
 def readDotEnv = {
     def envFile = ".env"
 
+    if (project.hasProperty("defaultEnvFile")) {
+        envFile = project.defaultEnvFile
+    }
+
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
     } else if (project.hasProperty("envConfigFiles")) {
