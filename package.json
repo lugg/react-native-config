@@ -14,7 +14,8 @@
   "files": [
     "android/",
     "ios/",
-    "index.js"
+    "index.js",
+    "react-native-config.podspec"
   ],
   "license": "MIT"
 }
