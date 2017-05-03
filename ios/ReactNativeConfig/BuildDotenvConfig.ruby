@@ -42,6 +42,9 @@ EOF
 # write it so that ReactNativeConfig.m can return it
 path = File.join(ENV["SYMROOT"], "GeneratedDotEnv.m")
 File.open(path, "w") { |f| f.puts template }
+# for archive 
+path = File.join(Dir.pwd, "GeneratedDotEnv.m")
+File.open(path, "w") { |f| f.puts template }
 
 # create header file with defines for the Info.plist preprocessor
 info_plist_defines_objc = dotenv.map { |k, v| %Q(#define __RN_CONFIG_#{k}  #{v}) }.join("\n")
