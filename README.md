@@ -104,7 +104,7 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 Alternatively, you can set `ENVFILE` before building/running your app. For instance:
 
 ```
-$ ENVFILE=.env.staging react-native run-android
+$ env ENVFILE=.env.staging react-native run-android
 ```
 
 #### iOS
