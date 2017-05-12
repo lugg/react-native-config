@@ -58,8 +58,4 @@ android {
         def envVars = readDotEnv(variant)
         addBuildConfigFields(variant, envVars)
     }
-    defaultConfig {
-        def envVars = readDotEnv()
-        addBuildConfigFields(android.defaultConfig, envVars)
-    }
 }
