@@ -1,34 +1,32 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+def calculateEnvFile(variant) {
 
-def getCurrentFlavor() {
-    Gradle gradle = getGradle()
-    String tskReqStr = gradle.getStartParameter().getTaskRequests()[0].args
-
-    Matcher matcher = Pattern.compile("([A-Z]\\w+)").matcher( tskReqStr )
-    if( matcher.find() ) {
-        return matcher.group(1).toLowerCase()
-    } else {
-        return "";
-    }
-}
-
-def readDotEnv = {
     def envFile = ".env"
-
     if (project.hasProperty("defaultEnvFile")) {
         envFile = project.defaultEnvFile
     }
 
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
-    } else if (project.hasProperty("envConfigFiles")) {
-        def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
-        if (possibleFile) {
+    } else if (variant && project.hasProperty("envConfigFiles")) {
+        def variantName = variant.getName()
+        def possibleFile = project.envConfigFiles.get(variantName)
+        if (!possibleFile) {
             envFile = possibleFile;
+            def buildType = variant.getBuildType().getName()
+            def indexOfType = variantName.toLowerCase().lastIndexOf(buildType.toLowerCase())
+            def flavor = variantName.take(indexOfType);
+            possibleFile = project.envConfigFiles.get(flavor)
+        }
+        if (possibleFile) {
+            envFile = possibleFile
         }
     }
+    return envFile
+}
 
+def readDotEnv(variant) {
+
+    def envFile = calculateEnvFile(variant)
     def env = [:]
     println("Reading env from: $envFile")
     try {
@@ -39,21 +37,25 @@ def readDotEnv = {
             }
         }
     } catch (FileNotFoundException ex) {
+        def envName = variant ? "variant $variant.getName()" : "defaultConfig"
         println("**************************")
-        println("*** Missing $envFile file ****")
+        println("*** Missing $envFile file for $envName ****")
         println("**************************")
     }
-    project.ext.set("env", env)
+    return env;
 }
 
-readDotEnv()
+def addBuildConfigFields(variant, envVars) {
+    envVars.each { k, v ->
+        def escaped = v.replaceAll("%","\\\\u0025")
+        variant.buildConfigField("String", k, "\"$v\"")
+        variant.resValue("string", k, "\"$escaped\"")
+    }
+}
 
 android {
-    defaultConfig {
-        project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
-        }
+    applicationVariants.all{variant ->
+        def envVars = readDotEnv(variant)
+        addBuildConfigFields(variant, envVars)
     }
 }
