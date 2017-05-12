@@ -1,4 +1,4 @@
-def calculcateEnvFile(variant) {
+def calculateEnvFile(variant) {
 
     def envFile = ".env"
     if (project.hasProperty("defaultEnvFile")) {
@@ -26,7 +26,7 @@ def calculcateEnvFile(variant) {
 
 def readDotEnv(variant) {
 
-    def envFile = calculcateEnvFile(variant)
+    def envFile = calculateEnvFile(variant)
     def env = [:]
     println("Reading env from: $envFile")
     try {
@@ -45,25 +45,21 @@ def readDotEnv(variant) {
     return env;
 }
 
-
+def addBuildConfigFields(variant, envVars) {
+    envVars.each { k, v ->
+        def escaped = v.replaceAll("%","\\\\u0025")
+        variant.buildConfigField("String", k, "\"$v\"")
+        variant.resValue("string", k, "\"$escaped\"")
+    }
+}
 
 android {
     applicationVariants.all{variant ->
         def envVars = readDotEnv(variant)
-        envVars.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
-            println("data: $k = $v")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
-        }
+        addBuildConfigFields(variant, envVars)
     }
     defaultConfig {
-        readDotEnv().each {
-            it.each { k, v ->
-                def escaped = v.replaceAll("%","\\\\u0025")
-                buildConfigField "String", k, "\"$v\""
-                resValue "string", k, "\"$escaped\""
-            }
-        }
+        def envVars = readDotEnv()
+        addBuildConfigFields(android.defaultConfig, envVars)
     }
 }
