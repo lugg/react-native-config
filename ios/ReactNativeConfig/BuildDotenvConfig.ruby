@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require "json"
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
 
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
@@ -47,7 +49,7 @@ File.open(path, "w") { |f| f.puts template }
 info_plist_defines_objc = dotenv.map { |k, v| %Q(#define __RN_CONFIG_#{k}  #{v}) }.join("\n")
 
 # write it so the Info.plist preprocessor can access it
-path = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
+path = File.join(ENV["CONFIGURATION_BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
 File.open(path, "w") { |f| f.puts info_plist_defines_objc }
 
 if custom_env
