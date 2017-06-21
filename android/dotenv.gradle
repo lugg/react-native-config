@@ -46,7 +46,7 @@ def readDotEnv = {
     println("Reading env from: $envFile")
     try {
         new File("$project.rootDir/../$envFile").eachLine { line ->
-            def matcher = (line =~ /^\s*([\w\d\.\-_]+)\s*=\s*(.*)?\s*$/)
+            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*)?['"]?\s*$/)
             if (matcher.getCount() == 1 && matcher[0].size() == 3){
                 env.put(matcher[0][1], matcher[0][2])
             }
