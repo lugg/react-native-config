@@ -3,14 +3,22 @@ import java.util.regex.Pattern
 
 def getCurrentFlavor() {
     Gradle gradle = getGradle()
-    String tskReqStr = gradle.getStartParameter().getTaskRequests()[0].args
 
-    Matcher matcher = Pattern.compile("([A-Z]\\w+)").matcher( tskReqStr )
-    if( matcher.find() ) {
-        return matcher.group(1).toLowerCase()
-    } else {
-        return "";
+    // match optional modules followed by the task
+    // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
+    // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
+    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
+    def flavor = ""
+
+    gradle.getStartParameter().getTaskNames().any { name ->
+        Matcher matcher = pattern.matcher(name)
+        if (matcher.find()) {
+            flavor = matcher.group(1).toLowerCase()
+            return true
+        }
     }
+
+    return flavor
 }
 
 def readDotEnv = {
@@ -23,9 +31,14 @@ def readDotEnv = {
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
     } else if (project.hasProperty("envConfigFiles")) {
-        def possibleFile = project.envConfigFiles.get(getCurrentFlavor())
-        if (possibleFile) {
-            envFile = possibleFile;
+        def flavor = getCurrentFlavor()
+
+        // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
+        project.ext.envConfigFiles.any { pair ->
+            if (flavor.startsWith(pair.key)) {
+                envFile = pair.value
+                return true
+            }
         }
     }
 
@@ -38,9 +51,9 @@ def readDotEnv = {
                 env.put(matcher[0][1], matcher[0][2])
             }
         }
-    } catch (FileNotFoundException ex) {
+    } catch (FileNotFoundException ignored) {
         println("**************************")
-        println("*** Missing $envFile file ****")
+        println("*** Missing .env file ****")
         println("**************************")
     }
     project.ext.set("env", env)
