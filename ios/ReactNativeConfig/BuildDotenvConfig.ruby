@@ -8,7 +8,7 @@ if File.exists?("/tmp/envfile")
   file = File.read("/tmp/envfile").strip
 else
   custom_env = false
-  file = ".env"
+  file = ENV["ENVFILE"] || ".env"
 end
 
 puts "Reading env from #{file}"
