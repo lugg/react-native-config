@@ -110,7 +110,7 @@ $ ENVFILE=.env.staging react-native run-android
 
 On Windows (in cmd)
 ```
-SET ENVFILE = '.env.staging' && react-native run-android
+SET ENVFILE='.env.staging' && react-native run-android
 ```
 
 On Windows (in Powershell)
