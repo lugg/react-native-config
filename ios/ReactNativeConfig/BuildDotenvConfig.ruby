@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require "json"
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
 
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
