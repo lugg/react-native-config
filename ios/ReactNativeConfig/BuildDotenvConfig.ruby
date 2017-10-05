@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require "json"
-
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
