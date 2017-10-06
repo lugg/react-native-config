@@ -79,6 +79,17 @@ __RN_CONFIG_API_URL
 
 Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
 
+#### CocoaPod Configuration
+When using Cocoapods, add the following lines in your Podfile:
+```
+pod 'react-native-config', :path => '../node_modules/react-native-config'
+
+pre_install do |installer|
+	system("cp ../.env /tmp/envfile && cd ../node_modules/react-native-config && export SYMROOT=./ios/ReactNativeConfig && export BUILD_DIR=./ios/ReactNativeConfig && ruby ./ios/ReactNativeConfig/BuildDotenvConfig.ruby")
+
+end
+```
+As the Ruby Script will not be executed, this pre_install hack is unfortunately necessary. See also: https://github.com/CocoaPods/CocoaPods/issues/2187
 
 ### Different environments
 

@@ -9,7 +9,12 @@ Pod::Spec.new do |s|
   s.author       = "Pedro Belo"
 
   s.homepage     = "https://github.com/luggit/react-native-config"
-
+  s.prepare_command = <<-CMD
+                         export SYMROOT=./ios/ReactNativeConfig
+						 export BUILD_DIR=./ios/ReactNativeConfig
+                          ruby ./ios/ReactNativeConfig/BuildDotenvConfig.ruby
+                     CMD
+ 
   s.license      = "MIT"
   s.platform     = :ios, "7.0"
 

@@ -15,7 +15,12 @@ dotenv = begin
   # https://regex101.com/r/cbm5Tp/1
   dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)=((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
   # find that above node_modules/react-native-config/ios/
-  raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
+  if custom_env 
+    raw = file
+  else
+    raw = File.read(File.join(Dir.pwd, "../../../#{file}"))
+  end
+  
   raw.split("\n").inject({}) do |h, line|
     m = line.match(dotenv_pattern)
     next h if m.nil?
