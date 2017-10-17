@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/0b1b91d07858f6f4df1555fa61135725af7ed6a8...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.9.0...master)
+
+### 0.9.0
+
+- Fix compatibility with RN 0.49+ (#172)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.8.1...v0.9.0)
 
 ### 0.8.1
 
