@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+# Allow utf-8 charactor in config value
+# For example, APP_NAME=中文字符
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
