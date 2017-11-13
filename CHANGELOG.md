@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.9.0...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.9.1...master)
+
+### 0.9.1
+
+- Fix unicode support in iOS (#179)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.9.0...v0.9.1)
 
 ### 0.9.0
 
