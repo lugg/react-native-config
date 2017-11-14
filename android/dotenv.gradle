@@ -1,29 +1,44 @@
 def readDotEnv(currentFlavor) {
     def envFile = ".env"
 
+    if (project.hasProperty("defaultEnvFile")) {
+        envFile = project.defaultEnvFile
+    }
+
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
     } else if (project.hasProperty("envConfigFiles")) {
-        def possibleFile = project.envConfigFiles.get(currentFlavor)
-        if (possibleFile) {
-            envFile = possibleFile;
+
+        // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
+        project.ext.envConfigFiles.any { pair ->
+            if (currentFlavor.startsWith(pair.key)) {
+                envFile = pair.value
+                return true
+            }
         }
     }
 
     def env = [:]
     println("Reading env from: $envFile")
-    try {
-        new File("$project.rootDir/../$envFile").eachLine { line ->
-            def matcher = (line =~ /^\s*([\w\d\.\-_]+)\s*=\s*(.*)?\s*$/)
-            if (matcher.getCount() == 1 && matcher[0].size() == 3){
+
+    File f = new File("$project.rootDir/../$envFile");
+    if (!f.exists()) {
+        f = new File("$envFile");
+    }
+
+    if (f.exists()) {
+        f.eachLine { line ->
+            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
+            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
                 env.put(matcher[0][1], matcher[0][2])
             }
         }
-    } catch (FileNotFoundException ex) {
+    } else {
         println("**************************")
         println("*** Missing .env file ****")
         println("**************************")
     }
+
     project.ext.set("env", env)
 }
 
@@ -43,7 +58,6 @@ tasks.whenTaskAdded { task ->
                             }
                         }
                     }
-
                 }
             }
         }
