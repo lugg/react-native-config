@@ -4,6 +4,7 @@
 if File.exists?("/tmp/envfile")
   custom_env = true
   file = File.read("/tmp/envfile").strip
+  defaultEnvFile = ".env"
 else
   custom_env = false
   file = ENV["ENVFILE"] || ".env"
@@ -22,6 +23,19 @@ dotenv = begin
     path = file
   end
   raw = File.read(path)
+
+  if (defaultEnvFile)
+    defaultEnvPath = File.join(Dir.pwd, "../../../#{defaultEnvFile}")
+    if !File.exists?(defaultEnvPath)
+      # try as absolute path
+      defaultEnvPath = defaultEnvFile
+    end
+    defaultRaw = File.read(defaultEnvPath)
+    if (defaultRaw)
+      raw = defaultRaw + "\n" + raw
+    end
+  end
+
   raw.split("\n").inject({}) do |h, line|
     m = line.match(dotenv_pattern)
     next h if m.nil?
