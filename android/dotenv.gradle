@@ -44,13 +44,13 @@ def readDotEnv(currentFlavor) {
 
 tasks.whenTaskAdded { task ->
     if (project.hasProperty("envConfigFiles")) {
-        project.envConfigFiles.each { envKey, envValue ->
-            if (task.name.toLowerCase() == "generate"+envKey+"buildconfig") {
+        project.envConfigFiles.each { envConfigName, envConfigFile ->
+            if (task.name.toLowerCase() == "generate"+envConfigName+"buildconfig") {
                 task.doFirst() {
                     android.applicationVariants.all { variant ->
                         def variantConfigString = variant.getVariantData().getVariantConfiguration().getFullName()
-                        if (envKey.contains(variantConfigString.toLowerCase())) {
-                            readDotEnv(envKey)
+                        if (envConfigName.contains(variantConfigString.toLowerCase())) {
+                            readDotEnv(envConfigName)
                             project.env.each { k, v ->
                                 def escaped = v.replaceAll("%","\\\\u0025")
                                 variant.buildConfigField "String", k, "\"$v\""
