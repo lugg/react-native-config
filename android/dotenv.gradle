@@ -1,79 +1,52 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
-def getCurrentFlavor() {
-    Gradle gradle = getGradle()
-
-    // match optional modules followed by the task
-    // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
-    // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
-    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
-    def flavor = ""
-
-    gradle.getStartParameter().getTaskNames().any { name ->
-        Matcher matcher = pattern.matcher(name)
-        if (matcher.find()) {
-            flavor = matcher.group(1).toLowerCase()
-            return true
-        }
-    }
-
-    return flavor
-}
-
-def readDotEnv = {
+def readDotEnv(currentFlavor) {
     def envFile = ".env"
-
-    if (project.hasProperty("defaultEnvFile")) {
-        envFile = project.defaultEnvFile
-    }
 
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
     } else if (project.hasProperty("envConfigFiles")) {
-        def flavor = getCurrentFlavor()
-
-        // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
-        project.ext.envConfigFiles.any { pair ->
-            if (flavor.startsWith(pair.key)) {
-                envFile = pair.value
-                return true
-            }
+        def possibleFile = project.envConfigFiles.get(currentFlavor)
+        if (possibleFile) {
+            envFile = possibleFile;
         }
     }
 
     def env = [:]
     println("Reading env from: $envFile")
-
-    File f = new File("$project.rootDir/../$envFile");
-    if (!f.exists()) {
-      f = new File("$envFile");
-    }
-
-    if (f.exists()) {
-        f.eachLine { line ->
-            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
-            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
+    try {
+        new File("$project.rootDir/../$envFile").eachLine { line ->
+            def matcher = (line =~ /^\s*([\w\d\.\-_]+)\s*=\s*(.*)?\s*$/)
+            if (matcher.getCount() == 1 && matcher[0].size() == 3){
                 env.put(matcher[0][1], matcher[0][2])
             }
         }
-    } else {
+    } catch (FileNotFoundException ex) {
         println("**************************")
         println("*** Missing .env file ****")
         println("**************************")
     }
-
     project.ext.set("env", env)
 }
 
-readDotEnv()
+tasks.whenTaskAdded { task ->
+    if (project.hasProperty("envConfigFiles")) {
+        project.envConfigFiles.each { envKey, envValue ->
+            if (task.name.toLowerCase() == "generate"+envKey+"buildconfig") {
+                task.doFirst() {
+                    android.applicationVariants.all { variant ->
+                        def variantConfigString = variant.getVariantData().getVariantConfiguration().getFullName()
+                        if (envKey.contains(variantConfigString.toLowerCase())) {
+                            readDotEnv(envKey)
+                            project.env.each { k, v ->
+                                def escaped = v.replaceAll("%","\\\\u0025")
+                                variant.buildConfigField "String", k, "\"$v\""
+                                variant.resValue "string", k, "\"$escaped\""
+                            }
+                        }
+                    }
 
-android {
-    defaultConfig {
-        project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
+                }
+            }
         }
     }
 }
+
