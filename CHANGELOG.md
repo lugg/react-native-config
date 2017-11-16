@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.9.1...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.10.0...master)
+
+### 0.10.0
+
+- Android setup improvements – allow hooks into variants and fix issues with BuddyBuild (#180)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.9.1...v0.10.0)
 
 ### 0.9.1
 
