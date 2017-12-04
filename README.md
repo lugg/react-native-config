@@ -91,10 +91,20 @@ Save config for different environments in different files: `.env.staging`, `.env
 
 By default react-native-config will read from `.env`, but you can change it when building or releasing your app.
 
+The simplest approach is to tell it what file to read with an environment variable, like:
+
+```
+$ ENVFILE=.env.staging react-native run-ios           # bash
+$ SET ENVFILE='.env.staging' && react-native run-ios  # windows
+$ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
+```
+
+This also works for `run-android`. Alternatively, there are platform-specific options below.
+
 
 #### Android
 
-To pick which file to use in Android, set a variable in your `build.gradle` before the `apply from:` using all lowercase names:
+Create a new map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and define build names in lowercase, like:
 
 ```
 project.ext.envConfigFiles = [
@@ -106,20 +116,12 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
-Alternatively, you can set `ENVFILE` before building/running your app. For instance:
-
-```
-$ ENVFILE=.env.staging react-native run-android          # bash
-$ SET ENVFILE='.env.staging' && react-native run-android # windows
-$ env:ENVFILE=".env.staging"; react-native run-android   # powershell
-```
-
 
 #### iOS
 
-Support for Xcode is still a bit experimental – but at this moment the recommendation is to create a new scheme for your app, and configure it to use a different env file.
+The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
 
-To create a new scheme, open your app in Xcode and then:
+Start by creating a new scheme:
 
 - Click the current app scheme (button with your app name next to the stop button)
 - Click "Manage Schemes..."
@@ -127,7 +129,7 @@ To create a new scheme, open your app in Xcode and then:
 - Click the settings gear below the list and select "Duplicate"
 - Give it a proper name on the top left. For instance: "Myapp (staging)"
 
-To make a scheme use a different env file, on the manage scheme window:
+Then edit it to make it use a different env file. From the "manage scheme" window:
 
 - Expand the "Build" settings on left
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
@@ -137,7 +139,7 @@ To make a scheme use a different env file, on the manage scheme window:
 echo ".env.staging" > /tmp/envfile
 ```
 
-This is still experimental and obviously a bit dirty – let me know if you have better ideas on this front!
+This is still a bit experimental and dirty – let us know if you have a better idea on how to make iOS use different configurations opening a pull request or issue!
 
 
 ## Setup
