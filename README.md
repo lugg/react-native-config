@@ -53,8 +53,13 @@ And use them to configure libraries in `AndroidManifest.xml` and others:
   android:value="@string/GOOGLE_MAPS_API_KEY" />
 ```
 
-**Variables stored in `.env` are published with your code, so DO NOT put anything sensitive there like your app `signingConfigs`.**
+All variables are strings, so you may need to cast them. For instance, in Gradle:
 
+```
+versionCode project.env.get("VERSION_CODE").toInteger()
+```
+
+Once again, remember variables stored in `.env` are published with your code, so **DO NOT put anything sensitive there like your app `signingConfigs`.**
 
 ### iOS
 
