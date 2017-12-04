@@ -7,6 +7,8 @@ def loadDotEnv(currentFlavor) {
 
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE'];
+    } else if (System.getProperty('ENVFILE')) {
+        envFile = System.getProperty('ENVFILE');
     } else if (project.hasProperty("envConfigFiles")) {
 
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
