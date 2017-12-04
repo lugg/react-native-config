@@ -23,7 +23,7 @@ Config.API_URL  // 'https://myapi.com'
 Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 ```
 
-Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so do not store sensitive keys in `.env`. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
+Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
 
 
 ### Android
