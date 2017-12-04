@@ -5,14 +5,15 @@
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8
 
+defaultEnvFile = ".env"
+
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
   file = File.read("/tmp/envfile").strip
-  defaultEnvFile = ".env"
 else
   custom_env = false
-  file = ENV["ENVFILE"] || ".env"
+  file = ENV["ENVFILE"] || defaultEnvFile
 end
 
 puts "Reading env from #{file}"
@@ -23,13 +24,11 @@ dotenv = begin
 
   # find that above node_modules/react-native-config/ios/
   path = File.join(Dir.pwd, "../../../#{file}")
-  if !File.exists?(path)
-    # try as absolute path
-    path = file
-  end
-  raw = File.read(path)
-
-  if (defaultEnvFile)
+  if File.exists?(path)
+    raw = File.read(path)
+  elsif File.exists?(file)
+    raw = File.read(file)    
+  else
     defaultEnvPath = File.join(Dir.pwd, "../../../#{defaultEnvFile}")
     if !File.exists?(defaultEnvPath)
       # try as absolute path
