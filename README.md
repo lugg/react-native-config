@@ -123,21 +123,18 @@ The basic idea in iOS is to have one scheme per environment file, so you can eas
 
 Start by creating a new scheme:
 
-- Click the current app scheme (button with your app name next to the stop button)
-- Click "Manage Schemes..."
-- Select your current scheme (the one on top)
-- Click the settings gear below the list and select "Duplicate"
+- In the Xcode menu, go to Product > Scheme > Edit Scheme
+- Click Duplicate Scheme on the bottom
 - Give it a proper name on the top left. For instance: "Myapp (staging)"
 
-Then edit it to make it use a different env file. From the "manage scheme" window:
+Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
 
 - Expand the "Build" settings on left
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
-- Fill in with this script on the dark box, replacing `.env.staging` for the file you want:
-
-```
-echo ".env.staging" > /tmp/envfile
-```
+- Where it says "Type a script or drag a script file", type:
+  ```
+  echo ".env.staging" > /tmp/envfile   # replace .env.staging for your file
+  ```
 
 This is still a bit experimental and dirty – let us know if you have a better idea on how to make iOS use different configurations opening a pull request or issue!
 
@@ -147,7 +144,7 @@ This is still a bit experimental and dirty – let us know if you have a better
 Install the package:
 
 ```
-$ npm install react-native-config --save
+$ yarn add react-native-config
 ```
 
 Link the library:
