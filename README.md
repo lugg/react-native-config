@@ -76,7 +76,7 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-They're also available for configuration in `Info.plist`, by appending `__RN_CONFIG_` to their name:
+They're also available for configuration in `Info.plist`, by prepending `__RN_CONFIG_` to their name:
 
 ```
 __RN_CONFIG_API_URL
