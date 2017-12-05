@@ -1,16 +1,36 @@
-def loadDotEnv(currentFlavor) {
-    def envFile = ".env"
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
-    if (project.hasProperty("defaultEnvFile")) {
-        envFile = project.defaultEnvFile
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+
+    // match optional modules followed by the task
+    // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
+    // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
+    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
+    def flavor = ""
+
+    gradle.getStartParameter().getTaskNames().any { name ->
+        Matcher matcher = pattern.matcher(name)
+        if (matcher.find()) {
+            flavor = matcher.group(1).toLowerCase()
+            return true
+        }
     }
 
-    if (System.env['ENVFILE']) {
-        envFile = System.env['ENVFILE'];
-    } else if (System.getProperty('ENVFILE')) {
-        envFile = System.getProperty('ENVFILE');
-    } else if (project.hasProperty("envConfigFiles")) {
+    return flavor
+}
 
+def loadDotEnv(flavor = getCurrentFlavor()) {
+    def envFile = ".env"
+
+    if (System.env['ENVFILE']) {
+        envFile = System.env['ENVFILE']
+    } else if (System.getProperty('ENVFILE')) {
+        envFile = System.getProperty('ENVFILE')
+    } else if (project.hasProperty("defaultEnvFile")) {
+        envFile = project.defaultEnvFile
+    } else if (project.hasProperty("envConfigFiles")) {
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
         project.ext.envConfigFiles.any { pair ->
             if (currentFlavor.startsWith(pair.key)) {
@@ -44,7 +64,7 @@ def loadDotEnv(currentFlavor) {
     project.ext.set("env", env)
 }
 
-loadDotEnv('.env')
+loadDotEnv()
 
 android {
     defaultConfig {
