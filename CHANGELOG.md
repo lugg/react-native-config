@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.11.0...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.1...master)
+
+### 0.11.1
+
+- Fix environment selection in Android (82ee9ad)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.0...v0.11.1)
 
 ### 0.11.0
 
