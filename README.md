@@ -104,13 +104,19 @@ This also works for `run-android`. Alternatively, there are platform-specific op
 
 #### Android
 
-Create a new map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and define build names in lowercase, like:
+The same environment variable can be used to assemble releases with a different config:
+
+```
+$ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
+```
+
+Alternatively, you can define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
 
 ```
 project.ext.envConfigFiles = [
     debug: ".env.development",
     release: ".env.production",
-    anycustombuildlowercase: ".env",
+    anothercustombuild: ".env",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
