@@ -159,23 +159,25 @@ Link the library:
 $ react-native link react-native-config
 ```
 
-### Extra step for iOS to support Info.plist
-
-* Go to your project -> Build Settings -> All
-* Search for "preprocess" 
-* Set `Preprocess Info.plist File` to `Yes`
-* Set `Info.plist Preprocessor Prefix File` to `${BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
-* Set `Info.plist Other Preprocessor Flags` to `-traditional`
-* If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
 ### Extra step for Android
 
-Apply a plugin to your app build in `android/app/build.gradle`:
+You'll also need to manually apply a plugin to your app, from `android/app/build.gradle`:
 
 ```
 // 2nd line, add a new apply:
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
+
+
+### Extra step for iOS to support Info.plist
+
+* Go to your project -> Build Settings -> All
+* Search for "preprocess"
+* Set `Preprocess Info.plist File` to `Yes`
+* Set `Info.plist Preprocessor Prefix File` to `${BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
+* Set `Info.plist Other Preprocessor Flags` to `-traditional`
+* If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
 
 #### Advanced Android Setup
