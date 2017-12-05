@@ -2,7 +2,15 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.10.0...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.0...master)
+
+### 0.11.0
+
+- Fix env file selection in iOS (#185)
+- Support envfile selection as a system property (#191)
+- Typescript support (#186)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.10.0...v0.11.0)
 
 ### 0.10.0
 
