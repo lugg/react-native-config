@@ -1,9 +1,11 @@
-'use strict';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
 
 import React, { Component } from 'react';
-
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
@@ -11,7 +13,7 @@ import {
 
 import Config from 'react-native-config';
 
-class Example extends Component {
+export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
@@ -36,5 +38,3 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
-
-AppRegistry.registerComponent('Example', () => Example);

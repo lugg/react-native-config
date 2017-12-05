@@ -1,13 +1,24 @@
 {
-  "name": "Example",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
-  },
-  "dependencies": {
-    "react": "^15.4.0",
-    "react-native": "^0.38.0",
-    "react-native-config": "../"
-  }
+	"name": "Example",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest",
+		"postinstall": "rm -rf node_modules/react-native-config/Example"
+	},
+	"dependencies": {
+		"react": "16.0.0",
+		"react-native": "0.50.4",
+		"react-native-config": "../"
+	},
+	"devDependencies": {
+		"babel-jest": "21.2.0",
+		"babel-preset-react-native": "4.0.0",
+		"jest": "21.2.1",
+		"react-test-renderer": "16.0.0"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
 }
