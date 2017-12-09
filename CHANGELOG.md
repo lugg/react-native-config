@@ -2,7 +2,14 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.11.1...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.2...master)
+
+### 0.11.2
+
+- Fix env selection in Android (#195)
+- Escape env values in Android (195a209)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.1...v0.11.2)
 
 ### 0.11.1
 
