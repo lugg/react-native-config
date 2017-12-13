@@ -17,5 +17,6 @@
     "index.js",
     "react-native-config.podspec"
   ],
+  "types": "./index.d.ts",
   "license": "MIT"
 }
