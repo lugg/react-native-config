@@ -201,3 +201,16 @@ When Proguard is enabled (which it is by default for Android release builds), it
     -keep class com.mypackage.BuildConfig { *; }
     
 `mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
+
+## Testing
+
+### Jest
+
+For mocking the `Config.FOO_BAR` usage, create a mock at `__mocks__/react-native-config.js`:
+
+```
+// __mocks__/react-native-config.js
+export default {
+  FOO_BAR: 'baz',
+};
+```
