@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.11.2...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.3...master)
+
+### 0.11.3
+
+- Fix typescript (#204)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.2...v0.11.3)
 
 ### 0.11.2
 
