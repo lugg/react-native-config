@@ -15,6 +15,7 @@
     "android/",
     "ios/",
     "index.js",
+    "index.d.ts",
     "react-native-config.podspec"
   ],
   "types": "./index.d.ts",
