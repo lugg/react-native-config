@@ -27,7 +27,7 @@ dotenv = begin
   if File.exists?(path)
     raw = File.read(path)
   elsif File.exists?(file)
-    raw = File.read(file)    
+    raw = File.read(file)
   else
     defaultEnvPath = File.join(Dir.pwd, "../../../#{defaultEnvFile}")
     if !File.exists?(defaultEnvPath)
@@ -56,7 +56,7 @@ rescue Errno::ENOENT
 end
 
 # create obj file that sets DOT_ENV as a NSDictionary
-dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v}") }.join(",")
+dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v.chomp}") }.join(",")
 template = <<EOF
   #define DOT_ENV @{ #{dotenv_objc} };
 EOF
