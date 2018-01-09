@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.11.4...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.5...master)
+
+### 0.11.5
+
+- Fix issue with CRLF (#201)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.4...v0.11.5)
 
 ### 0.11.4
 
