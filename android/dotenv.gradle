@@ -1,7 +1,7 @@
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-def getCurrentFlavor() {
+def getCurrentFlavorLowerCased() {
     Gradle gradle = getGradle()
 
     // match optional modules followed by the task
@@ -21,24 +21,25 @@ def getCurrentFlavor() {
     return flavor
 }
 
-def loadDotEnv(flavor = getCurrentFlavor()) {
-    def envFile = ".env"
-
+def matchEnvFile(flavor) {
     if (System.env['ENVFILE']) {
-        envFile = System.env['ENVFILE']
+        return System.env['ENVFILE']
     } else if (System.getProperty('ENVFILE')) {
-        envFile = System.getProperty('ENVFILE')
+        return System.getProperty('ENVFILE')
     } else if (project.hasProperty("defaultEnvFile")) {
-        envFile = project.defaultEnvFile
+        return project.defaultEnvFile
     } else if (project.hasProperty("envConfigFiles")) {
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
-        project.ext.envConfigFiles.any { pair ->
-            if (flavor.startsWith(pair.key)) {
-                envFile = pair.value
-                return true
-            }
-        }
+        return project.ext.envConfigFiles.find{pair -> 
+            flavor.startsWith(pair.key.toLowerCase())
+        }.value
+    } else {
+        return ".env";
     }
+}
+
+def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
+    def envFile = matchEnvFile(flavor)
 
     def env = [:]
     println("Reading env from: $envFile")
