@@ -34,8 +34,6 @@ def getEnvFilename(flavor) {
 
 def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
     def envFilename = getEnvFilename(flavor)
-
-    def env = [:]
     println("Reading env from: $envFilename")
 
     File f = new File("$project.rootDir/../$envFilename");
@@ -43,6 +41,7 @@ def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
         f = new File("$envFilename");
     }
 
+    def env = [:]
     if (f.exists()) {
         f.eachLine { line ->
             def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
