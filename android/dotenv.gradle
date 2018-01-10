@@ -1,5 +1,4 @@
 import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 def getCurrentFlavorLowerCased() {
     Gradle gradle = getGradle()
@@ -7,11 +6,11 @@ def getCurrentFlavorLowerCased() {
     // match optional modules followed by the task
     // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
     // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
-    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
+    def pattern = /(?:.*:)*[a-z]+([A-Z][A-Za-z]+)/
     def flavor = ""
 
     gradle.getStartParameter().getTaskNames().any { name ->
-        Matcher matcher = pattern.matcher(name)
+        Matcher matcher = name =~ pattern
         if (matcher.find()) {
             flavor = matcher.group(1).toLowerCase()
             return true
