@@ -1,5 +1,3 @@
-import java.util.regex.Matcher
-
 def getCurrentFlavorLowerCased() {
     // match optional modules followed by the task
     // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
@@ -8,7 +6,7 @@ def getCurrentFlavorLowerCased() {
     def flavor = ""
 
     gradle.getStartParameter().getTaskNames().any { name ->
-        Matcher matcher = name =~ pattern
+        def matcher = name =~ pattern
         if (matcher.find()) {
             flavor = matcher.group(1).toLowerCase()
             return true
