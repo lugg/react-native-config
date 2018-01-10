@@ -21,7 +21,7 @@ def getCurrentFlavorLowerCased() {
     return flavor
 }
 
-def matchEnvFile(flavor) {
+def getEnvFilename(flavor) {
     if (System.env['ENVFILE']) {
         return System.env['ENVFILE']
     } else if (System.getProperty('ENVFILE')) {
@@ -39,14 +39,14 @@ def matchEnvFile(flavor) {
 }
 
 def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
-    def envFile = matchEnvFile(flavor)
+    def envFilename = getEnvFilename(flavor)
 
     def env = [:]
-    println("Reading env from: $envFile")
+    println("Reading env from: $envFilename")
 
-    File f = new File("$project.rootDir/../$envFile");
+    File f = new File("$project.rootDir/../$envFilename");
     if (!f.exists()) {
-        f = new File("$envFile");
+        f = new File("$envFilename");
     }
 
     if (f.exists()) {
