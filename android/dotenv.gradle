@@ -1,8 +1,6 @@
 import java.util.regex.Matcher
 
 def getCurrentFlavorLowerCased() {
-    Gradle gradle = getGradle()
-
     // match optional modules followed by the task
     // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
     // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
