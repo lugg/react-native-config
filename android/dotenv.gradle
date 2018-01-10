@@ -32,6 +32,23 @@ def getEnvFilename(flavor) {
     }
 }
 
+def getEnvVariableMap(file) {
+    if (file.exists()) {
+        return file.readLines().inject([:], { env, line ->
+            def matcher = line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/
+            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
+                env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
+            }
+            return env;
+        })
+    } else {
+        println("**************************")
+        println("*** Missing .env file ****")
+        println("**************************")
+        return [:]
+    }
+}
+
 def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
     def envFilename = getEnvFilename(flavor)
     println("Reading env from: $envFilename")
@@ -41,19 +58,7 @@ def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
         f = new File("$envFilename");
     }
 
-    def env = [:]
-    if (f.exists()) {
-        f.eachLine { line ->
-            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
-            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
-                env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
-            }
-        }
-    } else {
-        println("**************************")
-        println("*** Missing .env file ****")
-        println("**************************")
-    }
+    def env = getEnvVariableMap(f);
 
     project.ext.set("env", env)
 }
