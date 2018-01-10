@@ -22,10 +22,8 @@ def getCurrentFlavorLowerCased() {
 }
 
 def getEnvFilename(flavor) {
-    if (System.env['ENVFILE']) {
-        return System.env['ENVFILE']
-    } else if (System.getProperty('ENVFILE')) {
-        return System.getProperty('ENVFILE')
+    if (System.env['ENVFILE'] || System.getProperty('ENVFILE')) {
+        return System.env['ENVFILE'] ?: System.getProperty('ENVFILE')
     } else if (project.hasProperty("defaultEnvFile")) {
         return project.defaultEnvFile
     } else if (project.hasProperty("envConfigFiles")) {
