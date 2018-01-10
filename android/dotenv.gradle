@@ -58,9 +58,7 @@ def loadDotEnv(flavor = getCurrentFlavorLowerCased()) {
         f = new File("$envFilename");
     }
 
-    def env = getEnvVariableMap(f);
-
-    project.ext.set("env", env)
+    project.ext.set("env", getEnvVariableMap(f))
 }
 
 loadDotEnv()
