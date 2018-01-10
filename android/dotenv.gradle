@@ -30,9 +30,10 @@ def getEnvFilename(flavor) {
         return project.defaultEnvFile
     } else if (project.hasProperty("envConfigFiles")) {
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
-        return project.ext.envConfigFiles.find{pair -> 
+        def possibleConfig = project.ext.envConfigFiles.find{pair -> 
             flavor.startsWith(pair.key.toLowerCase())
-        }.value
+        }
+        return possibleConfig?.value ?: ".env"
     } else {
         return ".env";
     }
