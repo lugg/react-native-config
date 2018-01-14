@@ -4,8 +4,15 @@ Module to expose config variables to your javascript code in React Native, suppo
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
-
 ## Usage
+
+Install react-native-config using npm or yarn:
+
+```bash
+npm install --save react-native-config
+# or
+yarn add react-native-config
+```
 
 Create a new file `.env` in the root of your React Native app:
 
