@@ -95,7 +95,7 @@ The simplest approach is to tell it what file to read with an environment variab
 
 ```
 $ ENVFILE=.env.staging react-native run-ios           # bash
-$ SET ENVFILE='.env.staging' && react-native run-ios  # windows
+$ SET ENVFILE=.env.staging && react-native run-ios    # windows
 $ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
 ```
 
