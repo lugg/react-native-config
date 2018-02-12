@@ -10,7 +10,7 @@ defaultEnvFile = ".env"
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
   custom_env = true
-  file = File.read("/tmp/envfile").strip
+  file = "/tmp/envfile"
 else
   custom_env = false
   file = ENV["ENVFILE"] || defaultEnvFile
