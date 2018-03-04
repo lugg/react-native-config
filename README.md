@@ -101,6 +101,10 @@ $ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
 
 This also works for `run-android`. Alternatively, there are platform-specific options below.
 
+### Platform-specific variables
+
+Sometimes you may need different keys for android and ios project. For example - google analytics keys, api keys etc.
+In this case, you can create a new file with `.ios` or `.android` extensions. This files will be **merged** with main environment variables. So you don't need to have duplicate values in two files. You can have main env file `.env.staging` and just couple variables which should be platform-specific in `.env.staging.ios` and `.env.staging.android`
 
 #### Android
 

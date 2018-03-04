@@ -21,8 +21,20 @@ def getCurrentFlavor() {
     return flavor
 }
 
+def parseFile(file) {
+    def data = [:]
+    file.eachLine { line ->
+        def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
+        if (matcher.getCount() == 1 && matcher[0].size() == 3) {
+            data.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
+        }
+    }
+    return data
+}
+
 def loadDotEnv(flavor = getCurrentFlavor()) {
     def envFile = ".env"
+    def plarform = "android"
 
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE']
@@ -40,7 +52,10 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
         }
     }
 
+    def platformFile = "$envFile.$plarform"
+
     def env = [:]
+    def platformData = [:]
     println("Reading env from: $envFile")
 
     File f = new File("$project.rootDir/../$envFile");
@@ -48,19 +63,23 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
         f = new File("$envFile");
     }
 
+    File platF = new File("$project.rootDir/../$platformFile");
+    if (!platF.exists()) {
+        platF = new File("$platformFile")
+    }
+
     if (f.exists()) {
-        f.eachLine { line ->
-            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
-            if (matcher.getCount() == 1 && matcher[0].size() == 3) {
-                env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
-            }
-        }
+        env = parseFile(f)
+
+        if (platF.exists())
+            platformData = parseFile(platF)
+
+        env = env + platformData
     } else {
         println("**************************")
         println("*** Missing .env file ****")
         println("**************************")
     }
-
     project.ext.set("env", env)
 }
 
@@ -69,7 +88,7 @@ loadDotEnv()
 android {
     defaultConfig {
         project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
+            def escaped = v.replaceAll("%", "\\\\u0025")
             buildConfigField "String", k, "\"$v\""
             resValue "string", k, "\"$escaped\""
         }
@@ -79,14 +98,14 @@ android {
 tasks.whenTaskAdded { task ->
     if (project.hasProperty("envConfigFiles")) {
         project.envConfigFiles.each { envConfigName, envConfigFile ->
-            if (task.name.toLowerCase() == "generate"+envConfigName+"buildconfig") {
+            if (task.name.toLowerCase() == "generate" + envConfigName + "buildconfig") {
                 task.doFirst() {
                     android.applicationVariants.all { variant ->
                         def variantConfigString = variant.getVariantData().getVariantConfiguration().getFullName()
                         if (envConfigName.contains(variantConfigString.toLowerCase())) {
                             loadDotEnv(envConfigName)
                             project.env.each { k, v ->
-                                def escaped = v.replaceAll("%","\\\\u0025")
+                                def escaped = v.replaceAll("%", "\\\\u0025")
                                 variant.buildConfigField "String", k, "\"$v\""
                                 variant.resValue "string", k, "\"$escaped\""
                             }
