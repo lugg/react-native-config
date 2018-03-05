@@ -77,7 +77,6 @@ envData = parseFile(envPath)
 
 data = data.merge envData
 
-
 # create obj file that sets DOT_ENV as a NSDictionary
 dotenv_objc = data.map {|k, v| %Q(@"#{k}":@"#{v.chomp}")}.join(",")
 template = <<EOF
@@ -89,7 +88,7 @@ resultPath = File.join(ENV["SYMROOT"], "GeneratedDotEnv.m")
 File.open(resultPath, "w") {|f| f.puts template}
 
 # create header file with defines for the Info.plist preprocessor
-info_plist_defines_objc = dotenv.map {|k, v| %Q(#define __RN_CONFIG_#{k}  #{v})}.join("\n")
+info_plist_defines_objc = data.map {|k, v| %Q(#define __RN_CONFIG_#{k}  #{v})}.join("\n")
 
 # write it so the Info.plist preprocessor can access it
 resultPath = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
