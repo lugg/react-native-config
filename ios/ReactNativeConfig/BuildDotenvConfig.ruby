@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'fileutils' # ADD THIS LINE
 
 # Allow utf-8 charactor in config value
 # For example, APP_NAME=中文字符
@@ -60,6 +61,10 @@ dotenv_objc = dotenv.map { |k, v| %Q(@"#{k}":@"#{v.chomp}") }.join(",")
 template = <<EOF
   #define DOT_ENV @{ #{dotenv_objc} };
 EOF
+
+# ensure paths exist
+FileUtils.mkdir_p ENV["SYMROOT"] # ADD THIS LINE
+FileUtils.mkdir_p ENV["BUILD_DIR"] # ADD THIS LINE
 
 # write it so that ReactNativeConfig.m can return it
 path = File.join(ENV["SYMROOT"], "GeneratedDotEnv.m")
