@@ -133,14 +133,20 @@ Start by creating a new scheme:
 - Click Duplicate Scheme on the bottom
 - Give it a proper name on the top left. For instance: "Myapp (staging)"
 
-Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
+Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:	 
 
-- Expand the "Build" settings on left
-- Click "Pre-actions", and under the plus sign select "New Run Script Action"
-- Where it says "Type a script or drag a script file", type:
-  ```
-  echo ".env.staging" > /tmp/envfile   # replace .env.staging for your file
-  ```
+[![image.png](https://s18.postimg.org/ylnh80jax/image.png)](https://postimg.org/image/w4bq0qzed/)]
+
+[![image.png](https://s18.postimg.org/opme8a5s9/image.png)](https://postimg.org/image/f52rlegg5/)]
+
+1.Expand the "Build" settings on left<br />
+2.Click "Pre-actions", and under the plus sign select "New Run Script Action"<br />
+3.Where it says "Type a script or drag a script file", type:<br />
+`echo ".env.staging" > /tmp/envfile   # replace .env.staging for your file`<br />
+4.In build tab, add react library for first and uncheck parallelize build<br />
+
+You can run this code: `react-native run-ios --scheme="Project-Dev"`
+
 
 This is still a bit experimental and dirty – let us know if you have a better idea on how to make iOS use different configurations opening a pull request or issue!
 
