@@ -98,6 +98,11 @@ $ ENVFILE=.env.staging react-native run-ios           # bash
 $ SET ENVFILE='.env.staging' && react-native run-ios  # windows
 $ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
 ```
+or
+
+```
+react-native run-ios --scheme="Staging"   
+```
 
 This also works for `run-android`. Alternatively, there are platform-specific options below.
 
