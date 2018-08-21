@@ -15,6 +15,8 @@ RCT_EXPORT_MODULE()
 }
 
 + (NSString *)envFor: (NSString *)key {
+    NSString *envValue = (NSString *)[[[NSProcessInfo processInfo]environment]objectForKey:key];
+    if (envValue) return envValue;
     NSString *value = (NSString *)[self.env objectForKey:key];
     return value;
 }
