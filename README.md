@@ -30,16 +30,26 @@ Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so 
 
 Install the package:
 
-```
-$ yarn add react-native-config
-```
+ - yarn 
+
+	```
+	$ yarn add react-native-config
+	```
+ - npm 
+
+	```
+	$ npm install react-native-config --save
+	```
 
 Link the library:
 
-```
-$ react-native link react-native-config
-```
+ - Auto Link 
 
+	```
+	$ react-native link react-native-config
+	```
+ - Manaul Link (iOS)
+ - Manaul Link (Android) 
 
 ### Extra step for Android
 
