@@ -10,17 +10,17 @@ Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 Create a new file `.env` in the root of your React Native app:
 
 ```
-API_URL=https://myapi.com
-GOOGLE_MAPS_API_KEY=abcdefgh
+	API_URL=https://myapi.com
+	GOOGLE_MAPS_API_KEY=abcdefgh
 ```
 
 Then access variables defined there from your app:
 
 ```js
-import Config from 'react-native-config'
+	import Config from 'react-native-config'
 
-Config.API_URL  // 'https://myapi.com'
-Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
+	Config.API_URL  // 'https://myapi.com'
+	Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 ```
 
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
@@ -48,8 +48,46 @@ Link the library:
 	```
 	$ react-native link react-native-config
 	```
- - Manaul Link (iOS)
- - Manaul Link (Android) 
+ - Manual Link (iOS)
+	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
+	2. Go to `node_modules` ➜ `react-native-config` and add 		`ReactNativeConfig.xcodeproj`
+	3. Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
+	4. In the project navigator, select your project. Add 		`libReactNativeConfig.a` to your project's `Build Phases` ➜ `Link Binary With 		Libraries`
+	5. Click [your project's name].xcodeproj file in the project navigator and go the Build 		Settings tab. Make sure All is toggled on (instead of Basic)
+	6. Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
+
+
+ - Manual Link (Android) 
+
+	**android/settings.gradle**
+	
+	```diff
+	+ include ':react-native-config'
+	+ project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+	```
+	**android/app/build.gradle**
+	
+	```diff
+	dependencies {
+		implementation "com.facebook.react:react-native:+"  // From node_modules
+	+	implementation project(':react-native-config')
+	}
+	```
+	**MainApplication.java**
+	
+	```diff
+	+ import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+	
+	@Override
+	protected List<ReactPackage> getPackages() {
+		   return Arrays.asList(
+           new MainReactPackage()
+	+      new ReactNativeConfigPackage()
+	    );
+	}
+	```
+	
+	
 
 ### Extra step for Android
 
