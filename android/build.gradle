@@ -1,7 +1,14 @@
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 buildscript {
     repositories {
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter()
-        google()
     }
 
     dependencies {
@@ -10,10 +17,6 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', 26)
@@ -35,6 +38,5 @@ repositories {
 }
 
 dependencies {
-    //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
 }
