@@ -4,7 +4,7 @@
 
 [Diff](https://github.com/luggit/react-native-config/compare/v0.11.6...master)
 
-### 0.11.5
+### 0.11.6
 
 - Updated gradle to v4.4 and gradle-plugin to v3.1.4 (#307)
 
