@@ -2,7 +2,13 @@
 
 ### Upcoming
 
-[Diff](https://github.com/luggit/react-native-config/compare/v0.11.6...master)
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.7...master)
+
+### 0.11.7
+
+- Fix envConfigFiles in build.gradle not working (#275)
+
+[Diff](https://github.com/luggit/react-native-config/compare/v0.11.6...v0.11.7)
 
 ### 0.11.6
 
