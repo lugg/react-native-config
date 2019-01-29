@@ -12,24 +12,32 @@ import ZFile
 let currentFolder = FileSystem.shared.currentFolder
 enum Error: Swift.Error {
     case noPrepareInSwiftFile
-    case missinIOSFolder
+    case missingIOSFolder
 }
 
 do {
+    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...\n\n".data(using: .utf8)!)
+    let envFileName = ".env"
+
+    var reactNativeFolder = try currentFolder.parentFolder()
+    
+    var environmentFile: FileProtocol!
     var iosFolder: FolderProtocol!
-   
+    
     do {
-      iosFolder = try currentFolder.subfolder(named: "ios")
+        // This happens when running from post install in node_modules folder
+        environmentFile = try reactNativeFolder.file(named: envFileName)
+        iosFolder = try reactNativeFolder.subfolder(named: "/Carthage/Checkouts/react-native-config/ios")
+
     } catch {
-        guard currentFolder.name == "ios" else {
-            throw Error.missinIOSFolder
-        }
         
-       iosFolder = currentFolder
+        reactNativeFolder = try reactNativeFolder.parentFolder().parentFolder().parentFolder()
+        
+        // We run from building in the carthage checkouts folder
+        environmentFile = try reactNativeFolder.file(named: envFileName)
+        iosFolder = currentFolder
     }
     
-    let environmentFile = try iosFolder.parentFolder().parentFolder().parentFolder().parentFolder().file(named: ".env")
-    // /Users/doozmen/Documents/dooZ/active/WizKey/dev.nosync/BolidesApp/Carthage/Checkouts/react-native-config/ios/ReactNativeConfig/GeneratedInfoPlistDotEnv.h
     let sourcesFolder = try iosFolder.subfolder(named: "ReactNativeConfig")
     
     let generatedInfoPlistDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedInfoPlistDotEnv.h")
@@ -45,11 +53,11 @@ do {
             components.count == 2,
             let key = components.first,
             let value = components.last else {
-            return nil
+                return nil
         }
         // #define __RN_CONFIG_API_URL  https://myapi.com
         // #define DOT_ENV @{ @"API_URL":@"https://myapi.com" };
-
+        
         return (
             info: "#define __RN_CONFIG_\(key) \(value)",
             dotEnv: "#define DOT_ENV @{ @\"\(key)\":@\"\(value)\"};",
@@ -79,17 +87,17 @@ do {
     
     try generatedSwiftFile.write(data: swiftLines.joined(separator: "\n").data(using: .utf8)!)
     FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift ✅\n\n".data(using: .utf8)!)
-
+    
     exit(EXIT_SUCCESS)
 } catch {
     FileHandle.standardError.write("""
-    ❌
+        ❌
         Could not find '.env' file in your root React Native project.
         The error was:
         \(error)
-    ❌
+        ❌
         ♥️ Fix it by adding .env file to root with `API_URL=https://myapi.com` or more
-    """.data(using: .utf8)!
+        """.data(using: .utf8)!
     )
     exit(EXIT_FAILURE)
 }
