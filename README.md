@@ -57,6 +57,35 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 * Search for "preprocess"
 * Set `Preprocess Info.plist File` to `Yes`
 * Set `Info.plist Preprocessor Prefix File` to `${BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
+
+  **Cocoapods**
+
+  If you are using **CocoaPods** in your project, set to `$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig/GeneratedInfoPlistDotEnv.h` 
+
+  Update your `Podfile` add the following line in the dependencies list:
+
+  `pod 'react-native-config', :path => '../node_modules/react-native-config'`
+
+  Finally add the following at the end of your `Podfile` 
+
+  ```ruby
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'react-native-config'
+        phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
+        phase.shell_script = "cd ../../"\
+                             " && RNC_ROOT=./node_modules/react-native-config/"\
+                             " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
+                             " && export BUILD_DIR=$RNC_ROOT/ios/ReactNativeConfig"\
+                             " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
+  
+        target.build_phases << phase
+        target.build_phases.move(phase,0)
+      end
+    end
+  end
+  ```
+
 * Set `Info.plist Other Preprocessor Flags` to `-traditional`
 * If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
@@ -200,7 +229,6 @@ This is still a bit experimental and dirty – let us know if you have a better
 When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
 
     -keep class com.mypackage.BuildConfig { *; }
-    
 `mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
 
 ## Testing
