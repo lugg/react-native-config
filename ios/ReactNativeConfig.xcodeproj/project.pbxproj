@@ -15,16 +15,15 @@
 		FD55CBA122009E5A0044D1A7 /* GeneratedDotEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */; };
 		FD55CBA222009E5A0044D1A7 /* GeneratedDotEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */; };
 		FD55CBA322009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */; };
-		FD55CBB822009FF50044D1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CBB722009FF50044D1A7 /* AppDelegate.swift */; };
-		FD55CBBA22009FF50044D1A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CBB922009FF50044D1A7 /* ViewController.swift */; };
-		FD55CBBC22009FF70044D1A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD55CBBB22009FF70044D1A7 /* Assets.xcassets */; };
-		FD55CBBF22009FF70044D1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD55CBBD22009FF70044D1A7 /* Main.storyboard */; };
 		FD55CBCB22009FF70044D1A7 /* PrepareReactNativeconfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CBCA22009FF70044D1A7 /* PrepareReactNativeconfigTests.swift */; };
 		FD55CBEE2200A2860044D1A7 /* PrepareReactNativeconfig.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = FD55CBB522009FF50044D1A7 /* PrepareReactNativeconfig.app */; };
 		FD55CC652200A4580044D1A7 /* ZFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE12200A2030044D1A7 /* ZFile.framework */; };
 		FD55CC662200A4580044D1A7 /* ZFile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE12200A2030044D1A7 /* ZFile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD55CC6A2200A4940044D1A7 /* SourceryAutoProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC302200A36C0044D1A7 /* SourceryAutoProtocols.framework */; };
 		FD55CC6B2200A4940044D1A7 /* SourceryAutoProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC302200A36C0044D1A7 /* SourceryAutoProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD55CC6F2200A68A0044D1A7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CC6E2200A68A0044D1A7 /* main.swift */; };
+		FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE72200A2030044D1A7 /* FoundationGenericHelper.framework */; };
+		FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE72200A2030044D1A7 /* FoundationGenericHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +349,13 @@
 			remoteGlobalIDString = "highway::SourceryAutoProtocols";
 			remoteInfo = "SourceryAutoProtocols-macos";
 		};
+		FD55CC722200A7460044D1A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD55CBD32200A2030044D1A7 /* ZFile.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FD1B88B321CE27D80055C2C1;
+			remoteInfo = "FoundationGenericHelper-macos";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -389,6 +395,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */,
 				FD55CC662200A4580044D1A7 /* ZFile.framework in Embed Frameworks */,
 				FD55CC6B2200A4940044D1A7 /* SourceryAutoProtocols.framework in Embed Frameworks */,
 			);
@@ -406,10 +413,6 @@
 		FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedDotEnv.m; sourceTree = "<group>"; };
 		FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneratedInfoPlistDotEnv.h; sourceTree = "<group>"; };
 		FD55CBB522009FF50044D1A7 /* PrepareReactNativeconfig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrepareReactNativeconfig.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD55CBB722009FF50044D1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD55CBB922009FF50044D1A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FD55CBBB22009FF70044D1A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FD55CBBE22009FF70044D1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD55CBC022009FF70044D1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD55CBC122009FF70044D1A7 /* PrepareReactNativeconfig.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrepareReactNativeconfig.entitlements; sourceTree = "<group>"; };
 		FD55CBC622009FF70044D1A7 /* PrepareReactNativeconfigTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrepareReactNativeconfigTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,6 +420,7 @@
 		FD55CBCC22009FF70044D1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD55CBD32200A2030044D1A7 /* ZFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZFile.xcodeproj; path = ../Carthage/Checkouts/ZFile/Sources/ZFile/ZFile.xcodeproj; sourceTree = "<group>"; };
 		FD55CBEF2200A36B0044D1A7 /* 🛣.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "🛣.xcodeproj"; path = "../Carthage/Checkouts/highway/Sources/highway/🛣.xcodeproj"; sourceTree = "<group>"; };
+		FD55CC6E2200A68A0044D1A7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */,
 				FD55CC652200A4580044D1A7 /* ZFile.framework in Frameworks */,
 				FD55CC6A2200A4940044D1A7 /* SourceryAutoProtocols.framework in Frameworks */,
 			);
@@ -491,10 +496,7 @@
 		FD55CBB622009FF50044D1A7 /* PrepareReactNativeconfig */ = {
 			isa = PBXGroup;
 			children = (
-				FD55CBB722009FF50044D1A7 /* AppDelegate.swift */,
-				FD55CBB922009FF50044D1A7 /* ViewController.swift */,
-				FD55CBBB22009FF70044D1A7 /* Assets.xcassets */,
-				FD55CBBD22009FF70044D1A7 /* Main.storyboard */,
+				FD55CC6E2200A68A0044D1A7 /* main.swift */,
 				FD55CBC022009FF70044D1A7 /* Info.plist */,
 				FD55CBC122009FF70044D1A7 /* PrepareReactNativeconfig.entitlements */,
 			);
@@ -604,7 +606,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */;
 			buildPhases = (
-				EBE4E8281C7BF689000F8875 /* ShellScript */,
+				EBE4E8281C7BF689000F8875 /* Prepare Configuration Files */,
 				FD55CB9622009A750044D1A7 /* Headers */,
 				EB2648DB1C7BE17A00B8F155 /* Sources */,
 				EB2648DC1C7BE17A00B8F155 /* Frameworks */,
@@ -626,14 +628,15 @@
 				FD55CBB122009FF50044D1A7 /* Sources */,
 				FD55CBB222009FF50044D1A7 /* Frameworks */,
 				FD55CBB322009FF50044D1A7 /* Resources */,
-				FD55CBED2200A2750044D1A7 /* CopyFiles */,
 				FD55CC692200A4580044D1A7 /* Embed Frameworks */,
+				FD55CBED2200A2750044D1A7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FD55CC6D2200A4940044D1A7 /* PBXTargetDependency */,
 				FD55CC682200A4580044D1A7 /* PBXTargetDependency */,
+				FD55CC732200A7460044D1A7 /* PBXTargetDependency */,
 			);
 			name = PrepareReactNativeconfig;
 			productName = PrepareReactNativeconfig;
@@ -1025,8 +1028,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD55CBBC22009FF70044D1A7 /* Assets.xcassets in Resources */,
-				FD55CBBF22009FF70044D1A7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,27 +1047,26 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby\n";
+			shellScript = "./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\n";
 		};
-		EBE4E8281C7BF689000F8875 /* ShellScript */ = {
+		EBE4E8281C7BF689000F8875 /* Prepare Configuration Files */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby",
 			);
+			name = "Prepare Configuration Files";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby\n";
+			shellScript = "./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1093,8 +1093,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD55CBBA22009FF50044D1A7 /* ViewController.swift in Sources */,
-				FD55CBB822009FF50044D1A7 /* AppDelegate.swift in Sources */,
+				FD55CC6F2200A68A0044D1A7 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,18 +1123,12 @@
 			name = "SourceryAutoProtocols-macos";
 			targetProxy = FD55CC6C2200A4940044D1A7 /* PBXContainerItemProxy */;
 		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FD55CBBD22009FF70044D1A7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FD55CBBE22009FF70044D1A7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+		FD55CC732200A7460044D1A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "FoundationGenericHelper-macos";
+			targetProxy = FD55CC722200A7460044D1A7 /* PBXContainerItemProxy */;
 		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3DF7F6B2203AA09B00D0EAB7 /* Debug */ = {
@@ -1312,7 +1305,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1352,7 +1344,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

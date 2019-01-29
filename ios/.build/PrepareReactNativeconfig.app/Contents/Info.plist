@@ -38,13 +38,15 @@
 	<string>1010</string>
 	<key>DTXcodeBuild</key>
 	<string>10B61</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.14</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 Pedro Belo. All rights reserved.</string>
-	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>be_dooz_srcroot</key>
+	<string>/Users/doozmen/Documents/dooZ/active/WizKey/dev.nosync/BolidesApp/Carthage/Checkouts/react-native-config/ios</string>
 </dict>
 </plist>
