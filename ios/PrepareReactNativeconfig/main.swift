@@ -10,6 +10,9 @@ import Foundation
 import ZFile
 
 let currentFolder = FileSystem.shared.currentFolder
+enum Error: Swift.Error {
+    case noPrepareInSwiftFile
+}
 
 do {
     let environmentFile = try currentFolder.parentFolder().parentFolder().parentFolder().parentFolder().file(named: ".env")
@@ -18,10 +21,11 @@ do {
     
     let generatedInfoPlistDotEnvFile = try sourcesFolder.file(named: "GeneratedInfoPlistDotEnv.h")
     let generatedDotEnvFile = try sourcesFolder.file(named: "GeneratedDotEnv.m")
+    let generatedSwiftFile = try sourcesFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Environment.swift")
     
     print("🚀 preparing build environment variables in \(environmentFile.path)")
     
-    let text: [(info: String, dotEnv: String)] = try environmentFile.readAllLines().compactMap { textLine in
+    let text: [(info: String, dotEnv: String, swift: String)] = try environmentFile.readAllLines().compactMap { textLine in
         let components = textLine.components(separatedBy: "=")
         
         guard
@@ -33,12 +37,35 @@ do {
         // #define __RN_CONFIG_API_URL  https://myapi.com
         // #define DOT_ENV @{ @"API_URL":@"https://myapi.com" };
 
-        return (info: "#define __RN_CONFIG_\(key) \(value)", dotEnv: "#define DOT_ENV @{ @\"\(key)\":@\"\(value)\"};")
+        return (
+            info: "#define __RN_CONFIG_\(key) \(value)",
+            dotEnv: "#define DOT_ENV @{ @\"\(key)\":@\"\(value)\"};",
+            swift: "    case \(key) = \"\(value)\""
+        )
     }
     
     try generatedInfoPlistDotEnvFile.write(data: text.map { $0.info }.joined(separator: "\n").data(using: .utf8)!)
     try generatedDotEnvFile.write(data: text.map { $0.dotEnv }.joined(separator: "\n").data(using: .utf8)!)
+    
+    let headerSwift = """
+    //
+    //  Environment.swift
+    //  ReactNativeConfigSwift
+    //
+    //  Created by Stijn on 29/01/2019.
+    //  Copyright © 2019 Pedro Belo. All rights reserved.
+    //
 
+    import Foundation
+
+    enum Environment: String, CaseIterable {
+    """
+    var swiftLines = [headerSwift]
+    swiftLines.append(contentsOf: text.map { $0.swift })
+    swiftLines.append("}")
+    
+    try generatedSwiftFile.write(data: swiftLines.joined(separator: "\n").data(using: .utf8)!)
+    
     exit(EXIT_SUCCESS)
 } catch {
     print("""
