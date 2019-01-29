@@ -408,7 +408,6 @@
 		3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
-		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = BuildDotenvConfig.ruby; sourceTree = "<group>"; };
 		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
 		FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedDotEnv.m; sourceTree = "<group>"; };
 		FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneratedInfoPlistDotEnv.h; sourceTree = "<group>"; };
@@ -488,7 +487,6 @@
 				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
 				FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */,
 				FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */,
-				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */,
 			);
 			path = ReactNativeConfig;
 			sourceTree = "<group>";
