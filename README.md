@@ -1,6 +1,6 @@
 # Config variables for React Native apps
 
-Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.
+Module to expose config variables to your javascript code in React Native, supporting both iOS (Objective-C & Swift) and Android.
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
@@ -23,23 +23,32 @@ Config.API_URL  // 'https://myapi.com'
 Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 ```
 
-Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
+Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. 
 
+It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
+// TODO: add secret keys in both android and iOS that are stored using git_secret and secure storage for both Android and iOS to solve issue above [github issue #1](https://github.com/doozMen/react-native-config/issues/1)
 
 ## Setup
 
 Install the package:
 
 ```
-$ yarn add react-native-config
+cd <#project root#>
+npm install
 ```
 
-Link the library:
+> ⚠️ Only works for project that use expokit and ejected the project
 
-```
-$ react-native link react-native-config
-```
+# iOS
 
+In xcode project
+
+1. Add project as a sub project and add product `ReactiveConfigSwift` to embed frameworks
+2. Point framework search path to `$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)`
+3. Point header search path to `$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/include` and set it to **recursive**
+4. Point library search path to `$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)`
+5. Add `ReactiveConfig` as a target dependency
+6. Link product `ReactiveConfig.a`
 
 ### Extra step for Android
 
@@ -112,6 +121,16 @@ Once again, remember variables stored in `.env` are published with your code, so
 
 ### iOS
 
+#### Swift
+
+``` swift
+import ReactNativeConfigSwift
+
+// API_URL is the key you added to the .env file
+let apiURL = Environment.API_URL
+
+```
+#### Objective-C
 Read variables declared in `.env` from your Obj-C classes like:
 
 ```objective-c
@@ -125,16 +144,9 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-They're also available for configuration in `Info.plist`, by prepending `__RN_CONFIG_` to their name:
-
-```
-__RN_CONFIG_API_URL
-```
-
-Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
-
-
 ### Different environments
+
+// TODO make this work again
 
 Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
 
@@ -173,25 +185,7 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 
 
 #### iOS
-
-The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
-
-Start by creating a new scheme:
-
-- In the Xcode menu, go to Product > Scheme > Edit Scheme
-- Click Duplicate Scheme on the bottom
-- Give it a proper name on the top left. For instance: "Myapp (staging)"
-
-Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
-
-- Expand the "Build" settings on left
-- Click "Pre-actions", and under the plus sign select "New Run Script Action"
-- Where it says "Type a script or drag a script file", type:
-  ```
-  echo ".env.staging" > /tmp/envfile   # replace .env.staging for your file
-  ```
-
-This is still a bit experimental and dirty – let us know if you have a better idea on how to make iOS use different configurations opening a pull request or issue!
+If you use `debug` and `release` configurations there is nothing more to do. If you do you need to for this repo and add your config.
 
 ## Troubleshooting
 

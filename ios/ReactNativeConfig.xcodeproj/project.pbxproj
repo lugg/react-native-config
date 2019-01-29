@@ -25,10 +25,8 @@
 		FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE72200A2030044D1A7 /* FoundationGenericHelper.framework */; };
 		FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE72200A2030044D1A7 /* FoundationGenericHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD55CC8A2200B4270044D1A7 /* ReactNativeConfigSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = FD55CC882200B4270044D1A7 /* ReactNativeConfigSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD55CC912200B4460044D1A7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */; };
-		FD55CC922200B46E0044D1A7 /* ReactNativeConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD55CC932200B4740044D1A7 /* GeneratedInfoPlistDotEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD55CC952200B4BA0044D1A7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CC942200B4BA0044D1A7 /* Environment.swift */; };
+		FD55CCA32200BDAB0044D1A7 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = FD55CCA22200BDAA0044D1A7 /* package.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,6 +434,9 @@
 		FD55CC882200B4270044D1A7 /* ReactNativeConfigSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfigSwift.h; sourceTree = "<group>"; };
 		FD55CC892200B4270044D1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD55CC942200B4BA0044D1A7 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		FD55CCA12200BCB40044D1A7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		FD55CCA22200BDAA0044D1A7 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = package.json; path = ../package.json; sourceTree = "<group>"; };
+		FD55CCA42200C19A0044D1A7 /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile.private; path = ../Cartfile.private; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -474,7 +475,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD55CC912200B4460044D1A7 /* libReactNativeConfig.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +484,9 @@
 		EB2648D61C7BE17A00B8F155 = {
 			isa = PBXGroup;
 			children = (
+				FD55CCA42200C19A0044D1A7 /* Cartfile.private */,
+				FD55CCA12200BCB40044D1A7 /* README.md */,
+				FD55CCA22200BDAA0044D1A7 /* package.json */,
 				FD55CBEF2200A36B0044D1A7 /* 🛣.xcodeproj */,
 				FD55CBD32200A2030044D1A7 /* ZFile.xcodeproj */,
 				EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */,
@@ -628,8 +631,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD55CC8A2200B4270044D1A7 /* ReactNativeConfigSwift.h in Headers */,
-				FD55CC922200B46E0044D1A7 /* ReactNativeConfig.h in Headers */,
-				FD55CC932200B4740044D1A7 /* GeneratedInfoPlistDotEnv.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +641,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DF7F6B4203AA09B00D0EAB7 /* Build configuration list for PBXNativeTarget "ReactNativeConfig-tvOS" */;
 			buildPhases = (
-				3DF7F6B5203AA0A900D0EAB7 /* ShellScript */,
+				3DF7F6B5203AA0A900D0EAB7 /* Prepare configuration files - Swift and Objective-C (For React-Native) */,
 				3DF7F6A8203AA09B00D0EAB7 /* Sources */,
 				3DF7F6A9203AA09B00D0EAB7 /* Frameworks */,
 				3DF7F6AA203AA09B00D0EAB7 /* CopyFiles */,
@@ -658,7 +659,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */;
 			buildPhases = (
-				EBE4E8281C7BF689000F8875 /* Prepare Configuration Files */,
+				EBE4E8281C7BF689000F8875 /* Prepare configuration files - Swift and Objective-C (For React-Native) */,
 				FD55CB9622009A750044D1A7 /* Headers */,
 				EB2648DB1C7BE17A00B8F155 /* Sources */,
 				EB2648DC1C7BE17A00B8F155 /* Frameworks */,
@@ -717,6 +718,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD55CC8B2200B4270044D1A7 /* Build configuration list for PBXNativeTarget "ReactNativeConfigSwift" */;
 			buildPhases = (
+				FD55CCA02200BC310044D1A7 /* Prepare configuration files - Swift and Objective-C (For React-Native) */,
 				FD55CC812200B4270044D1A7 /* Headers */,
 				FD55CC822200B4270044D1A7 /* Sources */,
 				FD55CC832200B4270044D1A7 /* Frameworks */,
@@ -1119,33 +1121,53 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD55CCA32200BDAB0044D1A7 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3DF7F6B5203AA0A900D0EAB7 /* ShellScript */ = {
+		3DF7F6B5203AA0A900D0EAB7 /* Prepare configuration files - Swift and Objective-C (For React-Native) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Prepare configuration files - Swift and Objective-C (For React-Native)";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\n";
 		};
-		EBE4E8281C7BF689000F8875 /* Prepare Configuration Files */ = {
+		EBE4E8281C7BF689000F8875 /* Prepare configuration files - Swift and Objective-C (For React-Native) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Prepare Configuration Files";
+			name = "Prepare configuration files - Swift and Objective-C (For React-Native)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\n";
+		};
+		FD55CCA02200BC310044D1A7 /* Prepare configuration files - Swift and Objective-C (For React-Native) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare configuration files - Swift and Objective-C (For React-Native)";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

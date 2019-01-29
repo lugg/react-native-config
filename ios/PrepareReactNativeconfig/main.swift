@@ -12,18 +12,31 @@ import ZFile
 let currentFolder = FileSystem.shared.currentFolder
 enum Error: Swift.Error {
     case noPrepareInSwiftFile
+    case missinIOSFolder
 }
 
 do {
-    let environmentFile = try currentFolder.parentFolder().parentFolder().parentFolder().parentFolder().file(named: ".env")
+    var iosFolder: FolderProtocol!
+   
+    do {
+      iosFolder = try currentFolder.subfolder(named: "ios")
+    } catch {
+        guard currentFolder.name == "ios" else {
+            throw Error.missinIOSFolder
+        }
+        
+       iosFolder = currentFolder
+    }
+    
+    let environmentFile = try iosFolder.parentFolder().parentFolder().parentFolder().parentFolder().file(named: ".env")
     // /Users/doozmen/Documents/dooZ/active/WizKey/dev.nosync/BolidesApp/Carthage/Checkouts/react-native-config/ios/ReactNativeConfig/GeneratedInfoPlistDotEnv.h
-    let sourcesFolder = try currentFolder.subfolder(named: "ReactNativeConfig")
+    let sourcesFolder = try iosFolder.subfolder(named: "ReactNativeConfig")
     
     let generatedInfoPlistDotEnvFile = try sourcesFolder.file(named: "GeneratedInfoPlistDotEnv.h")
     let generatedDotEnvFile = try sourcesFolder.file(named: "GeneratedDotEnv.m")
-    let generatedSwiftFile = try sourcesFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Environment.swift")
+    let generatedSwiftFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Environment.swift")
     
-    print("🚀 preparing build environment variables in \(environmentFile.path)")
+    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift\nPreparing build environment variables in \(environmentFile.path)\n...\n\n".data(using: .utf8)!)
     
     let text: [(info: String, dotEnv: String, swift: String)] = try environmentFile.readAllLines().compactMap { textLine in
         let components = textLine.components(separatedBy: "=")
@@ -65,17 +78,19 @@ do {
     swiftLines.append("}")
     
     try generatedSwiftFile.write(data: swiftLines.joined(separator: "\n").data(using: .utf8)!)
-    
+    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift ✅\n\n".data(using: .utf8)!)
+
     exit(EXIT_SUCCESS)
 } catch {
-    print("""
+    FileHandle.standardError.write("""
     ❌
         Could not find '.env' file in your root React Native project.
         The error was:
         \(error)
     ❌
         ♥️ Fix it by adding .env file to root with `API_URL=https://myapi.com` or more
-    """)
+    """.data(using: .utf8)!
+    )
     exit(EXIT_FAILURE)
 }
 
