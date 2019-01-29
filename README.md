@@ -32,6 +32,14 @@ It's [basically impossible to prevent users from reverse engineering mobile app 
 
 Install the package:
 
+add  dependency to package.json
+
+``` json
+"dependencies": {
+    "doozMen/react-native-config": "^1.0.0"
+    }
+```
+
 ```
 cd <#project root#>
 npm install
