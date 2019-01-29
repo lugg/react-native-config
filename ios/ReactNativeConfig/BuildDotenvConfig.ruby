@@ -16,7 +16,7 @@ else
   file = ENV["ENVFILE"] || defaultEnvFile
 end
 # find that above node_modules/react-native-config/ios/
-path = File.join(Dir.pwd, "../../../../../#{file}")
+path = File.join(Dir.pwd, "/../../../../#{file}")
 
 puts "Reading env from path #{path}"
 

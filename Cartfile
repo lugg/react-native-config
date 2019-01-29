@@ -1,0 +1,7 @@
+# Files not to be added to node_modules - Only relevant for iOS
+
+github "doozMen/ZFile"
+
+# Automation
+
+github "doozMen/highway"
