@@ -11,6 +11,8 @@
 		3DF7F6B7203AA0D600D0EAB7 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
+		FD55CB9722009A800044D1A7 /* ReactNativeConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
+		FD55CB9922009BBD0044D1A7 /* GeneratedDotEnv.m in Headers */ = {isa = PBXBuildFile; fileRef = FD55CB9822009BBD0044D1A7 /* GeneratedDotEnv.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,15 +26,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3DF7F6B8203AA0D900D0EAB7 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EB2648DD1C7BE17A00B8F155 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,24 +36,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE4E8351C7D1668000F8875 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
-		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildDotenvConfig.ruby; sourceTree = "<group>"; };
+		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = BuildDotenvConfig.ruby; sourceTree = "<group>"; };
 		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
+		FD55CB9822009BBD0044D1A7 /* GeneratedDotEnv.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratedDotEnv.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +87,25 @@
 			children = (
 				EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */,
 				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
+				FD55CB9822009BBD0044D1A7 /* GeneratedDotEnv.m */,
 				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */,
 			);
 			path = ReactNativeConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FD55CB9622009A750044D1A7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD55CB9922009BBD0044D1A7 /* GeneratedDotEnv.m in Headers */,
+				FD55CB9722009A800044D1A7 /* ReactNativeConfig.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		3DF7F6AB203AA09B00D0EAB7 /* ReactNativeConfig-tvOS */ = {
@@ -119,7 +116,6 @@
 				3DF7F6A8203AA09B00D0EAB7 /* Sources */,
 				3DF7F6A9203AA09B00D0EAB7 /* Frameworks */,
 				3DF7F6AA203AA09B00D0EAB7 /* CopyFiles */,
-				3DF7F6B8203AA0D900D0EAB7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -135,10 +131,10 @@
 			buildConfigurationList = EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */;
 			buildPhases = (
 				EBE4E8281C7BF689000F8875 /* ShellScript */,
+				FD55CB9622009A750044D1A7 /* Headers */,
 				EB2648DB1C7BE17A00B8F155 /* Sources */,
 				EB2648DC1C7BE17A00B8F155 /* Frameworks */,
 				EB2648DD1C7BE17A00B8F155 /* CopyFiles */,
-				EBE4E8351C7D1668000F8875 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -198,7 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
+			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby\n";
 		};
 		EBE4E8281C7BF689000F8875 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -212,7 +208,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
+			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -254,11 +250,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/React/**",
-					"${SYMROOT}",
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public",
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -286,11 +277,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/React/**",
-					"${SYMROOT}",
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public",
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -322,6 +308,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -336,7 +323,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../ios/Pods/Headers/Public/**",
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/include/**",
+					"$(SRCROOT)/../../../iOS/Pods/Headers/Public/**",
+					"$(SRCROOT)/../../ios/Pods/Headers/Public/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -365,6 +360,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -373,7 +369,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../ios/Pods/Headers/Public/**",
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/include/**",
+					"$(SRCROOT)/../../../iOS/Pods/Headers/Public/**",
+					"$(SRCROOT)/../../ios/Pods/Headers/Public/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -383,11 +387,6 @@
 		EB2648E91C7BE17A00B8F155 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/React/**",
-					"${SYMROOT}",
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -397,11 +396,6 @@
 		EB2648EA1C7BE17A00B8F155 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/React/**",
-					"${SYMROOT}",
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

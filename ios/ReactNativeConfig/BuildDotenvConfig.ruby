@@ -15,15 +15,16 @@ else
   custom_env = false
   file = ENV["ENVFILE"] || defaultEnvFile
 end
+# find that above node_modules/react-native-config/ios/
+path = File.join(Dir.pwd, "../../../../../#{file}")
 
-puts "Reading env from #{file}"
+puts "Reading env from path #{path}"
 
 dotenv = begin
   # https://regex101.com/r/cbm5Tp/1
   dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)=((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
 
-  # find that above node_modules/react-native-config/ios/
-  path = File.join(Dir.pwd, "../../../#{file}")
+  
   if File.exists?(path)
     raw = File.read(path)
   elsif File.exists?(file)

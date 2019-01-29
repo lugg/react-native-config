@@ -1,5 +1,5 @@
 #import "ReactNativeConfig.h"
-#import "GeneratedDotEnv.m" // written during build by BuildDotenvConfig.ruby
+#import "GeneratedDotEnv.h" // written during build by BuildDotenvConfig.ruby
 
 @implementation ReactNativeConfig
 
