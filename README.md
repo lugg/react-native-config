@@ -187,6 +187,18 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 #### iOS
 If you use `debug` and `release` configurations there is nothing more to do. If you do you need to for this repo and add your config.
 
+## Prepare excutable
+
+The files needed are generated using an executable app that is pre build `./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig`
+
+If you need to rebuild this file you can do so but first resolve the dependencies using [carthage](https://github.com/Carthage/Carthage)
+
+``` bash
+carthage update --no-build
+```
+Then add a scheme to the excoe project to build the target `PrepareReactNativeconfig`.
+Adjust the code in the `main.swift`
+
 ## Troubleshooting
 
 ### Problems with Proguard
