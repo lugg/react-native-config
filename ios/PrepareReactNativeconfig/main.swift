@@ -32,9 +32,9 @@ do {
     // /Users/doozmen/Documents/dooZ/active/WizKey/dev.nosync/BolidesApp/Carthage/Checkouts/react-native-config/ios/ReactNativeConfig/GeneratedInfoPlistDotEnv.h
     let sourcesFolder = try iosFolder.subfolder(named: "ReactNativeConfig")
     
-    let generatedInfoPlistDotEnvFile = try sourcesFolder.file(named: "GeneratedInfoPlistDotEnv.h")
-    let generatedDotEnvFile = try sourcesFolder.file(named: "GeneratedDotEnv.m")
-    let generatedSwiftFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Environment.swift")
+    let generatedInfoPlistDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedInfoPlistDotEnv.h")
+    let generatedDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedDotEnv.m")
+    let generatedSwiftFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").createFileIfNeeded(named: "Environment.swift")
     
     FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift\nPreparing build environment variables in \(environmentFile.path)\n...\n\n".data(using: .utf8)!)
     
