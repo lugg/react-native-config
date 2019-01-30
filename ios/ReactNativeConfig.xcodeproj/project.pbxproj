@@ -18,6 +18,8 @@
 		FD4868B02201E3180092A63E /* PlistJSONEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4868AE2201E2D00092A63E /* PlistJSONEntry.swift */; };
 		FD4868B42201E7FD0092A63E /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4868B32201E7FD0092A63E /* Env.swift */; };
 		FD48698D220216DC0092A63E /* UrlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD48698C220216DC0092A63E /* UrlEscaped.swift */; };
+		FD486A142202234C0092A63E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; };
+		FD486A152202234C0092A63E /* AppKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; };
 		FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; };
@@ -406,7 +408,7 @@
 		FD55CBED2200A2750044D1A7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "$(SRCROOT)/../.build";
+			dstPath = "$(SRCROOT)/../.build/$(CONFIGURATION)";
 			dstSubfolderSpec = 0;
 			files = (
 				FD55CBEE2200A2860044D1A7 /* PrepareReactNativeconfig.app in CopyFiles */,
@@ -421,6 +423,7 @@
 			files = (
 				FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */,
 				FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */,
+				FD486A152202234C0092A63E /* AppKit.framework in Embed Frameworks */,
 				FD55CC662200A4580044D1A7 /* ZFile.framework in Embed Frameworks */,
 				FD55CC6B2200A4940044D1A7 /* SourceryAutoProtocols.framework in Embed Frameworks */,
 			);
@@ -483,6 +486,7 @@
 				FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */,
 				FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */,
 				FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */,
+				FD486A142202234C0092A63E /* AppKit.framework in Frameworks */,
 				FD55CC652200A4580044D1A7 /* ZFile.framework in Frameworks */,
 				FD55CC6A2200A4940044D1A7 /* SourceryAutoProtocols.framework in Frameworks */,
 			);
@@ -1176,7 +1180,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd ${SRCROOT}\n./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
+			shellScript = "pushd ${SRCROOT}\n./.build/$(CONFIGURATION)/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
 		};
 		EBE4E8281C7BF689000F8875 /* Prepare configuration files - Swift and Objective-C (For React-Native) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1190,7 +1194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd ${SRCROOT}\n./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
+			shellScript = "pushd ${SRCROOT}\n./.build/$(CONFIGURATION)/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
 		};
 		FD55CCA02200BC310044D1A7 /* Prepare configuration files - Swift and Objective-C (For React-Native) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1208,7 +1212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd ${SRCROOT}\n./.build/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
+			shellScript = "pushd ${SRCROOT}\n./.build/$(CONFIGURATION)/PrepareReactNativeconfig.app/Contents/MacOS/PrepareReactNativeconfig\npopd\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

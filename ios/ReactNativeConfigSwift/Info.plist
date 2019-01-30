@@ -18,9 +18,9 @@
     <string>1.0</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
-          <key>BOLIDES_API_URL</key>
-<string>$(BOLIDES_API_URL)</string>
-      <key>BOLIDES_ITSME_SECURE_KEY</key>
+          <key>BOLIDES_ITSME_SECURE_KEY</key>
 <string>$(BOLIDES_ITSME_SECURE_KEY)</string>
+      <key>BOLIDES_API_URL</key>
+<string>$(BOLIDES_API_URL)</string>
 </dict>
 </plist>
