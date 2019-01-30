@@ -2,7 +2,4 @@
 
 xcuserdata
 *.xcuserdatad
-/ios/ReactNativeConfigSwift/Environment.swift
-/ios/ReactNativeConfig/GeneratedInfoPlistDotEnv.h
-/ios/ReactNativeConfig/GeneratedDotEnv.m
 /Carthage

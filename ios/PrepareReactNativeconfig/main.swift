@@ -16,38 +16,50 @@ enum Error: Swift.Error {
     case missingIOSFolder
 }
 
-do {
-    SignPost.shared.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
-    let envFileName = ".env"
+SignPost.shared.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
+let envFileName_debug = ".env.debug"
+let envFileName_release = ".env.release"
 
+do {
+    
     var reactNativeFolder = try currentFolder.parentFolder()
     
-    var environmentFile: FileProtocol!
+    var environmentFile_debug: FileProtocol!
+    var environmentFile_release: FileProtocol!
+
     var iosFolder: FolderProtocol!
     
     do {
-        // This happens when running from post install in node_modules folder
-        environmentFile = try reactNativeFolder.file(named: envFileName)
+        SignPost.shared.verbose("PrepareReactNativeconfig run from post install in node_modules folder")
+        environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
+        environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
         iosFolder = try reactNativeFolder.subfolder(named: "/Carthage/Checkouts/react-native-config/ios")
 
     } catch {
         
         reactNativeFolder = try reactNativeFolder.parentFolder().parentFolder().parentFolder()
         
-        // We run from building in the carthage checkouts folder
-        environmentFile = try reactNativeFolder.file(named: envFileName)
+        SignPost.shared.verbose("PrepareReactNativeconfig run from building in the carthage checkouts folder")
+        environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
+        environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
         iosFolder = currentFolder
     }
     
-    let sourcesFolder = try iosFolder.subfolder(named: "ReactNativeConfig")
+    let frameworkSwiftFolder = try iosFolder.subfolder(named: "ReactNativeConfigSwift")
     
-    let generatedInfoPlistDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedInfoPlistDotEnv.h")
-    let generatedDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedDotEnv.m")
-    let generatedSwiftFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").createFileIfNeeded(named: "Environment.swift")
+    let generatedEnvironmentSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Environment.swift")
+    let generatedPlistFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Info.plist")
+    let generatedPlistSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Plist.swift")
     
-    SignPost.shared.message("🚀 extraction constants from path \(environmentFile.path)\n...")
+    let debugXconfigFile = try iosFolder.createFileIfNeeded(named: "Debug.xcconfig")
+    try debugXconfigFile.write(string: try environmentFile_debug.readAsString())
     
-    let text: [(info: String, dotEnv: String, swift: String)] = try environmentFile.readAllLines().compactMap { textLine in
+    let releaseXconfigFile = try iosFolder.createFileIfNeeded(named: "Release.xcconfig")
+    try releaseXconfigFile.write(string: try environmentFile_release.readAsString())
+    
+    SignPost.shared.message("🚀 extraction constants from path \(environmentFile_debug.path)\n...")
+    
+    let text: [(case: String, value: String, plistVar: String, xmlEntry: String)] = try environmentFile_debug.readAllLines().compactMap { textLine in
         let components = textLine.components(separatedBy: "=")
         
         guard
@@ -56,20 +68,26 @@ do {
             let value = components.last else {
                 return nil
         }
-        // #define __RN_CONFIG_API_URL  https://myapi.com
-        // #define DOT_ENV @{ @"API_URL":@"https://myapi.com" };
+    
         
         return (
-            info: "#define __RN_CONFIG_\(key) \(value)",
-            dotEnv: "#define DOT_ENV @{ @\"\(key)\":@\"\(value)\"};",
-            swift: "    case \(key) = \"\(value)\""
+            case: "  case \(key)",
+            value: "\(key): \"\(value)\"",
+            plistVar: " public let \(key): String",
+            xmlEntry: """
+            <key>\(key)</key>
+            <string>$(\(key))</string>
+            """
         )
     }
     
-    try generatedInfoPlistDotEnvFile.write(data: text.map { $0.info }.joined(separator: "\n").data(using: .utf8)!)
-    try generatedDotEnvFile.write(data: text.map { $0.dotEnv }.joined(separator: "\n").data(using: .utf8)!)
+    let allConStants: String = text.map { $0.value }.joined(separator: "\n")
+    let allCases: String = text.map { $0.case }.joined(separator: "\n")
     
-    let headerSwift = """
+    
+    SignPost.shared.verbose("Writing environment variables to swift files and plist")
+    
+    let swiftLines = """
     //
     //  Environment.swift
     //  ReactNativeConfigSwift
@@ -80,20 +98,105 @@ do {
 
     import Foundation
 
-    enum Environment: String, CaseIterable {
-    """
-    var swiftLines = [headerSwift]
-    swiftLines.append(contentsOf: text.map { $0.swift })
-    swiftLines.append("}")
+    //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
+
+    @objc public class Environment: NSObject {
+        
+        @objc public class func allValuesDictionary() -> [String : String] {
+            
+            var dict = [String : String]()
+            
+             Environment.allConstants.forEach { _case in
+                dict[_case.key.rawValue] = _case.value
+            }
+            return dict
+        }
+       
+    public static let allConstants: [Environment.Case: String] = [\(allConStants)]
+        
+        public enum Case: String, CaseIterable {
+        
+            \(allCases)
     
-    try generatedSwiftFile.write(data: swiftLines.joined(separator: "\n").data(using: .utf8)!)
+        }
+        
+    }
+
+    """
+   
+    try generatedEnvironmentSwiftFile.write(data: swiftLines.data(using: .utf8)!)
+    
+    let plistVar: String = text.map { $0.plistVar }.joined(separator: "\n")
+    
+    let plistLinesSwift = """
+    //
+    //  EnvironmentCustomPlist.swift
+    //  ReactNativeConfigSwift
+    //
+    //  Created by Stijn on 30/01/2019.
+    //  Copyright © 2019 Pedro Belo. All rights reserved.
+    //
+
+    import Foundation
+
+    //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
+
+    public struct EnvironmentPlist: Codable {
+        
+        // These are the normal plist things
+
+        public let CFBundleDevelopmentRegion: String
+        public let CFBundleExecutable: String
+        public let CFBundleIdentifier: String
+        public let CFBundleInfoDictionaryVersion: String
+        public let CFBundleName: String
+        public let CFBundlePackageType: String
+        public let CFBundleShortVersionString: String
+        public let CFBundleVersion: String
+        
+        // Custom plist properties are added here
+        \(plistVar)
+    
+    }
+    """
+    try generatedPlistSwiftFile.write(string: plistLinesSwift)
+    
+    let plistLinesXmlText: String = text.map { $0.xmlEntry }.joined(separator: "\n")
+    
+    let plistLinesXml = """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>CFBundleDevelopmentRegion</key>
+        <string>$(DEVELOPMENT_LANGUAGE)</string>
+        <key>CFBundleExecutable</key>
+        <string>$(EXECUTABLE_NAME)</string>
+        <key>CFBundleIdentifier</key>
+        <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+        <key>CFBundleInfoDictionaryVersion</key>
+        <string>6.0</string>
+        <key>CFBundleName</key>
+        <string>$(PRODUCT_NAME)</string>
+        <key>CFBundlePackageType</key>
+        <string>FMWK</string>
+        <key>CFBundleShortVersionString</key>
+        <string>1.0</string>
+        <key>CFBundleVersion</key>
+        <string>$(CURRENT_PROJECT_VERSION)</string>
+        \(plistLinesXmlText)
+    </dict>
+    </plist>
+    """
+    
+    try generatedPlistFile.write(string: plistLinesXml)
     SignPost.shared.message("🚀 ReactNativeConfig main.swift ✅")
     
     exit(EXIT_SUCCESS)
 } catch {
     SignPost.shared.error("""
         ❌
-        Could not find '.env' file in your root React Native project.
+        Could not find '\(envFileName_release)' or/and '\(envFileName_debug)' file in your root React Native project.
         The error was:
         \(error)
         ❌

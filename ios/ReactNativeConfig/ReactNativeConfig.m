@@ -1,5 +1,6 @@
 #import "ReactNativeConfig.h"
-#import "GeneratedDotEnv.m" // written during build by ./.build/PrepareReactNativeconfig/Contents/macOS/PrepareReactNativeconfig
+#import <ReactNativeConfigSwift/ReactNativeConfigSwift-Swift.h>
+
 
 @implementation ReactNativeConfig
 
@@ -11,7 +12,7 @@ RCT_EXPORT_MODULE()
 }
 
 + (NSDictionary *)env {
-    return (NSDictionary *)DOT_ENV;
+    return Environment.allValuesDictionary;
 }
 
 + (NSString *)envFor: (NSString *)key {
@@ -20,7 +21,7 @@ RCT_EXPORT_MODULE()
 }
 
 - (NSDictionary *)constantsToExport {
-    return DOT_ENV
+    return Environment.allValuesDictionary;
 }
 
 @end
