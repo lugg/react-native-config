@@ -7,14 +7,29 @@ Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
 ## Basic Usage
 
-Create a new file `.env` in the root of your React Native app:
+Create a new file `.env.debug.json` & `.env.release.json`in the root of your React Native app:
 
 ```
-API_URL=https://myapi.com
-GOOGLE_MAPS_API_KEY=abcdefgh
+{
+"env": 
+  {
+    "<#key#>": 
+        {
+            "value": "https://<#your domain#>",
+            "valueType": "Url"
+        },
+    "<#second key#>": 
+        {
+        "value": "<#string value#>",
+        "valueType": "String"
+        }
+  }
+}
 ```
 
 Then access variables defined there from your app:
+
+// TODO: Currently there is a bug with this
 
 ```js
 import Config from 'react-native-config'
