@@ -11,6 +11,9 @@
 		3DF7F6B7203AA0D600D0EAB7 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
+		FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; };
+		FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; };
 		FD55CB9722009A800044D1A7 /* ReactNativeConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		FD55CBA122009E5A0044D1A7 /* GeneratedDotEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */; };
 		FD55CBA222009E5A0044D1A7 /* GeneratedDotEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */; };
@@ -30,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FD4BE2AB2201A9F0008903DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD55CBEF2200A36B0044D1A7 /* 🛣.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FD1126CB21C77F050072607D;
+			remoteInfo = SignPost;
+		};
 		FD55CBC722009FF70044D1A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB2648D71C7BE17A00B8F155 /* Project object */;
@@ -406,6 +416,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */,
+				FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */,
 				FD55CC662200A4580044D1A7 /* ZFile.framework in Embed Frameworks */,
 				FD55CC6B2200A4940044D1A7 /* SourceryAutoProtocols.framework in Embed Frameworks */,
 			);
@@ -419,6 +430,7 @@
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
 		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
+		FD4BE2B12201AA38008903DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		FD55CB9F22009E5A0044D1A7 /* GeneratedDotEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedDotEnv.m; sourceTree = "<group>"; };
 		FD55CBA022009E5A0044D1A7 /* GeneratedInfoPlistDotEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneratedInfoPlistDotEnv.h; sourceTree = "<group>"; };
 		FD55CBB522009FF50044D1A7 /* PrepareReactNativeconfig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrepareReactNativeconfig.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -458,7 +470,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */,
 				FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */,
+				FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */,
 				FD55CC652200A4580044D1A7 /* ZFile.framework in Frameworks */,
 				FD55CC6A2200A4940044D1A7 /* SourceryAutoProtocols.framework in Frameworks */,
 			);
@@ -610,6 +624,7 @@
 		FD55CC902200B4460044D1A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD4BE2B12201AA38008903DC /* AppKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -690,6 +705,7 @@
 				FD55CC6D2200A4940044D1A7 /* PBXTargetDependency */,
 				FD55CC682200A4580044D1A7 /* PBXTargetDependency */,
 				FD55CC732200A7460044D1A7 /* PBXTargetDependency */,
+				FD4BE2AC2201A9F0008903DC /* PBXTargetDependency */,
 			);
 			name = PrepareReactNativeconfig;
 			productName = PrepareReactNativeconfig;
@@ -1222,6 +1238,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FD4BE2AC2201A9F0008903DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SignPost;
+			targetProxy = FD4BE2AB2201A9F0008903DC /* PBXContainerItemProxy */;
+		};
 		FD55CBC822009FF70044D1A7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FD55CBB422009FF50044D1A7 /* PrepareReactNativeconfig */;

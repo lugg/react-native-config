@@ -8,6 +8,7 @@
 
 import Foundation
 import ZFile
+import SignPost
 
 let currentFolder = FileSystem.shared.currentFolder
 enum Error: Swift.Error {
@@ -16,7 +17,7 @@ enum Error: Swift.Error {
 }
 
 do {
-    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...\n\n".data(using: .utf8)!)
+    SignPost.shared.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
     let envFileName = ".env"
 
     var reactNativeFolder = try currentFolder.parentFolder()
@@ -44,7 +45,7 @@ do {
     let generatedDotEnvFile = try sourcesFolder.createFileIfNeeded(named: "GeneratedDotEnv.m")
     let generatedSwiftFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").createFileIfNeeded(named: "Environment.swift")
     
-    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift\nPreparing build environment variables in \(environmentFile.path)\n...\n\n".data(using: .utf8)!)
+    SignPost.shared.message("🚀 extraction constants from path \(environmentFile.path)\n...")
     
     let text: [(info: String, dotEnv: String, swift: String)] = try environmentFile.readAllLines().compactMap { textLine in
         let components = textLine.components(separatedBy: "=")
@@ -86,18 +87,18 @@ do {
     swiftLines.append("}")
     
     try generatedSwiftFile.write(data: swiftLines.joined(separator: "\n").data(using: .utf8)!)
-    FileHandle.standardOutput.write("🚀 ReactNativeConfig main.swift ✅\n\n".data(using: .utf8)!)
+    SignPost.shared.message("🚀 ReactNativeConfig main.swift ✅")
     
     exit(EXIT_SUCCESS)
 } catch {
-    FileHandle.standardError.write("""
+    SignPost.shared.error("""
         ❌
         Could not find '.env' file in your root React Native project.
         The error was:
         \(error)
         ❌
         ♥️ Fix it by adding .env file to root with `API_URL=https://myapi.com` or more
-        """.data(using: .utf8)!
+        """
     )
     exit(EXIT_FAILURE)
 }
