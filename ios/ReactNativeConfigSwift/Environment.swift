@@ -12,21 +12,56 @@ import Foundation
 
 @objc public class Environment: NSObject {
     
-    @objc public class func allValuesDictionary() -> [String : String] {
+    public enum Error: Swift.Error {
+        case noInfoDictonary
+        case infoDictionaryNotReadableAsDictionary
+    }
+    
+    @objc public class func allValuesDictionary() throws -> [String : String] {
         
         var dict = [String : String]()
         
-         Environment.allConstants.forEach { _case in
+         try Environment.allConstants().forEach { _case in
             dict[_case.key.rawValue] = _case.value
         }
         return dict
     }
    
-public static let allConstants: [Environment.Case: String] = [API_URL: "https://staging.armada.bolides.be"]
+    public static func plist() throws ->  Plist {
+        
+        guard let infoDict = Bundle.main.infoDictionary else {
+            throw Error.noInfoDictonary
+        }
+        
+        let data = try JSONSerialization.data(withJSONObject: infoDict, options: .sortedKeys)
+        
+        return try JSONDecoder().decode(Plist.self, from: data)
+    }
+    
+    public static func  allConstants() throws ->  [Environment.Case: String] {
+        var result = [Case: String]()
+        
+        let plist = try Environment.plist()
+        let data = try JSONEncoder().encode(plist)
+        
+        guard let dict: [String: String] = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String : String] else {
+            throw Error.infoDictionaryNotReadableAsDictionary
+        }
+        
+        dict.forEach {
+            
+            guard let key = Case(rawValue: $0.key) else {
+                return
+            }
+            result[key] = $0.value
+        }
+        
+        return result
+    }
     
     public enum Case: String, CaseIterable {
     
-          case API_URL
+            case API_URL
 
     }
     

@@ -12,7 +12,7 @@ RCT_EXPORT_MODULE()
 }
 
 + (NSDictionary *)env {
-    return Environment.allValuesDictionary;
+    return [Environment allValuesDictionaryAndReturnError:nil];
 }
 
 + (NSString *)envFor: (NSString *)key {
@@ -21,7 +21,7 @@ RCT_EXPORT_MODULE()
 }
 
 - (NSDictionary *)constantsToExport {
-    return Environment.allValuesDictionary;
+    return [Environment allValuesDictionaryAndReturnError:nil];
 }
 
 @end

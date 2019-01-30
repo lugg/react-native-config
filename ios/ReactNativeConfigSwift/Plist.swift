@@ -10,7 +10,7 @@ import Foundation
 
 //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
 
-public struct EnvironmentPlist: Codable {
+public struct Plist: Codable {
     
     // These are the normal plist things
 
@@ -24,6 +24,6 @@ public struct EnvironmentPlist: Codable {
     public let CFBundleVersion: String
     
     // Custom plist properties are added here
-     public let API_URL: String
+    public let API_URL: String
 
 }

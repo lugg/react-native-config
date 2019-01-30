@@ -59,21 +59,19 @@ do {
     
     SignPost.shared.message("🚀 extraction constants from path \(environmentFile_debug.path)\n...")
     
-    let text: [(case: String, value: String, plistVar: String, xmlEntry: String)] = try environmentFile_debug.readAllLines().compactMap { textLine in
+    let text: [(case: String, plistVar: String, xmlEntry: String)] = try environmentFile_debug.readAllLines().compactMap { textLine in
         let components = textLine.components(separatedBy: "=")
         
         guard
             components.count == 2,
-            let key = components.first,
-            let value = components.last else {
-                return nil
+            let key = components.first else {
+            return nil
         }
     
         
         return (
             case: "  case \(key)",
-            value: "\(key): \"\(value)\"",
-            plistVar: " public let \(key): String",
+            plistVar: "public let \(key): String",
             xmlEntry: """
             <key>\(key)</key>
             <string>$(\(key))</string>
@@ -81,9 +79,7 @@ do {
         )
     }
     
-    let allConStants: String = text.map { $0.value }.joined(separator: "\n")
     let allCases: String = text.map { $0.case }.joined(separator: "\n")
-    
     
     SignPost.shared.verbose("Writing environment variables to swift files and plist")
     
@@ -102,22 +98,57 @@ do {
 
     @objc public class Environment: NSObject {
         
-        @objc public class func allValuesDictionary() -> [String : String] {
+        public enum Error: Swift.Error {
+            case noInfoDictonary
+            case infoDictionaryNotReadableAsDictionary
+        }
+        
+        @objc public class func allValuesDictionary() throws -> [String : String] {
             
             var dict = [String : String]()
             
-             Environment.allConstants.forEach { _case in
+             try Environment.allConstants().forEach { _case in
                 dict[_case.key.rawValue] = _case.value
             }
             return dict
         }
        
-    public static let allConstants: [Environment.Case: String] = [\(allConStants)]
+        public static func plist() throws ->  Plist {
+            
+            guard let infoDict = Bundle.main.infoDictionary else {
+                throw Error.noInfoDictonary
+            }
+            
+            let data = try JSONSerialization.data(withJSONObject: infoDict, options: .sortedKeys)
+            
+            return try JSONDecoder().decode(Plist.self, from: data)
+        }
+        
+        public static func  allConstants() throws ->  [Environment.Case: String] {
+            var result = [Case: String]()
+            
+            let plist = try Environment.plist()
+            let data = try JSONEncoder().encode(plist)
+            
+            guard let dict: [String: String] = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String : String] else {
+                throw Error.infoDictionaryNotReadableAsDictionary
+            }
+            
+            dict.forEach {
+                
+                guard let key = Case(rawValue: $0.key) else {
+                    return
+                }
+                result[key] = $0.value
+            }
+            
+            return result
+        }
         
         public enum Case: String, CaseIterable {
         
-            \(allCases)
-    
+              \(allCases)
+
         }
         
     }
@@ -141,7 +172,7 @@ do {
 
     //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
 
-    public struct EnvironmentPlist: Codable {
+    public struct Plist: Codable {
         
         // These are the normal plist things
 
