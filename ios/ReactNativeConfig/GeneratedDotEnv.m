@@ -1,1 +1,0 @@
-#define DOT_ENV @{ @"API_URL":@"https://staging.armada.bolides.be"};

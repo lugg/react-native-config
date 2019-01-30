@@ -17,8 +17,8 @@ enum Error: Swift.Error {
 }
 
 SignPost.shared.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
-let envFileName_debug = ".env.debug"
-let envFileName_release = ".env.release"
+let envFileName_debug = ".env.debug.json"
+let envFileName_release = ".env.release.json"
 
 do {
     
@@ -52,26 +52,29 @@ do {
     let generatedPlistSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Plist.swift")
     
     let debugXconfigFile = try iosFolder.createFileIfNeeded(named: "Debug.xcconfig")
-    try debugXconfigFile.write(string: try environmentFile_debug.readAsString())
+    let env_debug: Env = try JSONDecoder().decode(Env.self, from:  try environmentFile_debug.read())
+
+    try debugXconfigFile.write(string: try env_debug.xcconfigEntry())
     
     let releaseXconfigFile = try iosFolder.createFileIfNeeded(named: "Release.xcconfig")
-    try releaseXconfigFile.write(string: try environmentFile_release.readAsString())
+    let env_release: Env = try JSONDecoder().decode(Env.self, from:  try environmentFile_release.read())
+
+    try releaseXconfigFile.write(string: try env_release.xcconfigEntry())
     
-    SignPost.shared.message("🚀 extraction constants from path \(environmentFile_debug.path)\n...")
+    SignPost.shared.message("""
+        🚀 Env read from
+            \(environmentFile_debug!)
+            \(environmentFile_release!)
+        ...
+        """
+    )
     
-    let text: [(case: String, plistVar: String, xmlEntry: String)] = try environmentFile_debug.readAllLines().compactMap { textLine in
-        let components = textLine.components(separatedBy: "=")
-        
-        guard
-            components.count == 2,
-            let key = components.first else {
-            return nil
-        }
+    // Only 1 environment read is good. Values come form configuration files
     
-        
+    let text: [(case: String, plistVar: String, xmlEntry: String)] = env_debug.env.keys.compactMap { key in
         return (
             case: "  case \(key)",
-            plistVar: "public let \(key): String",
+            plistVar: "public let \(key): \(PlistEntry.self)",
             xmlEntry: """
             <key>\(key)</key>
             <string>$(\(key))</string>

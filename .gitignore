@@ -3,3 +3,7 @@
 xcuserdata
 *.xcuserdatad
 /Carthage
+/ios/Debug.xcconfig
+/ios/Release.xcconfig
+/ios/ReactNativeConfigSwift/Environment.swift
+/ios/ReactNativeConfigSwift/Plist.swift
