@@ -9,7 +9,7 @@
 import Foundation
 
 struct Env: Decodable {
-    let env: [String: PlistEntry]
+    let env: [String: JSONEntry]
     
     func xcconfigEntry() throws -> String {
         return try env.map {
@@ -17,8 +17,8 @@ struct Env: Decodable {
         }.joined(separator: "\n")
     }
     
-    private func rawValue(for plistEntry: PlistEntry) throws -> String {
-        switch plistEntry.typedValue {
+    private func rawValue(for jsonEntry: JSONEntry) throws -> String {
+        switch jsonEntry.typedValue {
         case let .url(url):
             return url.absoluteString
                 .replacingOccurrences(of: "http://", with: "http:\\/\\/")

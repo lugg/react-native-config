@@ -71,18 +71,26 @@ do {
     
     // Only 1 environment read is good. Values come form configuration files
     
-    let text: [(case: String, plistVar: String, xmlEntry: String)] = env_debug.env.keys.compactMap { key in
+    let text: [(case: String, plistVar: String, xmlEntry: String)] = env_debug.env.enumerated().compactMap {
+        let key = $0.element.key
+        let typedValue = $0.element.value.typedValue
+        let swiftTypeString = typedValue.typeSwiftString
+        let xmlType = typedValue.typePlistString
+        
         return (
-            case: "  case \(key)",
-            plistVar: "public let \(key): \(PlistEntry.self)",
+            case: "case \(key)",
+            plistVar: "public let \(key): \(swiftTypeString)",
             xmlEntry: """
             <key>\(key)</key>
-            <string>$(\(key))</string>
+            <\(xmlType)>$(\(key))</\(xmlType)>
             """
         )
     }
     
-    let allCases: String = text.map { $0.case }.joined(separator: "\n")
+    let allCases: String = text
+        .map { $0.case }
+        .map {"      \($0)"}
+        .joined(separator: "\n")
     
     SignPost.shared.verbose("Writing environment variables to swift files and plist")
     
@@ -118,11 +126,11 @@ do {
        
         public static func plist() throws ->  Plist {
             
-            guard let infoDict = Bundle.main.infoDictionary else {
+            guard let infoDict = Bundle(for: Environment.self).infoDictionary else {
                 throw Error.noInfoDictonary
             }
             
-            let data = try JSONSerialization.data(withJSONObject: infoDict, options: .sortedKeys)
+            let data = try JSONSerialization.data(withJSONObject: infoDict, options: .prettyPrinted)
             
             return try JSONDecoder().decode(Plist.self, from: data)
         }
@@ -150,7 +158,7 @@ do {
         
         public enum Case: String, CaseIterable {
         
-              \(allCases)
+        \(allCases)
 
         }
         
@@ -160,7 +168,10 @@ do {
    
     try generatedEnvironmentSwiftFile.write(data: swiftLines.data(using: .utf8)!)
     
-    let plistVar: String = text.map { $0.plistVar }.joined(separator: "\n")
+    let plistVar: String = text
+        .map { $0.plistVar }
+        .map {"      \($0)"}
+        .joined(separator: "\n")
     
     let plistLinesSwift = """
     //
@@ -189,13 +200,16 @@ do {
         public let CFBundleVersion: String
         
         // Custom plist properties are added here
-        \(plistVar)
+    \(plistVar)
     
     }
     """
     try generatedPlistSwiftFile.write(string: plistLinesSwift)
     
-    let plistLinesXmlText: String = text.map { $0.xmlEntry }.joined(separator: "\n")
+    let plistLinesXmlText: String = text
+        .map { $0.xmlEntry }
+        .map {"      \($0)"}
+        .joined(separator: "\n")
     
     let plistLinesXml = """
     <?xml version="1.0" encoding="UTF-8"?>

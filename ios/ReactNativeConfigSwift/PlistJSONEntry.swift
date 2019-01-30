@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PlistEntry: Codable {
+public struct JSONEntry: Codable {
     public let value: String
     public let valueType: String
     
@@ -22,6 +22,27 @@ public struct PlistEntry: Codable {
         case string(String)
         case int(Int)
     
+        var typeSwiftString: String {
+            switch self {
+            case .url(_):
+                return "URLEscaped"
+            case .int(_):
+                return "Int"
+            case .string(_):
+                return "String"
+            }
+        }
+        
+        var typePlistString: String {
+            switch self {
+            case .url(_):
+                return "string"
+            case .int(_):
+                return "int"
+            case .string(_):
+                return "string"
+            }
+        }
     }
     
     public enum CodingKeys: String, CodingKey {
