@@ -27,6 +27,9 @@ public struct URLEscaped: Codable {
         self.url = url
     }
     
-    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(url.absoluteString)
+    }
     
 }
