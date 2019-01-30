@@ -229,13 +229,13 @@ do {
     exit(EXIT_SUCCESS)
 } catch {
     SignPost.shared.error("""
-        ❌
-        Could not find '\(envFileName_release)' or/and '\(envFileName_debug)' file in your root React Native project.
-        The error was:
-        \(error)
-        ❌
-        ♥️ Fix it by adding .env file to root with `API_URL=https://myapi.com` or more
-        """
+    ❌ Prepare React Native Config
+    
+         \(error)
+    
+    ❌
+        ♥️ Fix it by adding \(envFileName_debug) & \(envFileName_release) at <#react native#>/
+    """
     )
     exit(EXIT_FAILURE)
 }
