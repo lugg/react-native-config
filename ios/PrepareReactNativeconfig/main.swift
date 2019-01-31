@@ -48,7 +48,7 @@ do {
     let frameworkSwiftFolder = try iosFolder.subfolder(named: "ReactNativeConfigSwift")
     
     let generatedEnvironmentSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Environment.swift")
-    let generatedPlistFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").file(named: "Info.plist")
+    let generatedPlistFile = try iosFolder.subfolder(named: "ReactNativeConfigSwift").createFileIfNeeded(named: "Info.plist")
     let generatedPlistSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Plist.swift")
     
     let debugXconfigFile = try iosFolder.createFileIfNeeded(named: "Debug.xcconfig")
@@ -221,7 +221,9 @@ do {
         public var description: String {
             return \"""
             Environment Plist
-                
+    
+            // Config variable of Framework ReactNativeConfigSwift
+    
                 * CFBundleDevelopmentRegion = \\(CFBundleDevelopmentRegion)
                 * CFBundleExecutable = \\(CFBundleExecutable)
                 * CFBundleIdentifier = \\(CFBundleIdentifier)
@@ -230,6 +232,9 @@ do {
                 * CFBundlePackageType = \\(CFBundlePackageType)
                 * CFBundleShortVersionString = \\(CFBundleShortVersionString)
                 * CFBundleVersion = \\(CFBundleVersion)
+    
+            // Custom environment dependend constants from .env.debug.json or .env.release.json 
+
     \(plistVarString)
             \"""
         }

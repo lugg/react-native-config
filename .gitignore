@@ -7,3 +7,4 @@ xcuserdata
 /ios/Release.xcconfig
 /ios/ReactNativeConfigSwift/Environment.swift
 /ios/ReactNativeConfigSwift/Plist.swift
+/ios/ReactNativeConfigSwift/Info.plist
