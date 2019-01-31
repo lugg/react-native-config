@@ -41,6 +41,7 @@ Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. 
 
 It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
+
 // TODO: add secret keys in both android and iOS that are stored using git_secret and secure storage for both Android and iOS to solve issue above [github issue #1](https://github.com/doozMen/react-native-config/issues/1)
 
 ## Setup
@@ -81,16 +82,6 @@ You'll also need to manually apply a plugin to your app, from `android/app/build
 // 2nd line, add a new apply:
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
-
-
-### Extra step for iOS (support Info.plist)
-
-* Go to your project -> Build Settings -> All
-* Search for "preprocess"
-* Set `Preprocess Info.plist File` to `Yes`
-* Set `Info.plist Preprocessor Prefix File` to `${BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
-* Set `Info.plist Other Preprocessor Flags` to `-traditional`
-* If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
 
 
 #### Advanced Android Setup
@@ -149,9 +140,8 @@ Once again, remember variables stored in `.env` are published with your code, so
 ``` swift
 import ReactNativeConfigSwift
 
-// API_URL is the key you added to the .env file
-let apiURL = Environment.API_URL
-
+let environmentPlist = try Environment.plist()
+print(environmentPlist)
 ```
 #### Objective-C
 Read variables declared in `.env` from your Obj-C classes like:

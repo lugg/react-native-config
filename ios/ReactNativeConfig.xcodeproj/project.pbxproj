@@ -18,8 +18,6 @@
 		FD4868B02201E3180092A63E /* PlistJSONEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4868AE2201E2D00092A63E /* PlistJSONEntry.swift */; };
 		FD4868B42201E7FD0092A63E /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4868B32201E7FD0092A63E /* Env.swift */; };
 		FD48698D220216DC0092A63E /* UrlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD48698C220216DC0092A63E /* UrlEscaped.swift */; };
-		FD486A142202234C0092A63E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; };
-		FD486A152202234C0092A63E /* AppKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; };
 		FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CC282200A36C0044D1A7 /* SignPost.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4BE2B12201AA38008903DC /* AppKit.framework */; };
@@ -35,7 +33,6 @@
 		FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD55CBE72200A2030044D1A7 /* FoundationGenericHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD55CC8A2200B4270044D1A7 /* ReactNativeConfigSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = FD55CC882200B4270044D1A7 /* ReactNativeConfigSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD55CC952200B4BA0044D1A7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD55CC942200B4BA0044D1A7 /* Environment.swift */; };
-		FD55CCA32200BDAB0044D1A7 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = FD55CCA22200BDAA0044D1A7 /* package.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -423,7 +420,6 @@
 			files = (
 				FD55CC712200A7460044D1A7 /* FoundationGenericHelper.framework in Embed Frameworks */,
 				FD4BE2AA2201A9F0008903DC /* SignPost.framework in Embed Frameworks */,
-				FD486A152202234C0092A63E /* AppKit.framework in Embed Frameworks */,
 				FD55CC662200A4580044D1A7 /* ZFile.framework in Embed Frameworks */,
 				FD55CC6B2200A4940044D1A7 /* SourceryAutoProtocols.framework in Embed Frameworks */,
 			);
@@ -486,7 +482,6 @@
 				FD4BE2B22201AA38008903DC /* AppKit.framework in Frameworks */,
 				FD55CC702200A7460044D1A7 /* FoundationGenericHelper.framework in Frameworks */,
 				FD4BE2A92201A9F0008903DC /* SignPost.framework in Frameworks */,
-				FD486A142202234C0092A63E /* AppKit.framework in Frameworks */,
 				FD55CC652200A4580044D1A7 /* ZFile.framework in Frameworks */,
 				FD55CC6A2200A4940044D1A7 /* SourceryAutoProtocols.framework in Frameworks */,
 			);
@@ -1161,7 +1156,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD55CCA32200BDAB0044D1A7 /* package.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1516,6 +1510,10 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PrepareReactNativeconfig/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1555,6 +1553,10 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PrepareReactNativeconfig/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

@@ -71,7 +71,7 @@ do {
     
     // Only 1 environment read is good. Values come form configuration files
     
-    let text: [(case: String, plistVar: String, xmlEntry: String)] = env_debug.env.enumerated().compactMap {
+    let text: [(case: String, plistVar: String, plistVarString: String, xmlEntry: String)] = env_debug.env.enumerated().compactMap {
         let key = $0.element.key
         let typedValue = $0.element.value.typedValue
         let swiftTypeString = typedValue.typeSwiftString
@@ -80,6 +80,7 @@ do {
         return (
             case: "case \(key)",
             plistVar: "public let \(key): \(swiftTypeString)",
+            plistVarString: "\(key): \\(\(key))",
             xmlEntry: """
             <key>\(key)</key>
             <\(xmlType)>$(\(key))</\(xmlType)>
@@ -105,8 +106,7 @@ do {
 
     import Foundation
 
-    //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
-
+    /// ⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
     @objc public class Environment: NSObject {
         
         public enum Error: Swift.Error {
@@ -124,6 +124,19 @@ do {
             return dict
         }
        
+        /// All custom environment dependend keys that are added to the plist and in the dictionary
+        @objc public func allCustomKeys() -> [String] {
+            return Case.allCases.map { $0.rawValue }
+        }
+        
+        /// Keys used in the plist of ReactNativeConfigSwift module when building for the selected configuration (Debug or Release)
+        public enum Case: String, CaseIterable {
+            
+    \(allCases)
+            
+        }
+        
+        /// Plist containing custom variables that are set from the .env.debug.json or .env.release.json dependend on the configuration you build for.
         public static func plist() throws ->  Plist {
             
             guard let infoDict = Bundle(for: Environment.self).infoDictionary else {
@@ -135,6 +148,9 @@ do {
             return try JSONDecoder().decode(Plist.self, from: data)
         }
         
+        /// If using swift use plist()
+        /// In Objective-C you can access this dictionary containing all custom environment dependend keys.
+        /// They are set from the .env.debug.json or .env.release.json dependend on the configuration you build for.
         public static func  allConstants() throws ->  [Environment.Case: String] {
             var result = [Case: String]()
             
@@ -156,11 +172,6 @@ do {
             return result
         }
         
-        public enum Case: String, CaseIterable {
-        
-        \(allCases)
-
-        }
         
     }
 
@@ -170,7 +181,11 @@ do {
     
     let plistVar: String = text
         .map { $0.plistVar }
-        .map {"      \($0)"}
+        .map {"    \($0)"}
+        .joined(separator: "\n")
+    let plistVarString: String = text
+        .map { $0.plistVarString }
+        .map { "            * \($0)" }
         .joined(separator: "\n")
     
     let plistLinesSwift = """
@@ -186,7 +201,8 @@ do {
 
     //⚠️ File is generated and ignored in git. To change it change /PrepareReactNativeconfig/main.swift
 
-    public struct Plist: Codable {
+    public struct Plist: Codable, CustomStringConvertible {
+        
         
         // These are the normal plist things
 
@@ -201,8 +217,25 @@ do {
         
         // Custom plist properties are added here
     \(plistVar)
+        
+        public var description: String {
+            return \"""
+            Environment Plist
+                
+                * CFBundleDevelopmentRegion = \\(CFBundleDevelopmentRegion)
+                * CFBundleExecutable = \\(CFBundleExecutable)
+                * CFBundleIdentifier = \\(CFBundleIdentifier)
+                * CFBundleInfoDictionaryVersion = \\(CFBundleInfoDictionaryVersion)
+                * CFBundleName = \\(CFBundleName)
+                * CFBundlePackageType = \\(CFBundlePackageType)
+                * CFBundleShortVersionString = \\(CFBundleShortVersionString)
+                * CFBundleVersion = \\(CFBundleVersion)
+    \(plistVarString)
+            \"""
+        }
     
     }
+    
     """
     try generatedPlistSwiftFile.write(string: plistLinesSwift)
     
