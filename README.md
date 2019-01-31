@@ -11,14 +11,14 @@ Create a new file `.env.debug.json` & `.env.release.json`in the root of your Rea
 
 ```
 {
-"env": 
+"env":
   {
-    "<#key#>": 
+    "<#key#>":
         {
             "value": "https://<#your domain#>",
             "valueType": "Url"
         },
-    "<#second key#>": 
+    "<#second key#>":
         {
         "value": "<#string value#>",
         "valueType": "String"
@@ -159,14 +159,11 @@ NSDictionary *config = [ReactNativeConfig env];
 
 ### Different environments
 
-// TODO make this work again
+Save config for different environments in different files: `.env.staging.json`, `.env.production.json`, etc.
 
-Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
+#### JS
 
-By default react-native-config will read from `.env`, but you can change it when building or releasing your app.
-
-The simplest approach is to tell it what file to read with an environment variable, like:
-
+To make sure it works you should 
 ```
 $ ENVFILE=.env.staging react-native run-ios           # bash
 $ SET ENVFILE=.env.staging && react-native run-ios    # windows
