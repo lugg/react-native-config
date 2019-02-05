@@ -16,9 +16,11 @@ enum Error: Swift.Error {
     case missingIOSFolder
 }
 
-SignPost.shared.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
+let signPost = SignPost.shared
+signPost.message("🚀 ReactNativeConfig main.swift\nExecuted at path \(currentFolder.path)\n...")
 let envFileName_debug = ".env.debug.json"
 let envFileName_release = ".env.release.json"
+var envFileName_local = ".env.local.json"
 
 do {
     
@@ -26,6 +28,7 @@ do {
     
     var environmentFile_debug: FileProtocol!
     var environmentFile_release: FileProtocol!
+    var environmentFile_local: FileProtocol?
 
     var iosFolder: FolderProtocol!
     
@@ -33,6 +36,7 @@ do {
         SignPost.shared.verbose("PrepareReactNativeconfig run from post install in node_modules folder")
         environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
         environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
+        do { environmentFile_local = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
         iosFolder = try reactNativeFolder.subfolder(named: "/Carthage/Checkouts/react-native-config/ios")
 
     } catch {
@@ -42,6 +46,8 @@ do {
         SignPost.shared.verbose("PrepareReactNativeconfig run from building in the carthage checkouts folder")
         environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
         environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
+        do { environmentFile_local = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
+
         iosFolder = currentFolder
     }
     
@@ -60,6 +66,14 @@ do {
     let env_release: Env = try JSONDecoder().decode(Env.self, from:  try environmentFile_release.read())
 
     try releaseXconfigFile.write(string: try env_release.xcconfigEntry())
+    
+    if let environmentFile_local = environmentFile_local {
+        let localXconfigFile = try iosFolder.createFileIfNeeded(named: "Local.xcconfig")
+        let env_local: Env = try JSONDecoder().decode(Env.self, from: try environmentFile_local.read())
+        
+        try localXconfigFile.write(string: try env_local.xcconfigEntry())
+
+    }
     
     SignPost.shared.message("""
         🚀 Env read from

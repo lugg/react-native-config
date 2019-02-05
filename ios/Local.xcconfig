@@ -1,0 +1,2 @@
+BOLIDES_ITSME_SECURE_KEY = LOCAL: some key to get stuff for secure storage
+BOLIDES_API_URL = http:\/\/192.168.0.184:3000
