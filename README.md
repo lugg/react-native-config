@@ -195,7 +195,7 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 
 
 #### iOS
-If you use `debug` and `release` configurations there is nothing more to do. If you do you need to for this repo and add your config.
+If you use `debug`, `local` and `release` configurations there is nothing more to do. If you do you need to for this repo and add your config.
 
 ## Prepare excutable
 
