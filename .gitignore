@@ -8,3 +8,4 @@ xcuserdata
 /ios/ReactNativeConfigSwift/Environment.swift
 /ios/ReactNativeConfigSwift/Plist.swift
 /ios/ReactNativeConfigSwift/Info.plist
+/ios/Local.xcconfig
