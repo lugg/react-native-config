@@ -18,9 +18,10 @@ struct Env: Decodable {
     }
     
     func androidEnvEntry() throws -> String {
-        return try env.map {
-            return "\($0.key) = \(try androidEnvRawValue(for: $0.value))"
-            }.joined(separator: "\n")
+        return try env
+            .map { return "\($0.key) = \(try androidEnvRawValue(for: $0.value))" }
+            .sorted()
+            .joined(separator: "\n")
     }
     
     // MARK: - Private
