@@ -29,13 +29,11 @@ Create a new file `.env.debug.json` & `.env.release.json`in the root of your Rea
 
 Then access variables defined there from your app:
 
-// TODO: Currently there is a bug with this
 
 ```js
 import Config from 'react-native-config'
 
-Config.API_URL  // 'https://myapi.com'
-Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
+Config.<#key#> 
 ```
 
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. 

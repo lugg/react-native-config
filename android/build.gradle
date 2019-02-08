@@ -1,11 +1,13 @@
 buildscript {
     repositories {
+        // The order in which you list these repositories matter.
+        google()
         jcenter()
-        google()        
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.lint:lint-gradle:26.1.4'
     }
 }
 
