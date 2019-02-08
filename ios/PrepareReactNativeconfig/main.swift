@@ -76,12 +76,13 @@ do {
     try releaseXconfigFile.write(string: try env_release.xcconfigEntry())
     
     var env_local: Env?
+    var localXconfigFile: FileProtocol?
     
     if let environmentFile_local = environmentFileLocal {
-        let localXconfigFile = try iosFolder.createFileIfNeeded(named: "Local.xcconfig")
+        localXconfigFile = try iosFolder.createFileIfNeeded(named: "Local.xcconfig")
         env_local = try JSONDecoder().decode(Env.self, from: try environmentFile_local.read())
         
-        try localXconfigFile.write(string: try env_local!.xcconfigEntry())
+        try localXconfigFile?.write(string: try env_local!.xcconfigEntry())
 
     }
     
@@ -96,7 +97,7 @@ do {
     try androidEnvironmentFileRelease.write(string: try env_release.androidEnvEntry())
     
     if let env_local = env_local {
-        androidEnvironmentFileLocal = try androidFolder.createFileIfNeeded(named: ".env.release")
+        androidEnvironmentFileLocal = try androidFolder.createFileIfNeeded(named: ".env.local")
 
         try androidEnvironmentFileLocal?.write(string: try env_local.xcconfigEntry())
     }
@@ -107,6 +108,20 @@ do {
             \(environmentFileRelease!)
             \(String(describing: environmentFileLocal))
          ...
+        """
+    )
+    
+    SignPost.shared.message("""
+        🚀 Written to config files
+        # ios
+            \(debugXconfigFile)
+            \(releaseXconfigFile)
+            \(String(describing: localXconfigFile))
+        # android
+            \(androidEnvironmentFileDebug)
+            \(androidEnvironmentFileRelease)
+            \(String(describing: androidEnvironmentFileLocal))
+        ...
         """
     )
     
