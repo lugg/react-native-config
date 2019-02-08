@@ -1,0 +1,6 @@
+[submodule "Carthage/Checkouts/ZFile"]
+	path = Carthage/Checkouts/ZFile
+	url = https://github.com/doozMen/ZFile.git
+[submodule "Carthage/Checkouts/highway"]
+	path = Carthage/Checkouts/highway
+	url = https://github.com/doozMen/highway.git
