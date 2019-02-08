@@ -13,16 +13,35 @@ struct Env: Decodable {
     
     func xcconfigEntry() throws -> String {
         return try env.map {
-            return "\($0.key) = \(try rawValue(for: $0.value))"
+            return "\($0.key) = \(try xcconfigRawValue(for: $0.value))"
         }.joined(separator: "\n")
     }
     
-    private func rawValue(for jsonEntry: JSONEntry) throws -> String {
+    func androidEnvEntry() throws -> String {
+        return try env.map {
+            return "\($0.key) = \(try androidEnvRawValue(for: $0.value))"
+            }.joined(separator: "\n")
+    }
+    
+    // MARK: - Private
+    
+    private func xcconfigRawValue(for jsonEntry: JSONEntry) throws -> String {
         switch jsonEntry.typedValue {
         case let .url(url):
             return url.absoluteString
                 .replacingOccurrences(of: "http://", with: "http:\\/\\/")
                 .replacingOccurrences(of: "https://", with: "https:\\/\\/")
+        case let .string(string):
+            return string
+        case let .int(int):
+            return "\(int)"
+        }
+    }
+    
+    private func androidEnvRawValue(for jsonEntry: JSONEntry) throws -> String {
+        switch jsonEntry.typedValue {
+        case let .url(url):
+            return url.absoluteString
         case let .string(string):
             return string
         case let .int(int):

@@ -26,30 +26,38 @@ do {
     
     var reactNativeFolder = try currentFolder.parentFolder()
     
-    var environmentFile_debug: FileProtocol!
-    var environmentFile_release: FileProtocol!
-    var environmentFile_local: FileProtocol?
+    // ios environment .xcconfig files
+    
+    var environmentFileDebug: FileProtocol!
+    var environmentFileRelease: FileProtocol!
+    var environmentFileLocal: FileProtocol?
 
+    
+    
+    var androidFolder: FolderProtocol!
     var iosFolder: FolderProtocol!
     
     do {
         SignPost.shared.verbose("PrepareReactNativeconfig run from post install in node_modules folder")
-        environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
-        environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
-        do { environmentFile_local = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
+        environmentFileDebug = try reactNativeFolder.file(named: envFileName_debug)
+        environmentFileRelease = try reactNativeFolder.file(named: envFileName_release)
+        do { environmentFileLocal = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
         iosFolder = try reactNativeFolder.subfolder(named: "/Carthage/Checkouts/react-native-config/ios")
-
+        androidFolder = try reactNativeFolder.subfolder(named: "android")
     } catch {
         
         reactNativeFolder = try reactNativeFolder.parentFolder().parentFolder().parentFolder()
         
         SignPost.shared.verbose("PrepareReactNativeconfig run from building in the carthage checkouts folder")
-        environmentFile_debug = try reactNativeFolder.file(named: envFileName_debug)
-        environmentFile_release = try reactNativeFolder.file(named: envFileName_release)
-        do { environmentFile_local = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
+        environmentFileDebug = try reactNativeFolder.file(named: envFileName_debug)
+        environmentFileRelease = try reactNativeFolder.file(named: envFileName_release)
+        do { environmentFileLocal = try reactNativeFolder.file(named: envFileName_local) } catch { signPost.message("💁🏻‍♂️ If you would like you can add \(envFileName_local) to have a local config. Ignoring for now") }
 
         iosFolder = currentFolder
+        androidFolder = try reactNativeFolder.subfolder(named: "android")
     }
+    
+    // Generate ios config files
     
     let frameworkSwiftFolder = try iosFolder.subfolder(named: "ReactNativeConfigSwift")
     
@@ -58,31 +66,51 @@ do {
     let generatedPlistSwiftFile = try frameworkSwiftFolder.createFileIfNeeded(named: "Plist.swift")
     
     let debugXconfigFile = try iosFolder.createFileIfNeeded(named: "Debug.xcconfig")
-    let env_debug: Env = try JSONDecoder().decode(Env.self, from:  try environmentFile_debug.read())
+    let env_debug: Env = try JSONDecoder().decode(Env.self, from:  try environmentFileDebug.read())
 
     try debugXconfigFile.write(string: try env_debug.xcconfigEntry())
     
     let releaseXconfigFile = try iosFolder.createFileIfNeeded(named: "Release.xcconfig")
-    let env_release: Env = try JSONDecoder().decode(Env.self, from:  try environmentFile_release.read())
+    let env_release: Env = try JSONDecoder().decode(Env.self, from:  try environmentFileRelease.read())
 
     try releaseXconfigFile.write(string: try env_release.xcconfigEntry())
     
-    if let environmentFile_local = environmentFile_local {
+    var env_local: Env?
+    
+    if let environmentFile_local = environmentFileLocal {
         let localXconfigFile = try iosFolder.createFileIfNeeded(named: "Local.xcconfig")
-        let env_local: Env = try JSONDecoder().decode(Env.self, from: try environmentFile_local.read())
+        env_local = try JSONDecoder().decode(Env.self, from: try environmentFile_local.read())
         
-        try localXconfigFile.write(string: try env_local.xcconfigEntry())
+        try localXconfigFile.write(string: try env_local!.xcconfigEntry())
 
+    }
+    
+    // android config files
+    
+    // android .env files
+    let androidEnvironmentFileDebug: FileProtocol = try androidFolder.createFileIfNeeded(named: ".env.debug")
+    let androidEnvironmentFileRelease: FileProtocol = try androidFolder.createFileIfNeeded(named: ".env.release")
+    var androidEnvironmentFileLocal: FileProtocol?
+    
+    try androidEnvironmentFileDebug.write(string: try env_debug.androidEnvEntry())
+    try androidEnvironmentFileRelease.write(string: try env_release.androidEnvEntry())
+    
+    if let env_local = env_local {
+        androidEnvironmentFileLocal = try androidFolder.createFileIfNeeded(named: ".env.release")
+
+        try androidEnvironmentFileLocal?.write(string: try env_local.xcconfigEntry())
     }
     
     SignPost.shared.message("""
         🚀 Env read from
-            \(environmentFile_debug!)
-            \(environmentFile_release!)
-        ...
+            \(environmentFileDebug!)
+            \(environmentFileRelease!)
+            \(String(describing: environmentFileLocal))
+         ...
         """
     )
     
+    // iOS
     // Only 1 environment read is good. Values come form configuration files
     
     let text: [(case: String, plistVar: String, plistVarString: String, xmlEntry: String)] = env_debug.env.enumerated().compactMap {
