@@ -10,3 +10,6 @@ xcuserdata
 /ios/ReactNativeConfigSwift/Info.plist
 /ios/Local.xcconfig
 /android/build
+/android/.gradle
+/android/.gradle/4.10.1
+/android/.idea

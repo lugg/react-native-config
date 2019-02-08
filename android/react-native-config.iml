@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":react-native-config" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/../../../../android" external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":react-native-config" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <afterSyncTasks>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/../../../../node_modules/react-native-config/android/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/../../../../node_modules/react-native-config/android/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/../../../../node_modules/react-native-config/android/src/main/assets" />
+        <option name="PROJECT_TYPE" value="1" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+    <output url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes" />
+    <output-test url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/javac/debugUnitTest/compileDebugUnitTestJavaWithJavac/classes" />
+    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/apt/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/rs/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/res/rs/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/apt/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/apt/test/debug" isTestSource="true" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/not_namespaced_r_class_sources" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/generated/source/r" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/aapt_friendly_merged_manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/annotation_processor_list" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/attr" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/check-manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/consumer_proguard_file" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/intermediate-jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/javac" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/library_assets" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/merged_manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/packaged-aidl" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/packaged_res" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/public_res" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/shader_assets" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/shaders" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/build/tmp" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/aidl" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/assets" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/java" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/res" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/resources" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTest/shaders" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/aidl" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/assets" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/java" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/res" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/resources" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/androidTestDebug/shaders" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/aidl" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/assets" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/java" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/res" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/resources" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/rs" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/debug/shaders" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/aidl" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/assets" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/java" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/res" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/resources" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/rs" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/main/shaders" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/aidl" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/assets" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/java" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/res" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/resources" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/test/shaders" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/aidl" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/assets" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/java">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/java" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/res" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/resources">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/resources" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/shaders">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../node_modules/react-native-config/android/src/testDebug/shaders" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.webkit:android-jsc:r174650@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:fresco:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata-core:1.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:fbcore:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime:1.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.1.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: expolib_v1.com.squareup.okhttp3:okhttp:3.6.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.1.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:viewmodel:1.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:drawee:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-tasks:1.4.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.core:runtime:1.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.react:react-native:32.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-okhttp3:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-base:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: expolib_v1.com.squareup.okhttp3:okhttp-urlconnection:3.6.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.14.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: expolib_v1.com.facebook.fresco:expolib_v1-imagepipeline-okhttp3:1.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp-urlconnection:3.10.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline:1.10.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.10.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: expolib_v1.com.squareup.okio:okio:1.13.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: expolib_v1.com.facebook.infer.annotation:infer-annotation:0.11.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.soloader:soloader:0.5.1@aar" level="project" />
+  </component>
+</module>
