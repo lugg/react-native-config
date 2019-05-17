@@ -130,10 +130,18 @@ With one extra step environment values can be exposed to "Info.plist" and Build 
 #include? "tmp.xcconfig"
 ```
 
-3. go to project settings
-4. apply config to your configurations
+3. add the following to your ".gitignore":
+
+```
+# react-native-config codegen
+ios/tmp.xcconfig
+
+```
+
+4. go to project settings
+5. apply config to your configurations
    ![img](./readme-pics/3.ios_apply_config.png)
-5. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist<sup>this has to be placed after custom env file explained [here](#ios-multi-scheme)</sup>:
+6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used)
 
 ```
 "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
@@ -175,9 +183,9 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
-#### iOS
-
 <a name="ios-multi-scheme"></a>
+
+#### iOS
 
 The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
 
