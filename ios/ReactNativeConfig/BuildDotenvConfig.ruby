@@ -8,11 +8,16 @@ Encoding.default_internal = Encoding::UTF_8
 defaultEnvFile = ".env"
 
 # pick a custom env file if set
-if File.exists?("/tmp/envfile")
-  custom_env = true
+# check .envfile under project_dir/.envfile first. This path is under the project dir which allow concurrent iOS building in CI.
+#   This will take precendent of /tmp/envfile. 
+path = File.join(Dir.pwd, "../../../ios/.envfile")
+if File.exists?(path)
+  custom_env_path = path
+  file = File.read(path).strip
+elsif File.exists?("/tmp/envfile")
+  custom_env_path = "/tmp/envfile"
   file = File.read("/tmp/envfile").strip
 else
-  custom_env = false
   file = ENV["ENVFILE"] || defaultEnvFile
 end
 
@@ -72,8 +77,8 @@ info_plist_defines_objc = dotenv.map { |k, v| %Q(#define __RN_CONFIG_#{k}  #{v})
 path = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
 File.open(path, "w") { |f| f.puts info_plist_defines_objc }
 
-if custom_env
-  File.delete("/tmp/envfile")
+if custom_env_path
+  File.delete(custom_env_path)
 end
 
 puts "Wrote to #{path}"
