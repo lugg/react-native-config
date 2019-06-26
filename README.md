@@ -4,7 +4,6 @@ Module to expose config variables to your javascript code in React Native, suppo
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
-
 ## Basic Usage
 
 Create a new file `.env` in the root of your React Native app:
@@ -17,14 +16,13 @@ GOOGLE_MAPS_API_KEY=abcdefgh
 Then access variables defined there from your app:
 
 ```js
-import Config from 'react-native-config'
+import Config from "react-native-config";
 
-Config.API_URL  // 'https://myapi.com'
-Config.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
+Config.API_URL; // 'https://myapi.com'
+Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
 ```
 
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
-
 
 ## Setup
 
@@ -40,6 +38,11 @@ Link the library:
 $ react-native link react-native-config
 ```
 
+if cocoapods are used in the project then pod has to be installed as well:
+
+```
+(cd ios; pod install)
+```
 
 ### Extra step for Android
 
@@ -49,17 +52,6 @@ You'll also need to manually apply a plugin to your app, from `android/app/build
 // 2nd line, add a new apply:
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
-
-
-### Extra step for iOS (support Info.plist)
-
-* Go to your project -> Build Settings -> All
-* Search for "preprocess"
-* Set `Preprocess Info.plist File` to `Yes`
-* Set `Info.plist Preprocessor Prefix File` to `${BUILD_DIR}/GeneratedInfoPlistDotEnv.h`
-* Set `Info.plist Other Preprocessor Flags` to `-traditional`
-* If you don't see those settings, verify that "All" is selected at the top (instead of "Basic")
-
 
 #### Advanced Android Setup
 
@@ -125,14 +117,35 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-They're also available for configuration in `Info.plist`, by prepending `__RN_CONFIG_` to their name:
+#### Availability in Build settings and Info.plist
+
+With one extra step environment values can be exposed to "Info.plist" and Build settings in the native project.
+
+1. click on the file tree and create new file of type XCConfig
+   ![img](./readme-pics/1.ios_new_file.png)
+   ![img](./readme-pics/2.ios_file_type.png)
+2. save it under `ios` folder as "Config.xcconfig" with the following content:
 
 ```
-__RN_CONFIG_API_URL
+#include? "tmp.xcconfig"
 ```
 
-Note: Requires specific setup (see below) and a `Product > Clean` is required after changing the values to see the updated values.
+3. add the following to your ".gitignore":
 
+```
+# react-native-config codegen
+ios/tmp.xcconfig
+
+```
+
+4. go to project settings
+5. apply config to your configurations
+   ![img](./readme-pics/3.ios_apply_config.png)
+6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used)
+
+```
+"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
+```
 
 ### Different environments
 
@@ -149,7 +162,6 @@ $ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
 ```
 
 This also works for `run-android`. Alternatively, there are platform-specific options below.
-
 
 #### Android
 
@@ -171,6 +183,7 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
+<a name="ios-multi-scheme"></a>
 
 #### iOS
 
@@ -200,7 +213,7 @@ This is still a bit experimental and dirty – let us know if you have a better
 When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
 
     -keep class com.mypackage.BuildConfig { *; }
-    
+
 `mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
 
 ## Testing

@@ -57,9 +57,11 @@
 
 /* Begin PBXFileReference section */
 		3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50406729228CAD5A00E0438A /* ReadDotEnv.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ReadDotEnv.rb; sourceTree = "<group>"; };
+		50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildXCConfig.rb; sourceTree = "<group>"; };
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
-		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildDotenvConfig.ruby; sourceTree = "<group>"; };
+		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildDotenvConfig.rb; sourceTree = "<group>"; };
 		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,9 +103,11 @@
 		EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */ = {
 			isa = PBXGroup;
 			children = (
+				50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */,
 				EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */,
 				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
-				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.ruby */,
+				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */,
+				50406729228CAD5A00E0438A /* ReadDotEnv.rb */,
 			);
 			path = ReactNativeConfig;
 			sourceTree = "<group>";
@@ -172,6 +176,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = EB2648D61C7BE17A00B8F155;
@@ -192,13 +197,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby",
+				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
+			shellScript = "./ReactNativeConfig/BuildDotenvConfig.rb\n";
 		};
 		EBE4E8281C7BF689000F8875 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -206,13 +211,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby",
+				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
+			shellScript = "set -xe\necho \"$SRCROOT\"\n./ReactNativeConfig/BuildDotenvConfig.rb \"$SRCROOT/../../..\" \"$SRCROOT/ReactNativeConfig/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
