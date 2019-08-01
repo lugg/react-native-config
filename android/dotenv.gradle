@@ -22,8 +22,8 @@ def getCurrentFlavor() {
 }
 
 def loadDotEnv(flavor = getCurrentFlavor()) {
-    def envFile = ".env"
 
+    def envFile = project.hasProperty("defaultEnvFile") ? project.defaultEnvFile : ".env"
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE']
     } else if (System.getProperty('ENVFILE')) {
@@ -36,8 +36,6 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
                 return true
             }
         }
-    } else if (project.hasProperty("defaultEnvFile")) {
-        envFile = project.defaultEnvFile
     }
 
     def env = [:]
