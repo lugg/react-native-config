@@ -141,10 +141,10 @@ ios/tmp.xcconfig
 4. go to project settings
 5. apply config to your configurations
    ![img](./readme-pics/3.ios_apply_config.png)
-6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used)
+6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used); the extension of BuildDotenvConfig might be ".ruby" instead of ".rb" depending on your environment.
 
 ```
-"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.ruby" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
+"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
 ```
 
 ### Different environments
