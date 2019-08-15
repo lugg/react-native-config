@@ -31,7 +31,7 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     } else if (project.hasProperty("envConfigFiles")) {
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
         project.ext.envConfigFiles.any { pair ->
-            if (flavor.startsWith(pair.key)) {
+            if (flavor.startsWith(pair.key.toLowerCase())) {
                 envFile = pair.value
                 return true
             }
