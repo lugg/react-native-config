@@ -28,7 +28,7 @@ HOST_PATH="$SRCROOT/../.."
     input_files: ['$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb']
   }
 
-  s.source_files = 'ios/**/*.{h,m}'
+  s.source_files = 'ios/**/*.*'
   s.requires_arc = true
 
   s.dependency 'React'
