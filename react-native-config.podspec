@@ -22,13 +22,13 @@ Pod::Spec.new do |s|
     script: %(
 set -ex
 HOST_PATH="$SRCROOT/../.."
-"${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.ruby" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+"../../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
 ),
     execution_position: :before_compile,
-    input_files: ['$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.ruby']
+    input_files: ['$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb']
   }
 
-  s.source_files = 'ios/**/*.*'
+  s.source_files = 'ios/**/*.{h,m}'
   s.requires_arc = true
 
   s.dependency 'React'
