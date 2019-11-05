@@ -228,3 +228,7 @@ export default {
   FOO_BAR: 'baz',
 };
 ```
+
+## Meta
+
+Created by Pedro Belo at [Lugg](https://lugg.com/).
