@@ -3,22 +3,26 @@ import java.util.regex.Pattern
 
 def getCurrentFlavor() {
     Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
 
-    // match optional modules followed by the task
-    // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
-    // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
-    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
-    def flavor = ""
+    Pattern pattern
 
-    gradle.getStartParameter().getTaskNames().any { name ->
-        Matcher matcher = pattern.matcher(name)
-        if (matcher.find()) {
-            flavor = matcher.group(1).toLowerCase()
-            return true
-        }
+    if( tskReqStr.contains( "assemble" ) )
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher( tskReqStr )
+
+    if( matcher.find() ) {
+        println matcher.group(1).toLowerCase()
+        return matcher.group(1).toLowerCase()
     }
-
-    return flavor
+    else
+    {
+        println "NO MATCH FOUND"
+        return ""
+    }
 }
 
 def loadDotEnv(flavor = getCurrentFlavor()) {
