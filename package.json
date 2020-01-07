@@ -11,11 +11,11 @@
     "ios",
     "12factor"
   ],
-  "homepage": "https://github.com/luggit/react-native-config",
+  "homepage": "https://github.com/bamlab/react-native-config",
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/luggit/react-native-config"
+    "url": "https://github.com/bamlab/react-native-config"
   },
   "private": false,
   "author": "Thomas Pucci",
