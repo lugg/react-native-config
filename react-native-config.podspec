@@ -18,12 +18,13 @@ Pod::Spec.new do |s|
   s.script_phase = {
     name: 'Config codegen',
     script: %(
-set -ex
-HOST_PATH="$SRCROOT/../.."
-"${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
-),
+      set -ex
+      HOST_PATH="$SRCROOT/../.."
+      ${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb $HOST_PATH ${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig
+    ),
     execution_position: :before_compile,
-    input_files: ['$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb']
+    input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb'],
+    output_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/GeneratedDotEnv.m']
   }
 
   s.source_files = 'ios/**/*.{h,m}'
