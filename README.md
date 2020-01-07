@@ -1,10 +1,20 @@
-# Config variables for React Native apps
+<h1 align="center">React Native Config</h1>
 
-Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.
+<p align="center">Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.</p>
+<p align="center">Bring some [12 factor](http://12factor.net/config) love to your mobile apps!</p>
+<p align="center">Forked from [luggit's repo](https://github.com/luggit/react-native-config)</p>
 
-Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
+<p align="center">
 
-## Basic Usage
+<br>
+
+# Setup (RN >= 0.60)
+
+Install the package:
+
+```sh
+yarn add @bam.tech/react-native-config
+```
 
 Create a new file `.env` in the root of your React Native app:
 
@@ -13,38 +23,9 @@ API_URL=https://myapi.com
 GOOGLE_MAPS_API_KEY=abcdefgh
 ```
 
-Then access variables defined there from your app:
-
-```js
-import Config from "react-native-config";
-
-Config.API_URL; // 'https://myapi.com'
-Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
-```
-
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
 
-## Setup
-
-Install the package:
-
-```
-$ yarn add react-native-config
-```
-
-Link the library:
-
-```
-$ react-native link react-native-config
-```
-
-if cocoapods are used in the project then pod has to be installed as well:
-
-```
-(cd ios; pod install)
-```
-
-### Extra step for Android
+## Setup Android
 
 You'll also need to manually apply a plugin to your app, from `android/app/build.gradle`:
 
@@ -53,7 +34,7 @@ You'll also need to manually apply a plugin to your app, from `android/app/build
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
-#### Advanced Android Setup
+### Required if dynamic app id
 
 In `android/app/build.gradle`, if you use `applicationIdSuffix` or `applicationId` that is different from the package name indicated in `AndroidManifest.xml` in `<manifest package="...">` tag, for example, to support different build variants:
 Add this in `android/app/build.gradle`
@@ -65,9 +46,81 @@ defaultConfig {
 }
 ```
 
-## Native Usage
+### Optional : Proguard
 
-### Android
+When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
+
+    -keep class com.mypackage.BuildConfig { *; }
+
+`mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
+
+### Optional : Multi-environment support
+
+The same environment variable can be used to assemble releases with a different config:
+
+Define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
+
+```
+project.ext.envConfigFiles = [
+    debug: ".env.development",
+    release: ".env.production",
+    anothercustombuild: ".env",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+```
+
+## Setup iOS
+
+```
+cd ios
+pod install
+```
+
+- Right click on your project folder, create a "New file..."
+- Select the "Configuration Settings File" file type
+- Name it "react-native-config.xcconfig"
+- Remove this file from git (as it will be generated each build):
+
+  ```diff
+  # .gitignore
+
+  # react-native-config codegen
+  ios/react-native-config.xcconfig
+  ```
+
+- In the Xcode menu, go to Product > Scheme > Edit Scheme
+- Expand the "Build" settings on left
+- Click "Pre-actions", and under the plus sign select "New Run Script Action"
+- Where it says "Type a script or drag a script file", type:
+  ```
+  ENVFILE=.env ${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+  ```
+
+### Optional : Multi-environment support
+
+For each environment, use the following step (and change `ANOTHER_ENV` by your env name - staging, test, production) :
+
+- In the Xcode menu, go to Product > Scheme > Edit Scheme
+- Duplicate Scheme
+- Expand the "Build" settings on left
+- Click "Pre-actions", and under the plus sign select "New Run Script Action"
+- Where it says "Type a script or drag a script file", type:
+  ```
+  ENVFILE=.env.ANOTHER_ENV ${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+  ```
+
+# Usage
+
+## Javascript
+
+```js
+import Config from "react-native-config";
+
+Config.API_URL; // 'https://myapi.com'
+Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
+```
+
+## Android
 
 Config variables set in `.env` are available to your Java classes via `BuildConfig`:
 
@@ -78,11 +131,13 @@ public HttpURLConnection getApiClient() {
 }
 ```
 
-You can also read them from your Gradle configuration:
+You can also read them from your Gradle configuration.
+All variables are strings, so you may need to cast them. For instance, in Gradle:
 
 ```groovy
 defaultConfig {
     applicationId project.env.get("APP_ID")
+    versionCode project.env.get("VERSION_CODE").toInteger()
 }
 ```
 
@@ -94,15 +149,7 @@ And use them to configure libraries in `AndroidManifest.xml` and others:
   android:value="@string/GOOGLE_MAPS_API_KEY" />
 ```
 
-All variables are strings, so you may need to cast them. For instance, in Gradle:
-
-```
-versionCode project.env.get("VERSION_CODE").toInteger()
-```
-
-Once again, remember variables stored in `.env` are published with your code, so **DO NOT put anything sensitive there like your app `signingConfigs`.**
-
-### iOS
+## iOS
 
 Read variables declared in `.env` from your Obj-C classes like:
 
@@ -117,108 +164,20 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
-#### Availability in Build settings and Info.plist
+In `Info.plist` or `project.pbxproj`, read variables like so :
 
-With one extra step environment values can be exposed to "Info.plist" and Build settings in the native project.
-
-1. click on the file tree and create new file of type XCConfig
-   ![img](./readme-pics/1.ios_new_file.png)
-   ![img](./readme-pics/2.ios_file_type.png)
-2. save it under `ios` folder as "Config.xcconfig" with the following content:
-
-```
-#include? "tmp.xcconfig"
+```xml
+	<key>CFBundleDisplayName</key>
+	<string>$(DISPLAY_NAME)</string>
 ```
 
-3. add the following to your ".gitignore":
-
-```
-# react-native-config codegen
-ios/tmp.xcconfig
-
+```pbxproj
+  PROVISIONING_PROFILE_SPECIFIER = "$(PROVISIONING_PROFILE_SPECIFIER)";
 ```
 
-4. go to project settings
-5. apply config to your configurations
-   ![img](./readme-pics/3.ios_apply_config.png)
-6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used)
+# Testing
 
-```
-"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
-```
-
-### Different environments
-
-Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
-
-By default react-native-config will read from `.env`, but you can change it when building or releasing your app.
-
-The simplest approach is to tell it what file to read with an environment variable, like:
-
-```
-$ ENVFILE=.env.staging react-native run-ios           # bash
-$ SET ENVFILE=.env.staging && react-native run-ios    # windows
-$ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
-```
-
-This also works for `run-android`. Alternatively, there are platform-specific options below.
-
-#### Android
-
-The same environment variable can be used to assemble releases with a different config:
-
-```
-$ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
-```
-
-Alternatively, you can define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
-
-```
-project.ext.envConfigFiles = [
-    debug: ".env.development",
-    release: ".env.production",
-    anothercustombuild: ".env",
-]
-
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-```
-
-<a name="ios-multi-scheme"></a>
-
-#### iOS
-
-The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
-
-Start by creating a new scheme:
-
-- In the Xcode menu, go to Product > Scheme > Edit Scheme
-- Click Duplicate Scheme on the bottom
-- Give it a proper name on the top left. For instance: "Myapp (staging)"
-
-Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
-
-- Expand the "Build" settings on left
-- Click "Pre-actions", and under the plus sign select "New Run Script Action"
-- Where it says "Type a script or drag a script file", type:
-  ```
-  echo ".env.staging" > /tmp/envfile   # replace .env.staging for your file
-  ```
-
-This is still a bit experimental and dirty – let us know if you have a better idea on how to make iOS use different configurations opening a pull request or issue!
-
-## Troubleshooting
-
-### Problems with Proguard
-
-When Proguard is enabled (which it is by default for Android release builds), it can rename the `BuildConfig` Java class in the minification process and prevent React Native Config from referencing it. To avoid this, add an exception to `android/app/proguard-rules.pro`:
-
-    -keep class com.mypackage.BuildConfig { *; }
-
-`mypackage` should match the `package` value in your `app/src/main/AndroidManifest.xml` file.
-
-## Testing
-
-### Jest
+## Jest
 
 For mocking the `Config.FOO_BAR` usage, create a mock at `__mocks__/react-native-config.js`:
 
@@ -229,6 +188,6 @@ export default {
 };
 ```
 
-## Meta
+# Credits
 
-Created by Pedro Belo at [Lugg](https://lugg.com/).
+Forked from original repo created by Pedro Belo at [Lugg](https://lugg.com/).

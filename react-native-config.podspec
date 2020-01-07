@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
@@ -8,7 +6,7 @@ Pod::Spec.new do |s|
   s.name         = 'react-native-config'
   s.version      = package['version']
   s.summary      = 'Expose config variables to React Native apps'
-  s.author       = 'Pedro Belo'
+  s.author       = 'Thomas Pucci'
 
   s.homepage     = 'https://github.com/luggit/react-native-config'
 
