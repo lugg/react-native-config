@@ -31,7 +31,7 @@ You'll also need to manually apply a plugin to your app, from `android/app/build
 
 ```
 // 2nd line, add a new apply:
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply from: project(':@bam.tech_react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
 ### Required if dynamic app id
@@ -66,7 +66,7 @@ project.ext.envConfigFiles = [
     release: ".env.production",
     anothercustombuild: ".env",
 ]
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply from: project(':@bam.tech_react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
 ## Setup iOS
@@ -93,7 +93,7 @@ pod install
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
   ```
-  ENVFILE=.env ${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+  ENVFILE=.env ${SRCROOT}/../node_modules/@bam.tech/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
   ```
 
 ### Optional : Multi-environment support
@@ -114,7 +114,7 @@ For each environment, use the following step (and change `ANOTHER_ENV` by your e
 ## Javascript
 
 ```js
-import Config from "react-native-config";
+import Config from '@bam.tech/react-native-config';
 
 Config.API_URL; // 'https://myapi.com'
 Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
@@ -179,13 +179,31 @@ In `Info.plist` or `project.pbxproj`, read variables like so :
 
 ## Jest
 
-For mocking the `Config.FOO_BAR` usage, create a mock at `__mocks__/react-native-config.js`:
+For mocking the `Config.FOO_BAR` usage, create a mock at `__mocks__/@bam.tech/react-native-config.js`.
 
 ```
 // __mocks__/react-native-config.js
 export default {
   FOO_BAR: 'baz',
 };
+```
+
+### Example with exact values from `.env`
+
+`yarn add -D dotenv`
+
+```js
+// __mocks__/@bam.tech/react-native-config.js
+
+import fs from 'fs';
+import path from 'path';
+
+import dotenv from 'dotenv';
+
+const buf = fs.readFileSync(path.resolve(__dirname, '..', '..', '.env'));
+const config = dotenv.parse(buf);
+
+export default config;
 ```
 
 # Credits
