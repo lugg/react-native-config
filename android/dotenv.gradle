@@ -21,8 +21,27 @@ def getCurrentFlavor() {
     return flavor
 }
 
+def getEnvFiles(defaultEnvFile) {
+    // [, env, development, local]
+    def arr = defaultEnvFile.split("\\.")
+
+    def envFile = "${project.rootDir}/../.${arr[1]}.${arr[2]}"
+    def localEnvFile = "${envFile}.local"
+
+    def rootEnvFile = "${project.rootDir}/../../../env/.${arr[1]}.${arr[2]}"
+    def localRootEnvFile = "${rootEnvFile}.local"
+
+    def ENVFILE = System.env['ENVFILE']
+
+    return [localEnvFile, envFile, localRootEnvFile, rootEnvFile].findAll{item ->
+        ENVFILE
+            ? item.substring(item.length() - ENVFILE.length(), item.length()) == ENVFILE
+            : true
+    }
+}
+
 def loadDotEnv(flavor = getCurrentFlavor()) {
-    def envFile = ".env"
+    def envFile = ".env.development"
 
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE']
@@ -40,16 +59,23 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
         envFile = project.defaultEnvFile
     }
 
-    def env = [:]
     println("Reading env from: $envFile")
 
-    File f = new File("$project.rootDir/../$envFile");
-    if (!f.exists()) {
-        f = new File("$envFile");
+    def envFiles = getEnvFiles(envFile)
+    def targetEnvFile
+
+    for (def path in envFiles) {
+        File file = new File(path)
+        if (file.exists()) {
+            targetEnvFile = file
+            break
+        }
     }
 
-    if (f.exists()) {
-        f.eachLine { line ->
+    def env = [:]
+
+    if (targetEnvFile) {
+        targetEnvFile.eachLine { line ->
             def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
             if (matcher.getCount() == 1 && matcher[0].size() == 3) {
                 env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
@@ -57,7 +83,7 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
         }
     } else {
         println("**************************")
-        println("*** Missing .env file ****")
+        println("*** Missing ${envFile} file ****")
         println("**************************")
     }
 
