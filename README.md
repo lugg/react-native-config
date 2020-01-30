@@ -93,13 +93,19 @@ pod install
 - Expand the "Build" settings on left
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
+
   ```
   echo ".env.development" > "${SRCROOT}/envfile"
+  ENVFILE=.env.development ${SRCROOT}/../node_modules/@bam.tech/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
   ```
+
+- In your xcode project, in the Info tab ...
+- ... expand the Configurations section
+- For Debug and Release, on your project name row, select the `react-native-config` configuration option.
 
 ### Optional : Multi-environment support
 
-For each environment, use the following step (and change `ANOTHER_ENV` by your env name - staging, test, production) :
+For each environment, use the following step (and change `development` by your env name - staging, test, production) :
 
 - In the Xcode menu, go to Product > Scheme > Edit Scheme
 - Duplicate Scheme
@@ -107,7 +113,8 @@ For each environment, use the following step (and change `ANOTHER_ENV` by your e
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
   ```
-  ENVFILE=.env.ANOTHER_ENV ${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+  echo ".env.development" > "${SRCROOT}/envfile"
+  ENVFILE=.env.development ${SRCROOT}/../node_modules/@bam.tech/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
   ```
 
 # Usage
