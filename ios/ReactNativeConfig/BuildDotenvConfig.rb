@@ -25,6 +25,4 @@ EOF
 path = File.join(m_output_path, 'GeneratedDotEnv.m')
 File.open(path, 'w') { |f| f.puts template }
 
-File.delete('/tmp/envfile') if custom_env
-
 puts "Wrote to #{path}"

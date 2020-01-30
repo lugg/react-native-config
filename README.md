@@ -1,8 +1,8 @@
 <h1 align="center">React Native Config</h1>
 
 <p align="center">Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.</p>
-<p align="center">Bring some [12 factor](http://12factor.net/config) love to your mobile apps!</p>
-<p align="center">Forked from [luggit's repo](https://github.com/luggit/react-native-config)</p>
+<p align="center">Bring some <a href="http://12factor.net/config">12 factor</a> love to your mobile apps!</p>
+<p align="center">Forked from <a href="https://github.com/luggit/react-native-config">luggit's repo</a></p>
 
 <p align="center">
 
@@ -86,6 +86,7 @@ pod install
 
   # react-native-config codegen
   ios/react-native-config.xcconfig
+  ios/envfile
   ```
 
 - In the Xcode menu, go to Product > Scheme > Edit Scheme
@@ -93,7 +94,7 @@ pod install
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
   ```
-  ENVFILE=.env ${SRCROOT}/../node_modules/@bam.tech/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+  echo ".env.development" > "${SRCROOT}/envfile"
   ```
 
 ### Optional : Multi-environment support
@@ -114,7 +115,7 @@ For each environment, use the following step (and change `ANOTHER_ENV` by your e
 ## Javascript
 
 ```js
-import Config from '@bam.tech/react-native-config';
+import Config from "@bam.tech/react-native-config";
 
 Config.API_URL; // 'https://myapi.com'
 Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
@@ -195,12 +196,12 @@ export default {
 ```js
 // __mocks__/@bam.tech/react-native-config.js
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-const buf = fs.readFileSync(path.resolve(__dirname, '..', '..', '.env'));
+const buf = fs.readFileSync(path.resolve(__dirname, "..", "..", ".env"));
 const config = dotenv.parse(buf);
 
 export default config;
