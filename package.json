@@ -1,6 +1,6 @@
 {
   "name": "@bam.tech/react-native-config",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
