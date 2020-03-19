@@ -2,7 +2,15 @@
   "name": "react-native-config",
   "version": "1.0.0",
   "description": "Expose config variables to React Native apps",
-  "keywords": ["env", "config", "config-var", "react-native", "android", "ios", "12factor"],
+  "keywords": [
+    "env",
+    "config",
+    "config-var",
+    "react-native",
+    "android",
+    "ios",
+    "12factor"
+  ],
   "homepage": "https://github.com/luggit/react-native-config",
   "contributors": [],
   "repository": {
@@ -19,5 +27,9 @@
     "react-native-config.podspec"
   ],
   "types": "./index.d.ts",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@semantic-release/git": "^9.0.0",
+    "semantic-release": "^17.0.4"
+  }
 }
