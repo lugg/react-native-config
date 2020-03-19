@@ -12,7 +12,9 @@
     "12factor"
   ],
   "homepage": "https://github.com/luggit/react-native-config",
-  "contributors": [],
+  "contributors": [
+    "Luan Curti <luancurti@gmail.com> (https://github.com/luancurti)"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/luggit/react-native-config"
