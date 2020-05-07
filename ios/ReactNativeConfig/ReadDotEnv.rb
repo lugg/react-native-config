@@ -30,13 +30,12 @@ def read_dot_env(envs_root)
     elsif File.exist?(file)
       raw = File.read(file)
     else
-      defaultEnvPath = File.expand_path(File.join(envs_root, "../#{defaultEnvFile}"))
+      defaultEnvPath = File.expand_path(File.join(envs_root, "#{defaultEnvFile}"))
       unless File.exist?(defaultEnvPath)
         # try as absolute path
         defaultEnvPath = defaultEnvFile
       end
-      defaultRaw = File.read(defaultEnvPath)
-      raw = defaultRaw + "\n" + raw if defaultRaw
+      raw = File.read(defaultEnvPath)
     end
 
     raw.split("\n").inject({}) do |h, line|
