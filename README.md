@@ -44,6 +44,46 @@ if cocoapods are used in the project then pod has to be installed as well:
 (cd ios; pod install)
 ```
 
+ - Manual Link (iOS)
+
+	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
+	2. Go to `node_modules` ➜ `react-native-config` and add 		`ReactNativeConfig.xcodeproj`
+	3. Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
+	4. In the project navigator, select your project. Add 		`libReactNativeConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+	5. And go the Build Settings tab. Make sure All is toggled on (instead of Basic)
+	6. Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
+
+
+ - Manual Link (Android) 
+
+	**android/settings.gradle**
+	
+	```diff
+	+ include ':react-native-config'
+	+ project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+	```
+	**android/app/build.gradle**
+	
+	```diff
+	dependencies {
+		implementation "com.facebook.react:react-native:+"  // From node_modules
+	+	implementation project(':react-native-config')
+	}
+	```
+	**MainApplication.java**
+	
+	```diff
+	+ import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+	
+	@Override
+	protected List<ReactPackage> getPackages() {
+		   return Arrays.asList(
+           		new MainReactPackage()
+	+      		new ReactNativeConfigPackage()
+	    );
+	}
+	```
+
 ### Extra step for Android
 
 You'll also need to manually apply a plugin to your app, from `android/app/build.gradle`:
