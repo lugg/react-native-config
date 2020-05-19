@@ -28,31 +28,22 @@ Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so 
 
 Install the package:
 
- - yarn 
-
-	```
-	$ yarn add react-native-config
-	```
- - npm 
-
-	```
-	$ npm install react-native-config --save
-	```
+```
+$ yarn add react-native-config
+```
 
 Link the library:
 
- - Auto Link 
- 
- if cocoapods are used in the project then pod has to be installed as well:
+```
+$ react-native link react-native-config
+```
 
-  ```
-  (cd ios; pod install)
-  ```
+if cocoapods are used in the project then pod has to be installed as well:
 
-	```
-	$ react-native link react-native-config
-	```
- 
+```
+(cd ios; pod install)
+```
+
  - Manual Link (iOS)
 
 	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
