@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07BF4DBD2476FBED00E59829 /* ReactNativeConfigModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */; };
 		3DF7F6B6203AA0C200D0EAB7 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
 		3DF7F6B7203AA0D600D0EAB7 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
 		EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
@@ -56,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07BF4DBB2476FBED00E59829 /* ReactNativeConfigModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfigModule.h; sourceTree = "<group>"; };
+		07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfigModule.m; sourceTree = "<group>"; };
 		3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50406729228CAD5A00E0438A /* ReadDotEnv.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ReadDotEnv.rb; sourceTree = "<group>"; };
 		50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildXCConfig.rb; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */,
 				EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */,
 				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
+				07BF4DBB2476FBED00E59829 /* ReactNativeConfigModule.h */,
+				07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */,
 				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */,
 				50406729228CAD5A00E0438A /* ReadDotEnv.rb */,
 			);
@@ -234,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07BF4DBD2476FBED00E59829 /* ReactNativeConfigModule.m in Sources */,
 				EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
