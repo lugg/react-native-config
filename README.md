@@ -187,6 +187,18 @@ ios/tmp.xcconfig
 "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
 ```
 
+#### App Extensions
+
+Add dependency to `react-native-config`.
+
+```
+target 'ShareExtension' do
+  platform :ios, '9.0'
+
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+end
+```
+
 ### Different environments
 
 Save config for different environments in different files: `.env.staging`, `.env.production`, etc.
