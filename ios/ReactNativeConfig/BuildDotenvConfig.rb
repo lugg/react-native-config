@@ -25,6 +25,11 @@ EOF
 path = File.join(m_output_path, 'GeneratedDotEnv.m')
 File.open(path, 'w') { |f| f.puts template }
 
-#File.delete('/tmp/envfile') if custom_env
+# create header file with defines for the Info.plist preprocessor
+info_plist_defines_objc = dotenv.map { |k, v| %Q(#define RNC_#{k}  #{v}) }.join("\n")
+
+# write it so the Info.plist preprocessor can access it
+path = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
+File.open(path, "w") { |f| f.puts info_plist_defines_objc }
 
 puts "Wrote to #{path}"
