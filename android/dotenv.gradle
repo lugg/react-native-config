@@ -80,7 +80,7 @@ tasks.whenTaskAdded { task ->
             if (task.name.toLowerCase() == "generate"+envConfigName+"buildconfig") {
                 task.doFirst() {
                     android.applicationVariants.all { variant ->
-                        def variantConfigString = variant.getVariantData().getVariantConfiguration().getFullName()
+                        def variantConfigString = variant.getVariantData().getName()
                         if (envConfigName.contains(variantConfigString.toLowerCase())) {
                             loadDotEnv(envConfigName)
                             project.env.each { k, v ->
