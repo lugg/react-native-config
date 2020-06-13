@@ -1,5 +1,5 @@
 export interface NativeConfig {
-  [name: string]: any
+  [name: string]: string
 }
 export const Config: NativeConfig
 export default Config

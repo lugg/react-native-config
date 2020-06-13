@@ -20,7 +20,7 @@ public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
 
   @Override
   public String getName() {
-    return "ReactNativeConfig";
+    return "ReactNativeConfigModule";
   }
 
   @Override
