@@ -50,7 +50,7 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
         f.eachLine { line ->
             def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
             if (matcher.getCount() == 1 && matcher[0].size() == 3) {
-                env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
+                env.put(matcher[0][1], System.env[matcher[0][1]] || matcher[0][2].replace('"', '\\"'))
             }
         }
     } else {
