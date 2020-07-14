@@ -196,6 +196,9 @@ target 'ShareExtension' do
   platform :ios, '9.0'
 
   pod 'react-native-config', :path => '../node_modules/react-native-config'
+
+  # For extensions without React dependencies
+  pod 'react-native-config/Extension', :path => '../node_modules/react-native-config'
 end
 ```
 

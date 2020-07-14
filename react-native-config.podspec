@@ -28,8 +28,17 @@ HOST_PATH="$SRCROOT/../.."
     input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
   }
 
-  s.source_files = 'ios/**/*.{h,m}'
   s.requires_arc = true
+  s.default_subspec = 'App'
 
-  s.dependency 'React'
+    s.subspec 'App' do |app|
+    app.source_files = 'ios/**/*.{h,m}'
+    app.dependency 'React'
+  end
+
+  s.subspec 'Extension' do |ext|
+    # Use this subspec for iOS extensions that cannot use React dependency
+    ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
+  end
+
 end
