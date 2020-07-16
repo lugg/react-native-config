@@ -36,8 +36,19 @@ HOST_PATH="$SRCROOT/../.."
     app.dependency 'React'
   end
 
+  # Use this subspec for iOS extensions that cannot use React dependency
   s.subspec 'Extension' do |ext|
-    # Use this subspec for iOS extensions that cannot use React dependency
+    # Had to duplicate the script_phase since it wasn't being passed down. Not sure why
+    ext.script_phase = {
+      name: 'Config codegen',
+      script: %(
+        set -ex
+        HOST_PATH="$SRCROOT/../.."
+        "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+        ),
+      execution_position: :before_compile,
+      input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+    }
     ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
   end
 
