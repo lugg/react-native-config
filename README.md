@@ -181,7 +181,7 @@ ios/tmp.xcconfig
 4. go to project settings
 5. apply config to your configurations
    ![img](./readme-pics/3.ios_apply_config.png)
-6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "echo ... > tmp/envfile" if [approach explained below](#ios-multi-scheme) is used)
+6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "cp ... ${PROJECT_DIR}/../.env" if [approach explained below](#ios-multi-scheme) is used)
 
 ```
 "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
@@ -256,8 +256,9 @@ Then edit the newly created scheme to make it use a different env file. From the
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
   ```
-  cp ${PROJECT_DIR}/../.env.staging .env  # replace .env.staging for your file
+  cp ${PROJECT_DIR}/../.env.staging ${PROJECT_DIR}/../.env  # replace .env.staging for your file
   ```
+Also ensure that "Provide build settings from", just above the script, has a value selected so that PROJECT_DIR is set.
 
 ## Troubleshooting
 
