@@ -187,6 +187,8 @@ ios/tmp.xcconfig
 "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
 ```
 
+**Accessing your variable in info.plist**: You can now access your env variable using the prefix `RNC_`, for example `$(RNC_MY_ENV_VARIABLE)`.
+
 #### App Extensions
 
 Add dependency to `react-native-config`.
