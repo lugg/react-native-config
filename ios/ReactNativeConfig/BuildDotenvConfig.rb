@@ -60,11 +60,10 @@ objc_dict = indexed_keys.map.with_index do |obj, index|
 end
 
 template = <<~EOF
-  static NSDictionary *DOT_ENV;
-  
-  @interface ReactNativeConfigTrampoline: NSObject
-  @end
-  
+  #import "GeneratedDotEnv.h"
+
+  NSDictionary *DOT_ENV;
+
   @implementation ReactNativeConfigTrampoline
   
   + (void)load
