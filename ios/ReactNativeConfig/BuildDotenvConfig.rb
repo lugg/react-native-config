@@ -2,6 +2,9 @@
 # frozen_string_literal: true
 
 require_relative 'ReadDotEnv'
+require 'digest'
+require 'securerandom'
+require 'set'
 
 envs_root = ARGV[0]
 m_output_path = ARGV[1]
@@ -15,10 +18,64 @@ Encoding.default_internal = Encoding::UTF_8
 dotenv, custom_env = read_dot_env(envs_root)
 puts "read dotenv #{dotenv}"
 
-# create obj file that sets DOT_ENV as a NSDictionary
-dotenv_objc = dotenv.map { |k, v| %(@"#{k}":@"#{v.chomp}") }.join(',')
-template = <<EOF
-  #define DOT_ENV @{ #{dotenv_objc} };
+# create objc file with obfuscated keys, unobfuscated at runtime.
+# Implementation inspired from cocoapods-keys: https://github.com/orta/cocoapods-keys/blob/4153cfc7621a89c7ae3f96bb0285d9602f41e267/lib/key_master.rb
+data_length = dotenv.values.map(&:length).reduce(0, :+) * rand(20..29)
+data = SecureRandom.base64(data_length)
+data += '\\"' # this is a sentinel for keys that contain literal quote characters
+
+used_indexes = Set.new
+indexed_keys = {}
+dotenv.each do |key, escaped_value|
+  indexed_keys[key] = []
+  # ReadDotEnv.rb escapes these, but we need to unescape them for use with obfuscation
+  value = escaped_value.gsub('\"', '"')
+  value.chars.each_with_index do |char, char_index|
+    loop do # we loop until we break to avoid index collisions
+      if char == '"'
+        index = data.length - 1 # point to the sentinel for quote characters
+        indexed_keys[key][char_index] = index
+        break
+      else
+        index = SecureRandom.random_number data.length
+        unless used_indexes.include?(index)
+          data[index] = char # store this character of the key in the obfuscated data
+          indexed_keys[key][char_index] = index # point to the index in data
+          used_indexes << index # mark the index in data as already in-use
+          break
+        end
+      end
+    end
+  end
+end
+
+c_strings = indexed_keys.map.with_index do |obj, index|
+  _key, value = obj
+  data_indexes = value.map { |i| "[data characterAtIndex:#{i}]" }
+  "char string#{index}[#{value.length + 1}] = {#{data_indexes.join(', ')}, '\\0'};"
+end
+objc_dict = indexed_keys.map.with_index do |obj, index|
+  key, _value = obj
+  "@\"#{key}\": [NSString stringWithCString:string#{index} encoding:NSUTF8StringEncoding]"
+end
+
+template = <<~EOF
+  #import "GeneratedDotEnv.h"
+
+  NSDictionary *DOT_ENV;
+
+  @implementation ReactNativeConfigTrampoline
+  
+  + (void)load
+  {
+    NSString *data = @"#{data.gsub('\\', '\\\\\\').gsub('"', '\\"')}";
+    #{c_strings.join("\n  ")}
+    DOT_ENV = @{
+      #{objc_dict.join(", \n    ")}
+    };
+  }
+  
+  @end
 EOF
 
 # write it so that ReactNativeConfig.m can return it
