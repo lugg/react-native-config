@@ -4,6 +4,7 @@
 @implementation ReactNativeConfig
 
 + (NSDictionary *)env {
+    [ReactNativeConfigTrampoline setup];
     return (NSDictionary *)DOT_ENV;
 }
 

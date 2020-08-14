@@ -66,13 +66,16 @@ template = <<~EOF
 
   @implementation ReactNativeConfigTrampoline
   
-  + (void)load
+  + (void)setup
   {
-    NSString *data = @"#{data.gsub('\\', '\\\\\\').gsub('"', '\\"')}";
-    #{c_strings.join("\n  ")}
-    DOT_ENV = @{
-      #{objc_dict.join(", \n    ")}
-    };
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      NSString *data = @"#{data.gsub('\\', '\\\\\\').gsub('"', '\\"')}";
+      #{c_strings.join("\n  ")}
+      DOT_ENV = @{
+        #{objc_dict.join(", \n    ")}
+      };
+    });
   }
   
   @end
