@@ -213,7 +213,7 @@ By default react-native-config will read from `.env`, but you can change it when
 The simplest approach is to tell it what file to read with an environment variable, like:
 
 ```
-$ ENVFILE=.env.staging react-native run-ios           # bash
+$ ENVFILE=".env.staging" react-native run-ios         # bash
 $ SET ENVFILE=.env.staging && react-native run-ios    # windows
 $ env:ENVFILE=".env.staging"; react-native run-ios    # powershell
 ```
