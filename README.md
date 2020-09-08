@@ -1,6 +1,6 @@
 # Config variables for React Native apps
 
-Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.
+Module to expose config variables to your javascript code in React Native, supporting iOS, Android and Windows.
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
@@ -32,7 +32,7 @@ Install the package:
 $ yarn add react-native-config
 ```
 
-Link the library:
+Link the library (not supported on Windows, use manual linking):
 
 (Note: For React Native 0.60 or greater, [autolinking](https://reactnative.dev/blog/2019/07/03/version-60#native-modules-are-now-autolinked) is available)
 
@@ -85,6 +85,31 @@ if cocoapods are used in the project then pod has to be installed as well:
 	    );
 	}
 	```
+
+ - Manual Link (Windows)
+
+	**windows/myapp.sln**
+
+	Add the `RNCConfig` project to your solution.
+
+	1. Open the solution in Visual Studio 2019
+	2. Right-click Solution icon in Solution Explorer > Add > Existing Project  
+	Select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
+
+	**windows/myapp/myapp.vcxproj**
+
+	Add a reference to `RNCConfig` to your main application project. From Visual Studio 2019:
+
+	1. Right-click main application project > Add > Reference...  
+	Check `RNCConfig` from Solution Projects.
+
+	**pch.h**
+
+	Add `#include "winrt/RNCConfig.h"`.
+
+	**app.cpp**
+
+	Add `PackageProviders().Append(winrt::RNCConfig::ReactPackageProvider());` before `InitializeComponent();`.
 
 ### Extra step for Android
 
@@ -158,6 +183,15 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 // or just fetch the whole config
 NSDictionary *config = [ReactNativeConfig env];
 ```
+
+### Windows
+
+You can access variables declared in `.env` from C++ in your App project:
+```
+std::string api_key = ReactNativeConfig::API_KEY;
+```
+
+Similarly, you can access those values in other project by adding reference to the `RNCConfig` as described in the manual linking section.
 
 #### Availability in Build settings and Info.plist
 
@@ -281,6 +315,13 @@ If using Dexguard, the shrinking phase will remove resources it thinks are unuse
 ## Testing
 
 Since `react-native-config` contains native code, it cannot be run in a node.js environment (Jest, Mocha). [react-native-config-node](https://github.com/CureApp/react-native-config-node) provides a way to mock `react-native-config` for use in test runners - exactly as it is used in the actual app.
+
+On Windows, [the Example app](example/) supports running automatic tests by using [WinAppDriver](https://github.com/microsoft/WinAppDriver). In the Example app folder run:
+
+```console
+yarn appium
+yarn test:windows
+```
 
 ### Jest
 

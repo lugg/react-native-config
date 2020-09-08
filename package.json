@@ -9,6 +9,7 @@
     "react-native",
     "android",
     "ios",
+    "windows",
     "12factor"
   ],
   "homepage": "https://github.com/luggit/react-native-config",
@@ -24,6 +25,7 @@
   "files": [
     "android/",
     "ios/",
+    "windows/",
     "index.js",
     "index.d.ts",
     "react-native-config.podspec"
@@ -33,5 +35,8 @@
   "devDependencies": {
     "@semantic-release/git": "^9.0.0",
     "semantic-release": "^17.0.4"
+  },
+  "peerDependencies": {
+    "react-native-windows": ">=0.61"
   }
 }
