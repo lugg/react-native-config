@@ -34,6 +34,8 @@ $ yarn add react-native-config
 
 Link the library:
 
+(Note: For React Native 0.60 or greater, [autolinking](https://reactnative.dev/blog/2019/07/03/version-60#native-modules-are-now-autolinked) is available)
+
 ```
 $ react-native link react-native-config
 ```
