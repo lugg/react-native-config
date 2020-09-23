@@ -33,7 +33,7 @@ HOST_PATH="$SRCROOT/../.."
 
     s.subspec 'App' do |app|
     app.source_files = 'ios/**/*.{h,m}'
-    app.dependency 'React'
+    app.dependency 'React-Core'
   end
 
   # Use this subspec for iOS extensions that cannot use React dependency
