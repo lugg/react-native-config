@@ -32,9 +32,12 @@ Install the package:
 $ yarn add react-native-config
 ```
 
-Link the library (not supported on Windows, use manual linking):
+Link the library:
 
 (Note: For React Native 0.60 or greater, [autolinking](https://reactnative.dev/blog/2019/07/03/version-60#native-modules-are-now-autolinked) is available)
+
+(Note: For Windows, this module supports autolinking when used with `react-native-windows@0.63`
+or later. For earlier versions you need to manually link the module.)
 
 ```
 $ react-native link react-native-config
@@ -94,7 +97,8 @@ if cocoapods are used in the project then pod has to be installed as well:
 
 	1. Open the solution in Visual Studio 2019
 	2. Right-click Solution icon in Solution Explorer > Add > Existing Project  
-	Select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
+	  - if using `react-native-windows@0.62` or later select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
+		- if using `react-native-windows@0.61` select `node_modules\react-native-config\windows\RNCConfig61\RNCConfig61.vcxproj`
 
 	**windows/myapp/myapp.vcxproj**
 

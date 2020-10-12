@@ -44,7 +44,7 @@ function generateFiles(vars) {
   }
   nativeCode +='}\n'
   updateFile(nativeCode, path.join(outDir, 'RNCConfigValues.h'))
-  updateFile(rnCode, path.join(outDir, 'RNCConfigValuesModule.inc.h'))
+  updateFile(rnCode, path.join(outDir, 'RNCConfigValuesModule.inc.g.h'))
 }
 
 // Escape the string so it will work with C++

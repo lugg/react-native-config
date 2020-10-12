@@ -11,7 +11,7 @@ namespace RNCConfig
   REACT_MODULE(ReactNativeConfigModule);
   struct ReactNativeConfigModule
   {
-#include "RNCConfigValuesModule.inc.h"
+#include "RNCConfigValuesModule.inc.g.h"
   };
 }
 
