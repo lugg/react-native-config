@@ -280,6 +280,8 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
+Also note that besides requiring lowercase, the matching is done with `buildFlavor.startsWith`, so a build named `debugProd` could match the `debug` case, above.
+
 <a name="ios-multi-scheme"></a>
 
 #### iOS
