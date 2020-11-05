@@ -318,6 +318,12 @@ If using Dexguard, the shrinking phase will remove resources it thinks are unuse
 
     -keepresources string/build_config_package
 
+### TypeError: _reactNativeConfig.default.getConstants is not a function
+
+This error stems from `.env` file being malformed. Accepted formats are listed here https://regex101.com/r/cbm5Tp/1. Common causes are:
+  - Missing the .env file entirely
+  - Rogue space anywhere, example: in front of env variable: ` MY_ENV='foo'`
+
 ## Testing
 
 Since `react-native-config` contains native code, it cannot be run in a node.js environment (Jest, Mocha). [react-native-config-node](https://github.com/CureApp/react-native-config-node) provides a way to mock `react-native-config` for use in test runners - exactly as it is used in the actual app.
