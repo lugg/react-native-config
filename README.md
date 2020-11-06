@@ -221,13 +221,15 @@ ios/tmp.xcconfig
 4. go to project settings
 5. apply config to your configurations
    ![img](./readme-pics/3.ios_apply_config.png)
-6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "cp ... ${PROJECT_DIR}/../.env" if [approach explained below](#ios-multi-scheme) is used)
+6. Go to _Edit scheme..._ -> _Build_ -> _Pre-actions_, click _+_ and select _New Run Script Action_. Paste below code which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist. Make sure to select your target under _Provide build settings from_, so `$SRCROOT` environment variables is available to the script. (Note that this snippet has to be placed after "cp ... \${PROJECT_DIR}/../.env" if [approach explained below](#ios-multi-scheme) is used).
 
-```
-"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
-```
+   ```
+   "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
+   ```
 
-7. **Accessing your variable in info.plist**: You can now access your env variable using the prefix `RNC_`, for example `$(RNC_MY_ENV_VARIABLE)`. If you face issues accessing variables, please refer to [this issue](https://github.com/luggit/react-native-config/issues/391#issuecomment-632331803).
+   ![img](./readme-pics/4.ios_pre_actions.png)
+
+7. You can now access your env variables in the Info.plist, for example `$(MY_ENV_VARIABLE)`. If you face issues accessing variables, please open a new issue and provide as much details as possible so above steps can be improved.
 
 #### App Extensions
 
