@@ -40,8 +40,10 @@ def read_dot_env(envs_root)
 
     raw.split("\n").inject({}) do |h, line|
       m = line.match(dotenv_pattern)
+
       if m.nil?
         abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
+      end
 
       key = m[:key]
       # Ensure string (in case of empty value) and escape any quotes present in the value.
