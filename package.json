@@ -28,7 +28,8 @@
     "windows/",
     "index.js",
     "index.d.ts",
-    "react-native-config.podspec"
+    "react-native-config.podspec",
+    "!.*ignore"
   ],
   "types": "./index.d.ts",
   "license": "MIT",
