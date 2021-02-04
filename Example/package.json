@@ -6,8 +6,10 @@
     "android": "react-native run-android",
     "appium": "appium",
     "ios": "react-native run-ios",
+    "macos": "node node_modules/react-native-macos/local-cli/cli.js run-macos",
     "windows": "react-native run-windows",
     "start": "react-native start",
+    "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
     "test": "jest",
     "test:windows": "yarn jest --setupFiles=./jest-setups/jest.setup.windows.js",
     "lint": "eslint .",
@@ -17,6 +19,7 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-config": "../",
+    "react-native-macos": "^0.62.0-0",
     "react-native-windows": "^0.62.0-0"
   },
   "devDependencies": {
