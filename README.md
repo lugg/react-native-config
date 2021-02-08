@@ -295,6 +295,7 @@ Start by creating a new scheme:
 - In the Xcode menu, go to Product > Scheme > Edit Scheme
 - Click Duplicate Scheme on the bottom
 - Give it a proper name on the top left. For instance: "Myapp (staging)"
+- Make sure the "Shared" checkbox is checked so the scheme is added to your version control system
 
 Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
 
