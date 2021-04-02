@@ -24,6 +24,7 @@
   "author": "Pedro Belo",
   "files": [
     "android/",
+    "apple/",
     "ios/",
     "windows/",
     "index.js",

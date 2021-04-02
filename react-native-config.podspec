@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
 
   s.license      = 'MIT'
   s.ios.deployment_target = '9.0'
+  s.osx.deployment_target  = '10.13'
   s.tvos.deployment_target = '9.0'
 
   s.source       = { git: 'https://github.com/luggit/react-native-config.git', tag: "v#{s.version.to_s}" }
@@ -22,17 +23,17 @@ Pod::Spec.new do |s|
     script: %(
 set -ex
 HOST_PATH="$SRCROOT/../.."
-"${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+"${PODS_TARGET_SRCROOT}/apple/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/apple"
 ),
     execution_position: :before_compile,
-    input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+    input_files: ['$PODS_TARGET_SRCROOT/apple/BuildDotenvConfig.rb']
   }
 
   s.requires_arc = true
   s.default_subspec = 'App'
 
     s.subspec 'App' do |app|
-    app.source_files = 'ios/**/*.{h,m}'
+    app.source_files = 'apple/**/*.{h,m}'
     app.dependency 'React-Core'
   end
 
@@ -44,12 +45,12 @@ HOST_PATH="$SRCROOT/../.."
       script: %(
         set -ex
         HOST_PATH="$SRCROOT/../.."
-        "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+        "${PODS_TARGET_SRCROOT}/apple/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/apple"
         ),
       execution_position: :before_compile,
-      input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+      input_files: ['$PODS_TARGET_SRCROOT/apple/BuildDotenvConfig.rb']
     }
-    ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
+    ext.source_files = ['apple/**/ReactNativeConfig.{h,m}', 'apple/**/GeneratedDotEnv.m']
   end
 
 end

@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07BF4DBD2476FBED00E59829 /* ReactNativeConfigModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */; };
-		3DF7F6B6203AA0C200D0EAB7 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
-		3DF7F6B7203AA0D600D0EAB7 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
-		EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */; };
-		EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */; };
+		92F3600E25CB6C8300EECE5B /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F3600825CB6C8300EECE5B /* ReactNativeConfig.m */; };
+		92F3600F25CB6C8300EECE5B /* ReactNativeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F3600825CB6C8300EECE5B /* ReactNativeConfig.m */; };
+		92F3601025CB6C8300EECE5B /* ReactNativeConfigModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F3600A25CB6C8300EECE5B /* ReactNativeConfigModule.m */; };
+		92F3601125CB6C8300EECE5B /* ReactNativeConfigModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F3600A25CB6C8300EECE5B /* ReactNativeConfigModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -21,7 +20,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				3DF7F6B7203AA0D600D0EAB7 /* ReactNativeConfig.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +38,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				EB2648E31C7BE17A00B8F155 /* ReactNativeConfig.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,15 +54,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		07BF4DBB2476FBED00E59829 /* ReactNativeConfigModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfigModule.h; sourceTree = "<group>"; };
-		07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfigModule.m; sourceTree = "<group>"; };
 		3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		50406729228CAD5A00E0438A /* ReadDotEnv.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ReadDotEnv.rb; sourceTree = "<group>"; };
-		50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildXCConfig.rb; sourceTree = "<group>"; };
+		92F3600725CB6C8300EECE5B /* BuildDotenvConfig.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = BuildDotenvConfig.rb; path = ../apple/BuildDotenvConfig.rb; sourceTree = "<group>"; };
+		92F3600825CB6C8300EECE5B /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReactNativeConfig.m; path = ../apple/ReactNativeConfig.m; sourceTree = "<group>"; };
+		92F3600925CB6C8300EECE5B /* ReactNativeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReactNativeConfig.h; path = ../apple/ReactNativeConfig.h; sourceTree = "<group>"; };
+		92F3600A25CB6C8300EECE5B /* ReactNativeConfigModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReactNativeConfigModule.m; path = ../apple/ReactNativeConfigModule.m; sourceTree = "<group>"; };
+		92F3600B25CB6C8300EECE5B /* BuildXCConfig.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = BuildXCConfig.rb; path = ../apple/BuildXCConfig.rb; sourceTree = "<group>"; };
+		92F3600C25CB6C8300EECE5B /* ReactNativeConfigModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReactNativeConfigModule.h; path = ../apple/ReactNativeConfigModule.h; sourceTree = "<group>"; };
+		92F3600D25CB6C8300EECE5B /* ReadDotEnv.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = ReadDotEnv.rb; path = ../apple/ReadDotEnv.rb; sourceTree = "<group>"; };
 		EB2648DF1C7BE17A00B8F155 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactNativeConfig.h; sourceTree = "<group>"; };
-		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildDotenvConfig.rb; sourceTree = "<group>"; };
-		EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactNativeConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +86,13 @@
 		EB2648D61C7BE17A00B8F155 = {
 			isa = PBXGroup;
 			children = (
-				EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */,
+				92F3600725CB6C8300EECE5B /* BuildDotenvConfig.rb */,
+				92F3600B25CB6C8300EECE5B /* BuildXCConfig.rb */,
+				92F3600925CB6C8300EECE5B /* ReactNativeConfig.h */,
+				92F3600825CB6C8300EECE5B /* ReactNativeConfig.m */,
+				92F3600C25CB6C8300EECE5B /* ReactNativeConfigModule.h */,
+				92F3600A25CB6C8300EECE5B /* ReactNativeConfigModule.m */,
+				92F3600D25CB6C8300EECE5B /* ReadDotEnv.rb */,
 				EB2648E01C7BE17A00B8F155 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,20 +104,6 @@
 				3DF7F6AC203AA09B00D0EAB7 /* libReactNativeConfig-tvOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */ = {
-			isa = PBXGroup;
-			children = (
-				50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */,
-				EB2648E21C7BE17A00B8F155 /* ReactNativeConfig.h */,
-				EBE4E8461C7D2456000F8875 /* ReactNativeConfig.m */,
-				07BF4DBB2476FBED00E59829 /* ReactNativeConfigModule.h */,
-				07BF4DBC2476FBED00E59829 /* ReactNativeConfigModule.m */,
-				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */,
-				50406729228CAD5A00E0438A /* ReadDotEnv.rb */,
-			);
-			path = ReactNativeConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +220,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DF7F6B6203AA0C200D0EAB7 /* ReactNativeConfig.m in Sources */,
+				92F3601125CB6C8300EECE5B /* ReactNativeConfigModule.m in Sources */,
+				92F3600F25CB6C8300EECE5B /* ReactNativeConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,8 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07BF4DBD2476FBED00E59829 /* ReactNativeConfigModule.m in Sources */,
-				EBE4E8471C7D2456000F8875 /* ReactNativeConfig.m in Sources */,
+				92F3601025CB6C8300EECE5B /* ReactNativeConfigModule.m in Sources */,
+				92F3600E25CB6C8300EECE5B /* ReactNativeConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
