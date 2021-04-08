@@ -1,6 +1,6 @@
 {
   "name": "react-native-config",
-  "version": "1.3.3",
+  "version": "1.4.2",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
@@ -9,6 +9,7 @@
     "react-native",
     "android",
     "ios",
+    "windows",
     "12factor"
   ],
   "homepage": "https://github.com/luggit/react-native-config",
@@ -24,14 +25,19 @@
   "files": [
     "android/",
     "ios/",
+    "windows/",
     "index.js",
     "index.d.ts",
-    "react-native-config.podspec"
+    "react-native-config.podspec",
+    "!.*ignore"
   ],
   "types": "./index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@semantic-release/git": "^9.0.0",
     "semantic-release": "^17.0.4"
+  },
+  "peerDependencies": {
+    "react-native-windows": ">=0.61"
   }
 }

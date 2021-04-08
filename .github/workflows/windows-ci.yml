@@ -1,0 +1,52 @@
+name: Windows CI
+on: [pull_request]
+
+jobs:
+  run-windows-tests:
+    name: Build & run tests
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout Code
+     
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.9.1'
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.0
+      with:
+        vs-version: 16.5
+
+    - name: Check node modules cache
+      uses: actions/cache@v1
+      id: yarn-cache
+      with:
+        path: ./Example/node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install node modules
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: |
+        cd Example
+        yarn --pure-lockfile
+
+    - name: Build x64 release
+      run: |
+        cd Example
+        npx react-native run-windows --release --no-packager --no-launch --logging
+
+    - name: Start Appium server
+      shell: powershell
+      run: |
+        cd Example
+        Start-Process PowerShell -ArgumentList "yarn appium"
+      
+    - name: Run tests
+      run: |
+        cd Example
+        yarn test:windows

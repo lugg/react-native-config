@@ -1,6 +1,6 @@
 # Config variables for React Native apps
 
-Module to expose config variables to your javascript code in React Native, supporting both iOS and Android.
+Module to expose config variables to your javascript code in React Native, supporting iOS, Android and Windows.
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
@@ -33,6 +33,11 @@ $ yarn add react-native-config
 ```
 
 Link the library:
+
+(Note: For React Native 0.60 or greater, [autolinking](https://reactnative.dev/blog/2019/07/03/version-60#native-modules-are-now-autolinked) is available)
+
+(Note: For Windows, this module supports autolinking when used with `react-native-windows@0.63`
+or later. For earlier versions you need to manually link the module.)
 
 ```
 $ react-native link react-native-config
@@ -83,6 +88,32 @@ if cocoapods are used in the project then pod has to be installed as well:
 	    );
 	}
 	```
+
+ - Manual Link (Windows)
+
+	**windows/myapp.sln**
+
+	Add the `RNCConfig` project to your solution.
+
+	1. Open the solution in Visual Studio 2019
+	2. Right-click Solution icon in Solution Explorer > Add > Existing Project  
+	  - if using `react-native-windows@0.62` or later select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
+		- if using `react-native-windows@0.61` select `node_modules\react-native-config\windows\RNCConfig61\RNCConfig61.vcxproj`
+
+	**windows/myapp/myapp.vcxproj**
+
+	Add a reference to `RNCConfig` to your main application project. From Visual Studio 2019:
+
+	1. Right-click main application project > Add > Reference...  
+	Check `RNCConfig` from Solution Projects.
+
+	**pch.h**
+
+	Add `#include "winrt/RNCConfig.h"`.
+
+	**app.cpp**
+
+	Add `PackageProviders().Append(winrt::RNCConfig::ReactPackageProvider());` before `InitializeComponent();`.
 
 ### Extra step for Android
 
@@ -157,6 +188,15 @@ NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
 NSDictionary *config = [ReactNativeConfig env];
 ```
 
+### Windows
+
+You can access variables declared in `.env` from C++ in your App project:
+```
+std::string api_key = ReactNativeConfig::API_KEY;
+```
+
+Similarly, you can access those values in other project by adding reference to the `RNCConfig` as described in the manual linking section.
+
 #### Availability in Build settings and Info.plist
 
 With one extra step environment values can be exposed to "Info.plist" and Build settings in the native project.
@@ -181,13 +221,15 @@ ios/tmp.xcconfig
 4. go to project settings
 5. apply config to your configurations
    ![img](./readme-pics/3.ios_apply_config.png)
-6. create new build phase for the scheme which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist (this snippet has to be placed after "cp ... ${PROJECT_DIR}/../.env" if [approach explained below](#ios-multi-scheme) is used)
+6. Go to _Edit scheme..._ -> _Build_ -> _Pre-actions_, click _+_ and select _New Run Script Action_. Paste below code which will generate "tmp.xcconfig" before each build exposing values to Build Settings and Info.plist. Make sure to select your target under _Provide build settings from_, so `$SRCROOT` environment variables is available to the script. (Note that this snippet has to be placed after "cp ... \${PROJECT_DIR}/../.env" if [approach explained below](#ios-multi-scheme) is used).
 
-```
-"${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
-```
+   ```
+   "${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb" "${SRCROOT}/.." "${SRCROOT}/tmp.xcconfig"
+   ```
 
-7. **Accessing your variable in info.plist**: You can now access your env variable using the prefix `RNC_`, for example `$(RNC_MY_ENV_VARIABLE)`. If you face issues accessing variables, please refer to [this issue](https://github.com/luggit/react-native-config/issues/391#issuecomment-632331803).
+   ![img](./readme-pics/4.ios_pre_actions.png)
+
+7. You can now access your env variables in the Info.plist, for example `$(MY_ENV_VARIABLE)`. If you face issues accessing variables, please open a new issue and provide as much details as possible so above steps can be improved.
 
 #### App Extensions
 
@@ -240,6 +282,8 @@ project.ext.envConfigFiles = [
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
 
+Also note that besides requiring lowercase, the matching is done with `buildFlavor.startsWith`, so a build named `debugProd` could match the `debug` case, above.
+
 <a name="ios-multi-scheme"></a>
 
 #### iOS
@@ -251,6 +295,7 @@ Start by creating a new scheme:
 - In the Xcode menu, go to Product > Scheme > Edit Scheme
 - Click Duplicate Scheme on the bottom
 - Give it a proper name on the top left. For instance: "Myapp (staging)"
+- Make sure the "Shared" checkbox is checked so the scheme is added to your version control system
 
 Then edit the newly created scheme to make it use a different env file. From the same "manage scheme" window:
 
@@ -258,7 +303,7 @@ Then edit the newly created scheme to make it use a different env file. From the
 - Click "Pre-actions", and under the plus sign select "New Run Script Action"
 - Where it says "Type a script or drag a script file", type:
   ```
-  cp ${PROJECT_DIR}/../.env.staging ${PROJECT_DIR}/../.env  # replace .env.staging for your file
+  cp "${PROJECT_DIR}/../.env.staging" "${PROJECT_DIR}/../.env"  # replace .env.staging for your file
   ```
 Also ensure that "Provide build settings from", just above the script, has a value selected so that PROJECT_DIR is set.
 
@@ -276,9 +321,22 @@ If using Dexguard, the shrinking phase will remove resources it thinks are unuse
 
     -keepresources string/build_config_package
 
+### TypeError: _reactNativeConfig.default.getConstants is not a function
+
+This error stems from `.env` file being malformed. Accepted formats are listed here https://regex101.com/r/cbm5Tp/1. Common causes are:
+  - Missing the .env file entirely
+  - Rogue space anywhere, example: in front of env variable: ` MY_ENV='foo'`
+
 ## Testing
 
 Since `react-native-config` contains native code, it cannot be run in a node.js environment (Jest, Mocha). [react-native-config-node](https://github.com/CureApp/react-native-config-node) provides a way to mock `react-native-config` for use in test runners - exactly as it is used in the actual app.
+
+On Windows, [the Example app](example/) supports running automatic tests by using [WinAppDriver](https://github.com/microsoft/WinAppDriver). In the Example app folder run:
+
+```console
+yarn appium
+yarn test:windows
+```
 
 ### Jest
 
