@@ -17,6 +17,20 @@ To read from another file just specify it with `ENVFILE`, like:
 $ ENVFILE=.env.prod react-native run-android
 ```
 
+## Running on Windows
+
+To use the default `.env` file:
+
+```console
+npx react-native run-windows
+```
+
+To read from another file:
+```console
+set ENVFILE=.env.production
+npx react-native run-windows
+```
+
 ## Running from Xcode
 
 Open the Xcode project file in `Example/ios/Example.xcodeproj`.

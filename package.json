@@ -1,6 +1,6 @@
 {
   "name": "@bam.tech/react-native-config",
-  "version": "0.13.0",
+  "version": "1.4.2",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
@@ -22,10 +22,19 @@
   "files": [
     "android/",
     "ios/",
+    "windows/",
     "index.js",
     "index.d.ts",
-    "react-native-config.podspec"
+    "react-native-config.podspec",
+    "!.*ignore"
   ],
   "types": "./index.d.ts",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@semantic-release/git": "^9.0.0",
+    "semantic-release": "^17.0.4"
+  },
+  "peerDependencies": {
+    "react-native-windows": ">=0.61"
+  }
 }

@@ -7,7 +7,7 @@ def getCurrentFlavor() {
     // match optional modules followed by the task
     // (?:.*:)* is a non-capturing group to skip any :foo:bar: if they exist
     // *[a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleRelease --> Release)
-    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z]+)")
+    def pattern = Pattern.compile("(?:.*:)*[a-z]+([A-Z][A-Za-z0-9]+)")
     def flavor = ""
 
     gradle.getStartParameter().getTaskNames().any { name ->
@@ -22,8 +22,8 @@ def getCurrentFlavor() {
 }
 
 def loadDotEnv(flavor = getCurrentFlavor()) {
-    def envFile = ".env"
 
+    def envFile = project.hasProperty("defaultEnvFile") ? project.defaultEnvFile : ".env"
     if (System.env['ENVFILE']) {
         envFile = System.env['ENVFILE']
     } else if (System.getProperty('ENVFILE')) {
@@ -31,13 +31,11 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     } else if (project.hasProperty("envConfigFiles")) {
         // use startsWith because sometimes the task is "generateDebugSources", so we want to match "debug"
         project.ext.envConfigFiles.any { pair ->
-            if (flavor.startsWith(pair.key)) {
+            if (flavor.startsWith(pair.key.toLowerCase())) {
                 envFile = pair.value
                 return true
             }
         }
-    } else if (project.hasProperty("defaultEnvFile")) {
-        envFile = project.defaultEnvFile
     }
 
     def env = [:]
@@ -50,7 +48,9 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
 
     if (f.exists()) {
         f.eachLine { line ->
+            // https://regex101.com/r/cbm5Tp/1
             def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
+            // TODO: Fail Android builds if line doesn't match
             if (matcher.getCount() == 1 && matcher[0].size() == 3) {
                 env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))
             }
@@ -82,7 +82,7 @@ tasks.whenTaskAdded { task ->
             if (task.name.toLowerCase() == "generate"+envConfigName+"buildconfig") {
                 task.doFirst() {
                     android.applicationVariants.all { variant ->
-                        def variantConfigString = variant.getVariantData().getVariantConfiguration().getFullName()
+                        def variantConfigString = variant.getName()
                         if (envConfigName.contains(variantConfigString.toLowerCase())) {
                             loadDotEnv(envConfigName)
                             project.env.each { k, v ->

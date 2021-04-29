@@ -60,6 +60,11 @@ The same environment variable can be used to assemble releases with a different 
 
 Define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
 
+(Note: For React Native 0.60 or greater, [autolinking](https://reactnative.dev/blog/2019/07/03/version-60#native-modules-are-now-autolinked) is available)
+
+(Note: For Windows, this module supports autolinking when used with `react-native-windows@0.63`
+or later. For earlier versions you need to manually link the module.)
+
 ```
 project.ext.envConfigFiles = [
     debug: ".env.development",
@@ -68,6 +73,8 @@ project.ext.envConfigFiles = [
 ]
 apply from: project(':@bam.tech_react-native-config').projectDir.getPath() + "/dotenv.gradle"
 ```
+
+Also note that besides requiring lowercase, the matching is done with `buildFlavor.startsWith`, so a build named `debugProd` could match the `debug` case, above.
 
 ## Setup iOS
 
@@ -105,6 +112,7 @@ pod install
 
 ### Optional : Multi-environment support
 
+The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
 For each environment, use the following step (and change `development` by your env name - staging, test, production) :
 
 - In the Xcode menu, go to Product > Scheme > Edit Scheme

@@ -22,7 +22,7 @@ def read_dot_env(envs_root)
 
   dotenv = begin
     # https://regex101.com/r/cbm5Tp/1
-    dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)=((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
+    dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)\s*=\s*((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
 
     path = File.expand_path(File.join(envs_root, file.to_s))
     if File.exist?(path)
@@ -30,18 +30,23 @@ def read_dot_env(envs_root)
     elsif File.exist?(file)
       raw = File.read(file)
     else
-      defaultEnvPath = File.expand_path(File.join(envs_root, "../#{defaultEnvFile}"))
+      defaultEnvPath = File.expand_path(File.join(envs_root, "#{defaultEnvFile}"))
       unless File.exist?(defaultEnvPath)
         # try as absolute path
         defaultEnvPath = defaultEnvFile
       end
-      defaultRaw = File.read(defaultEnvPath)
-      raw = defaultRaw + "\n" + raw if defaultRaw
+      raw = File.read(defaultEnvPath)
     end
 
     raw.split("\n").inject({}) do |h, line|
       m = line.match(dotenv_pattern)
-      next h if m.nil?
+
+      next h if line.nil? || line.strip.empty?
+      next h if line.match(/^\s*#/)
+
+      if m.nil?
+        abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
+      end
 
       key = m[:key]
       # Ensure string (in case of empty value) and escape any quotes present in the value.

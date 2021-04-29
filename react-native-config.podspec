@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/bamlab/react-native-config'
 
   s.license      = 'MIT'
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
 
   s.source       = { git: 'https://github.com/bamlab/react-native-config.git', tag: s.version.to_s }
@@ -27,8 +27,28 @@ Pod::Spec.new do |s|
     output_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/GeneratedDotEnv.m']
   }
 
-  s.source_files = 'ios/**/*.{h,m}'
   s.requires_arc = true
+  s.default_subspec = 'App'
 
-  s.dependency 'React'
+    s.subspec 'App' do |app|
+    app.source_files = 'ios/**/*.{h,m}'
+    app.dependency 'React-Core'
+  end
+
+  # Use this subspec for iOS extensions that cannot use React dependency
+  s.subspec 'Extension' do |ext|
+    # Had to duplicate the script_phase since it wasn't being passed down. Not sure why
+    ext.script_phase = {
+      name: 'Config codegen',
+      script: %(
+        set -ex
+        HOST_PATH="$SRCROOT/../.."
+        "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+        ),
+      execution_position: :before_compile,
+      input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+    }
+    ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
+  end
+
 end
