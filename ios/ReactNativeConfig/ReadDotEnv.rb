@@ -12,9 +12,9 @@ def read_dot_env(envs_root)
   puts "going to read env file from root folder #{envs_root}"
 
   # pick a custom env file if set
-  if File.exist?('/tmp/envfile')
+  if File.exist?("#{envs_root}/ios/envfile")
     custom_env = true
-    file = File.read('/tmp/envfile').strip
+    file = File.read("#{envs_root}/ios/envfile").strip
   else
     custom_env = false
     file = ENV['ENVFILE'] || defaultEnvFile

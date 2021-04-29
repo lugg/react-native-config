@@ -1,5 +1,5 @@
 {
-  "name": "react-native-config",
+  "name": "@bam.tech/react-native-config",
   "version": "1.4.2",
   "description": "Expose config variables to React Native apps",
   "keywords": [
@@ -9,19 +9,16 @@
     "react-native",
     "android",
     "ios",
-    "windows",
     "12factor"
   ],
-  "homepage": "https://github.com/luggit/react-native-config",
-  "contributors": [
-    "Luan Curti <luancurti@gmail.com> (https://github.com/luancurti)"
-  ],
+  "homepage": "https://github.com/bamlab/react-native-config",
+  "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/luggit/react-native-config"
+    "url": "https://github.com/bamlab/react-native-config"
   },
   "private": false,
-  "author": "Pedro Belo",
+  "author": "Thomas Pucci",
   "files": [
     "android/",
     "ios/",
