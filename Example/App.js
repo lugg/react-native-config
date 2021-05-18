@@ -16,6 +16,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>API_URL={Config.API_URL}</Text>
+        <Text style={styles.text}>EXAMPLE_KEY={Config.EXAMPLE_KEY}</Text>
       </View>
     );
   }

@@ -79,18 +79,18 @@ public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
   }
 
   private String decode(Object encodedString, String key) {
-        byte[] decodedBytes = Base64.decode((String) encodedString, Base64.DEFAULT);
-        byte[] keyBytes = key.getBytes();
+    byte[] decodedBytes = Base64.decode((String) encodedString, Base64.DEFAULT);
+    byte[] keyBytes = key.getBytes();
 
-        int len = decodedBytes.length;
-        int keyBytesLen = keyBytes.length;
+    int len = decodedBytes.length;
+    int keyBytesLen = keyBytes.length;
 
-        byte[] resultBytes = new byte[len];
+    byte[] resultBytes = new byte[len];
 
-        for (int i = 0; i < decodedBytes.length; i++) {
-            resultBytes[i] = (byte) (decodedBytes[i] ^ keyBytes[i % keyBytesLen]);
-        }
-
-        return new String(resultBytes);
+    for (int i = 0; i < decodedBytes.length; i++) {
+        resultBytes[i] = (byte) (decodedBytes[i] ^ keyBytes[i % keyBytesLen]);
     }
+
+    return new String(resultBytes);
+  }
 }
