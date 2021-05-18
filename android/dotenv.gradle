@@ -105,9 +105,23 @@ def encodeString(String str, String key) {
     return result.encodeBase64().toString()
 }
 
+def escapeEncodedKeys(List encodedKeys) {
+    def result = "{"
+    encodedKeys.eachWithIndex { it, i ->
+        if (i != encodedKeys.size()-1) {
+            result += "\"$it\","
+        } else {
+            result += "\"$it\""
+        }
+    }
+    result += "}"
+    return result
+}
+
 
 android {
     defaultConfig {
+        def encodedKeys = [] //needed to keep track of keys encoded
         String xorKey = generateKey(keyLength)
         project.env.each { k, v ->
             def escaped = v.replaceAll("%","\\\\u0025")
@@ -119,7 +133,13 @@ android {
 
             resValue "string", k, "\"$encodedEscaped\""
             resValue "string", "XOR_KEY", "\"$xorKey\""
+
+            encodedKeys << k
         }
+        //Add the encodedkeys to buildconfig. Needed to know which var to decode
+        def escapedKeys = escapeEncodedKeys(encodedKeys)
+        buildConfigField "String[]", "ENCODED_KEYS", escapedKeys
+
     }
 }
 
@@ -133,6 +153,7 @@ tasks.whenTaskAdded { task ->
                         if (envConfigName.contains(variantConfigString.toLowerCase())) {
                             loadDotEnv(envConfigName)
 
+                            def encodedKeys = [] //needed to keep track of keys encoded
                             String xorKey = generateKey(keyLength)
                             project.env.each { k, v ->
                                 def escaped = v.replaceAll("%","\\\\u0025")
@@ -145,7 +166,12 @@ tasks.whenTaskAdded { task ->
 
                                 variant.resValue "string", k, "\"$encodedEscaped\""
                                 variant.resValue "string", "XOR_KEY", "\"$xorKey\""
+
+                                encodedKeys << k
                             }
+                            //Add the encodedkeys to buildconfig. Needed to know which var to decode
+                            def escapedKeys = escapeEncodedKeys(encodedKeys)
+                            variant.buildConfigField "String[]", "ENCODED_KEYS", escapedKeys
                         }
                     }
                 }
