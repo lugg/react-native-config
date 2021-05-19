@@ -16,9 +16,7 @@ jobs:
         node-version: '12.9.1'
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.0
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      uses: microsoft/setup-msbuild@v1.0.2
       with:
         vs-version: 16.5
 
