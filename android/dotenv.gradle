@@ -66,13 +66,80 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
 
 loadDotEnv()
 
+def keyLength = 64
+
+def generateKey(int keyLength = 64) {
+    return new Random().with {
+        (1..keyLength).collect {
+            (('a'..'z')).join()[ nextInt((('a'..'z')).join().length())]
+        }.join()
+    }
+}
+
+/**
+ * First uses a simple xor encryption on string using provided key
+ * The resulting byte array is further encoded as base64 encoded string
+ *
+ * To decode the returned string you'd have to first Base64.decode(encodedString),
+ * then xor decrypt the returned byte array (by applying this same xor encryption
+ *       because when you apply it twice, you get back the original string),
+ * then build a new string with the decrypted byte array: new String(resultBytes);
+ *
+ * @param str
+ * @param key
+ * @return
+ */
+def encodeString(String str, String key) {
+    int len = str.length()
+    int keyLen = key.length()
+
+    byte[] strBytes = str.getBytes()
+    byte[] keyBytes = key.getBytes()
+    byte[] result = new byte[len]
+
+    for (int i = 0; i < len; i++)
+    {
+        result[i] = (byte) (strBytes[i] ^ keyBytes[i % keyLen])
+    }
+
+    return result.encodeBase64().toString()
+}
+
+def escapeEncodedKeys(List encodedKeys) {
+    def result = "{"
+    encodedKeys.eachWithIndex { it, i ->
+        if (i != encodedKeys.size()-1) {
+            result += "\"$it\","
+        } else {
+            result += "\"$it\""
+        }
+    }
+    result += "}"
+    return result
+}
+
+
 android {
     defaultConfig {
+        def encodedKeys = [] //needed to keep track of keys encoded
+        String xorKey = generateKey(keyLength)
         project.env.each { k, v ->
             def escaped = v.replaceAll("%","\\\\u0025")
-            buildConfigField "String", k, "\"$v\""
-            resValue "string", k, "\"$escaped\""
+            def encodedValue = encodeString(v, xorKey)
+            def encodedEscaped = encodeString(escaped, xorKey)
+
+            buildConfigField "String", k, "\"$encodedValue\""
+            buildConfigField "String", "XOR_KEY", "\"$xorKey\""
+
+            resValue "string", k, "\"$encodedEscaped\""
+            resValue "string", "XOR_KEY", "\"$xorKey\""
+
+            encodedKeys << k
         }
+        //Add the encodedkeys to buildconfig. Needed to know which var to decode
+        def escapedKeys = escapeEncodedKeys(encodedKeys)
+        buildConfigField "String[]", "ENCODED_KEYS", escapedKeys
+
     }
 }
 
@@ -85,11 +152,26 @@ tasks.whenTaskAdded { task ->
                         def variantConfigString = variant.getName()
                         if (envConfigName.contains(variantConfigString.toLowerCase())) {
                             loadDotEnv(envConfigName)
+
+                            def encodedKeys = [] //needed to keep track of keys encoded
+                            String xorKey = generateKey(keyLength)
                             project.env.each { k, v ->
                                 def escaped = v.replaceAll("%","\\\\u0025")
-                                variant.buildConfigField "String", k, "\"$v\""
-                                variant.resValue "string", k, "\"$escaped\""
+                                def encodedValue = encodeString(v, xorKey)
+                                def encodedEscaped = encodeString(escaped, xorKey)
+
+
+                                variant.buildConfigField "String", k, "\"$encodedValue\""
+                                variant.buildConfigField "String", "XOR_KEY", "\"$xorKey\""
+
+                                variant.resValue "string", k, "\"$encodedEscaped\""
+                                variant.resValue "string", "XOR_KEY", "\"$xorKey\""
+
+                                encodedKeys << k
                             }
+                            //Add the encodedkeys to buildconfig. Needed to know which var to decode
+                            def escapedKeys = escapeEncodedKeys(encodedKeys)
+                            variant.buildConfigField "String[]", "ENCODED_KEYS", escapedKeys
                         }
                     }
                 }
