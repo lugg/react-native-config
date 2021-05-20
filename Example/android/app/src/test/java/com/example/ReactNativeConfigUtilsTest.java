@@ -7,11 +7,11 @@ import junit.framework.TestCase;
 public class ReactNativeConfigUtilsTest extends TestCase {
 
     public void testDecode() {
-        String unDecoded = BuildConfig.EXAMPLE_KEY;
+        String unDecoded = BuildConfig.API_URL;
         String key = BuildConfig.XOR_KEY;
 
         String decodedString = ReactNativeConfigUtils.decode(unDecoded, key);
-        String expected = "thisisanartsyenvvar";
+        String expected = "http://localhost";
 
         assertEquals("Example Key is NOT correctly decoded", expected, decodedString);
     }
@@ -21,8 +21,8 @@ public class ReactNativeConfigUtilsTest extends TestCase {
      * a simple base64 encoded strings
      */
     public void testEncodingIsNotSimpleBase64() {
-        String str = "thisisanartsyenvvar";
-        String envVar = BuildConfig.EXAMPLE_KEY;
+        String str = "http://localhost";
+        String envVar = BuildConfig.API_URL;
 
         String encodedWithBase64 = Base64.encodeToString(str.getBytes(), Base64.DEFAULT);
 
