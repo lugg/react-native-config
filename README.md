@@ -132,7 +132,7 @@ Add this in `android/app/build.gradle`
 ```
 defaultConfig {
     ...
-    resValue "string", "build_config_package", "YOUR_PACKAGE_NAME_IN_ANDROIDMANIFEST.XML"
+    resValue "string", "build_config_package", "YOUR_PACKAGE_NAME_IN_ANDROIDMANIFEST_XML"
 }
 ```
 
