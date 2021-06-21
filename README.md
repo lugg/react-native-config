@@ -307,6 +307,48 @@ Then edit the newly created scheme to make it use a different env file. From the
   ```
 Also ensure that "Provide build settings from", just above the script, has a value selected so that PROJECT_DIR is set.
 
+Alternatively, if you have separated build configurations, you may easily set the different envfiles per configuration by adding these lines into the end of Podfile:
+
+```ruby
+ENVFILES = {
+  'Debug' => '$(PODS_ROOT)/../../.env.debug',
+  'Release' => '$(PODS_ROOT)/../../.env.production',
+}
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if target.name == 'react-native-config'
+        config.build_settings['ENVFILE'] = ENVFILES[config.name]
+      end
+    end
+  end
+end
+```
+
+Note that if you have flipper enabled in your Podfile, you must move the `flipper_post_install` into the newely added hook since Podfile doesn't allow multiple `post_install` hooks.
+
+```diff
+  target 'MyApp' do
+    # ...
+    use_flipper!
+-   post_install do |installer|
+-     flipper_post_install(installer)
+-   end
+  end
+
+  post_install do |installer|
++   flipper_post_install(installer)
+
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if target.name == 'react-native-config'
+          config.build_settings['ENVFILE'] = ENVFILES[config.name]
+        end
+      end
+    end
+  end
+```
+
 ## Troubleshooting
 
 ### Problems with Proguard
