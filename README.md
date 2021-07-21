@@ -8,6 +8,12 @@
 
 <br>
 
+# Why a fork
+
+- There was an important issue with the iOS build system that we wanted to fix ASAP back then
+- We wanted to standardize the way to use the lib
+- We wanted control over such a critical lib (it uses env variables)
+	
 # Setup (RN >= 0.60)
 
 Install the package:
