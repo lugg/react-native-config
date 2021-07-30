@@ -11,14 +11,7 @@ def read_dot_env(envs_root)
   defaultEnvFile = '.env'
   puts "going to read env file from root folder #{envs_root}"
 
-  # pick a custom env file if set
-  if File.exist?('/tmp/envfile')
-    custom_env = true
-    file = File.read('/tmp/envfile').strip
-  else
-    custom_env = false
-    file = ENV['ENVFILE'] || defaultEnvFile
-  end
+  file = ENV['ENVFILE'] || defaultEnvFile
 
   dotenv = begin
     # https://regex101.com/r/cbm5Tp/1
@@ -59,5 +52,6 @@ def read_dot_env(envs_root)
       puts('**************************')
       return [{}, false] # set dotenv as an empty hash
   end
-  [dotenv, custom_env]
+
+  dotenv
 end
