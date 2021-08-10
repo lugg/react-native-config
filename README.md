@@ -10,7 +10,13 @@
 
 # Why a fork
 
-- There was an important issue with the iOS build system that we wanted to fix ASAP back then
+- There was an important issue with the iOS build system that we wanted to fix ASAP back then (but it was merged since)
+- Setting environment variables does not work properly in the XCode pre-build phases. This commit helps with setting the environment file in this way. Without this commit, the code below wouldn't work https://github.com/bamlab/react-native-config/commit/38c5f6075d518edd0a53d0c6836e46a828d031c4
+```
+echo ".env.staging" > ${SRCROOT}/envfile
+ENVFILE=.env.staging ${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb ${SRCROOT}/.. ${SRCROOT}/react-native-config.xcconfig
+```
+
 - We wanted to standardize the way to use the lib
 - We wanted control over such a critical lib (it uses env variables)
 	
