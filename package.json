@@ -1,6 +1,6 @@
 {
   "name": "@bam.tech/react-native-config",
-  "version": "1.4.2",
+  "version": "1.4.5",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
@@ -36,5 +36,10 @@
   },
   "peerDependencies": {
     "react-native-windows": ">=0.61"
+  },
+  "peerDependenciesMeta": {
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }
