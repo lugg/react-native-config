@@ -1,3 +1,5 @@
+# Difference with upstream: This fork obfuscates the environment variables!
+
 # Config variables for React Native apps
 
 Module to expose config variables to your javascript code in React Native, supporting iOS, Android and Windows.
@@ -21,8 +23,6 @@ import Config from "react-native-config";
 Config.API_URL; // 'https://myapi.com'
 Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
 ```
-
-Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
 
 ## Setup
 
