@@ -197,7 +197,7 @@ std::string api_key = ReactNativeConfig::API_KEY;
 
 Similarly, you can access those values in other project by adding reference to the `RNCConfig` as described in the manual linking section.
 
-#### Availability in Build settings and Info.plist
+### Availability in Build settings and Info.plist
 
 With one extra step environment values can be exposed to "Info.plist" and Build settings in the native project.
 
