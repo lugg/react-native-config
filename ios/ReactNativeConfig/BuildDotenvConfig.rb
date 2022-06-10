@@ -26,7 +26,7 @@ path = File.join(m_output_path, 'GeneratedDotEnv.m')
 File.open(path, 'w') { |f| f.puts template }
 
 # create header file with defines for the Info.plist preprocessor
-info_plist_defines_objc = dotenv.map { |k, v| %Q(#define RNC_#{k}  #{v}) }.join("\n")
+info_plist_defines_objc = dotenv.map { |k, v| %Q(#define #{k}  #{v}) }.join("\n")
 
 # write it so the Info.plist preprocessor can access it
 path = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
