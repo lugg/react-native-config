@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.source       = { git: 'https://github.com/luggit/react-native-config.git', tag: "v#{s.version.to_s}" }
   s.script_phase = {
     name: 'Config codegen',
+    alwaysOutOfDate: 1,
     script: %(
 set -ex
 HOST_PATH="$SRCROOT/../.."
