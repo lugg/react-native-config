@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
   s.source       = { git: 'https://github.com/luggit/react-native-config.git', tag: "v#{s.version.to_s}" }
   s.script_phase = {
     name: 'Config codegen',
-    alwaysOutOfDate: 1,
     script: %(
 set -ex
 HOST_PATH="$SRCROOT/../.."
@@ -27,6 +26,7 @@ HOST_PATH="$SRCROOT/../.."
 ),
     execution_position: :before_compile,
     input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+    output_files: ['$BUILD_DIR/GeneratedInfoPlistDotEnv.h'],
   }
 
   s.requires_arc = true
