@@ -26,7 +26,7 @@ HOST_PATH="$SRCROOT/../.."
 ),
     execution_position: :before_compile,
     input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
-    output_files: ['$BUILD_DIR/GeneratedInfoPlistDotEnv.h'],
+    output_files: ['$BUILD_DIR/GeneratedInfoPlistDotEnv.h']
   }
 
   s.requires_arc = true
