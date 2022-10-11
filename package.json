@@ -1,6 +1,6 @@
 {
   "name": "react-native-config",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
