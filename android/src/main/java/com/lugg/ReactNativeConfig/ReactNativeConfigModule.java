@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 
 import java.lang.ClassNotFoundException;
 import java.lang.IllegalAccessException;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -40,10 +42,16 @@ public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
       Field[] fields = clazz.getDeclaredFields();
       for(Field f: fields) {
         try {
-          constants.put(f.getName(), f.get(null));
+          Object value = f.get(null);
+          // Make sure that the value is supported by RN.
+          Arguments.fromList(List.of(value));
+          constants.put(f.getName(), value);
         }
         catch (IllegalAccessException e) {
           Log.d("ReactNative", "ReactConfig: Could not access BuildConfig field " + f.getName());
+        }
+        catch (IllegalArgumentException e) {
+          Log.d("ReactNative", "ReactConfig: Unsupported BuildConfig field type " + f.getName());
         }
       }
     }
