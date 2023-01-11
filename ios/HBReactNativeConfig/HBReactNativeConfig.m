@@ -1,7 +1,7 @@
-#import "ReactNativeConfig.h"
+#import "HBReactNativeConfig.h"
 #import "GeneratedDotEnv.m" // written during build by BuildDotenvConfig.ruby
 
-@implementation ReactNativeConfig
+@implementation HBReactNativeConfig
 
 + (NSDictionary *)env {
     return (NSDictionary *)DOT_ENV;

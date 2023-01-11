@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface ReactNativeConfig : NSObject
+@interface HBReactNativeConfig : NSObject
 
 + (NSDictionary *)env;
 + (NSString *)envFor: (NSString *)key;

@@ -1,4 +1,4 @@
-package com.lugg.ReactNativeConfig;
+package com.lugg.HBReactNativeConfig;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -13,14 +13,14 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.HashMap;
 
-public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
-  public ReactNativeConfigModule(ReactApplicationContext reactContext) {
+public class HBReactNativeConfigModule extends ReactContextBaseJavaModule {
+  public HBReactNativeConfigModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
   @Override
   public String getName() {
-    return "ReactNativeConfigModule";
+    return "HBReactNativeConfigModule";
   }
 
   @Override

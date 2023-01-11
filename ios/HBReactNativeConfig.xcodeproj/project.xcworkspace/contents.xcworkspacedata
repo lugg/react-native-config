@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ReactNativeConfig.xcodeproj">
+      location = "self:HBReactNativeConfig.xcodeproj">
    </FileRef>
 </Workspace>

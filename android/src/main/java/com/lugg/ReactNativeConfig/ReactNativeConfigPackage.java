@@ -1,4 +1,4 @@
-package com.lugg.ReactNativeConfig;
+package com.lugg.HBReactNativeConfig;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ReactNativeConfigPackage implements ReactPackage {
+public class HBReactNativeConfigPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(
-            new ReactNativeConfigModule(reactContext)
+            new HBReactNativeConfigModule(reactContext)
         );
     }
 

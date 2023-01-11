@@ -5,7 +5,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = 'react-native-config'
+  s.name         = 'hb-react-native-config'
   s.version      = package['version']
   s.summary      = 'Expose config variables to React Native apps'
   s.author       = 'Pedro Belo'
@@ -22,10 +22,10 @@ Pod::Spec.new do |s|
     script: %(
 set -ex
 HOST_PATH="$SRCROOT/../.."
-"${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+"${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig"
 ),
     execution_position: :before_compile,
-    input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb'],
+    input_files: ['$PODS_TARGET_SRCROOT/ios/HBReactNativeConfig/BuildDotenvConfig.rb'],
     output_files: ['$BUILD_DIR/GeneratedInfoPlistDotEnv.h']
   }
 
@@ -45,12 +45,12 @@ HOST_PATH="$SRCROOT/../.."
       script: %(
         set -ex
         HOST_PATH="$SRCROOT/../.."
-        "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
+        "${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig"
         ),
       execution_position: :before_compile,
-      input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb']
+      input_files: ['$PODS_TARGET_SRCROOT/ios/HBReactNativeConfig/BuildDotenvConfig.rb']
     }
-    ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
+    ext.source_files = ['ios/**/HBReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
   end
 
 end
