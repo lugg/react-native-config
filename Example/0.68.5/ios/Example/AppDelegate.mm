@@ -2,6 +2,7 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTLog.h>
 #import <React/RCTRootView.h>
 
 #import <React/RCTAppSetupUtils.h>
@@ -13,6 +14,8 @@
 #import <React/RCTSurfacePresenter.h>
 #import <React/RCTSurfacePresenterBridgeAdapter.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
+
+#import <HBReactNativeConfig.h>
 
 #import <react/config/ReactNativeConfig.h>
 
@@ -30,6 +33,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   RCTAppSetupPrepareApp(application);
+  
+  NSString *env = [HBReactNativeConfig envFor:@"ENV"];
+  NSString *apiUrl = [HBReactNativeConfig envFor:@"API_URL"];
+  RCTLogInfo(@"ENV: %@", env);
+  RCTLogInfo(@"API_URL: %@", apiUrl);
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 

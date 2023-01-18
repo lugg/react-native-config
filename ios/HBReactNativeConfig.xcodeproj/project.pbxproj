@@ -135,7 +135,7 @@
 			dependencies = (
 			);
 			name = "HBReactNativeConfig-tvOS";
-			productName = "ReactNativeConfig-tvOS";
+			productName = "HBReactNativeConfig-tvOS";
 			productReference = 3DF7F6AC203AA09B00D0EAB7 /* libHBReactNativeConfig-tvOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -154,7 +154,7 @@
 			dependencies = (
 			);
 			name = HBReactNativeConfig;
-			productName = ReactNativeConfig;
+			productName = HBReactNativeConfig;
 			productReference = EB2648DF1C7BE17A00B8F155 /* libHBReactNativeConfig.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -202,13 +202,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
+				"$(SRCROOT)/HBReactNativeConfig/BuildDotenvConfig.rb",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./ReactNativeConfig/BuildDotenvConfig.rb\n";
+			shellScript = "./HBReactNativeConfig/BuildDotenvConfig.rb\n";
 		};
 		EBE4E8281C7BF689000F8875 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -216,13 +216,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
+				"$(SRCROOT)/HBReactNativeConfig/BuildDotenvConfig.rb",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -xe\necho \"$SRCROOT\"\n./ReactNativeConfig/BuildDotenvConfig.rb \"$SRCROOT/../../..\" \"$SRCROOT/ReactNativeConfig/\"\n";
+			shellScript = "set -xe\necho \"$SRCROOT\"\n./HBReactNativeConfig/BuildDotenvConfig.rb \"$SRCROOT/../../..\" \"$SRCROOT/HBReactNativeConfig/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
