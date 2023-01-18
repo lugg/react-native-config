@@ -48,7 +48,8 @@ HOST_PATH="$SRCROOT/../.."
         "${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/HBReactNativeConfig"
         ),
       execution_position: :before_compile,
-      input_files: ['$PODS_TARGET_SRCROOT/ios/HBReactNativeConfig/BuildDotenvConfig.rb']
+      input_files: ['$PODS_TARGET_SRCROOT/ios/HBReactNativeConfig/BuildDotenvConfig.rb'],
+      output_files: ['$PODS_TARGET_SRCROOT/ios/HBReactNativeConfig/GeneratedDotEnv.m']
     }
     ext.source_files = ['ios/**/HBReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
   end
