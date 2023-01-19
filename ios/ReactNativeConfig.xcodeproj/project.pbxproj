@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07BF4DBD2476FBED00E59829 /* RNCConfigModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BF4DBC2476FBED00E59829 /* RNCConfigModule.m */; };
+		3DF7F6B6203AA0C200D0EAB7 /* RNCConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* RNCConfig.m */; };
+		3DF7F6B7203AA0D600D0EAB7 /* RNCConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* RNCConfig.h */; };
+		EB2648E31C7BE17A00B8F155 /* RNCConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB2648E21C7BE17A00B8F155 /* RNCConfig.h */; };
+		EBE4E8471C7D2456000F8875 /* RNCConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE4E8461C7D2456000F8875 /* RNCConfig.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3DF7F6AA203AA09B00D0EAB7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				3DF7F6B7203AA0D600D0EAB7 /* RNCConfig.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DF7F6B8203AA0D900D0EAB7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB2648DD1C7BE17A00B8F155 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				EB2648E31C7BE17A00B8F155 /* RNCConfig.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBE4E8351C7D1668000F8875 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07BF4DBB2476FBED00E59829 /* RNCConfigModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCConfigModule.h; sourceTree = "<group>"; };
+		07BF4DBC2476FBED00E59829 /* RNCConfigModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCConfigModule.m; sourceTree = "<group>"; };
+		3DF7F6AC203AA09B00D0EAB7 /* libRNCConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libRNCConfig-tvOS.a"; path = "libReactNativeConfig-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50406729228CAD5A00E0438A /* ReadDotEnv.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ReadDotEnv.rb; sourceTree = "<group>"; };
+		50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildXCConfig.rb; sourceTree = "<group>"; };
+		EB2648DF1C7BE17A00B8F155 /* libRNCConfig.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRNCConfig.a; path = libReactNativeConfig.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB2648E21C7BE17A00B8F155 /* RNCConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNCConfig.h; sourceTree = "<group>"; };
+		EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = BuildDotenvConfig.rb; sourceTree = "<group>"; };
+		EBE4E8461C7D2456000F8875 /* RNCConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCConfig.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DF7F6A9203AA09B00D0EAB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB2648DC1C7BE17A00B8F155 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB2648D61C7BE17A00B8F155 = {
+			isa = PBXGroup;
+			children = (
+				EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */,
+				EB2648E01C7BE17A00B8F155 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB2648E01C7BE17A00B8F155 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB2648DF1C7BE17A00B8F155 /* libRNCConfig.a */,
+				3DF7F6AC203AA09B00D0EAB7 /* libRNCConfig-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB2648E11C7BE17A00B8F155 /* ReactNativeConfig */ = {
+			isa = PBXGroup;
+			children = (
+				50830C45228DD3D000CEA8FC /* BuildXCConfig.rb */,
+				EB2648E21C7BE17A00B8F155 /* RNCConfig.h */,
+				EBE4E8461C7D2456000F8875 /* RNCConfig.m */,
+				07BF4DBB2476FBED00E59829 /* RNCConfigModule.h */,
+				07BF4DBC2476FBED00E59829 /* RNCConfigModule.m */,
+				EBE4E8291C7BF6DD000F8875 /* BuildDotenvConfig.rb */,
+				50406729228CAD5A00E0438A /* ReadDotEnv.rb */,
+			);
+			path = ReactNativeConfig;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DF7F6AB203AA09B00D0EAB7 /* ReactNativeConfig-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DF7F6B4203AA09B00D0EAB7 /* Build configuration list for PBXNativeTarget "ReactNativeConfig-tvOS" */;
+			buildPhases = (
+				3DF7F6B5203AA0A900D0EAB7 /* ShellScript */,
+				3DF7F6A8203AA09B00D0EAB7 /* Sources */,
+				3DF7F6A9203AA09B00D0EAB7 /* Frameworks */,
+				3DF7F6AA203AA09B00D0EAB7 /* CopyFiles */,
+				3DF7F6B8203AA0D900D0EAB7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ReactNativeConfig-tvOS";
+			productName = "ReactNativeConfig-tvOS";
+			productReference = 3DF7F6AC203AA09B00D0EAB7 /* libRNCConfig-tvOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EB2648DE1C7BE17A00B8F155 /* ReactNativeConfig */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */;
+			buildPhases = (
+				EBE4E8281C7BF689000F8875 /* ShellScript */,
+				EB2648DB1C7BE17A00B8F155 /* Sources */,
+				EB2648DC1C7BE17A00B8F155 /* Frameworks */,
+				EB2648DD1C7BE17A00B8F155 /* CopyFiles */,
+				EBE4E8351C7D1668000F8875 /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReactNativeConfig;
+			productName = ReactNativeConfig;
+			productReference = EB2648DF1C7BE17A00B8F155 /* libRNCConfig.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB2648D71C7BE17A00B8F155 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Pedro Belo";
+				TargetAttributes = {
+					3DF7F6AB203AA09B00D0EAB7 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					EB2648DE1C7BE17A00B8F155 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = EB2648DA1C7BE17A00B8F155 /* Build configuration list for PBXProject "ReactNativeConfig" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = EB2648D61C7BE17A00B8F155;
+			productRefGroup = EB2648E01C7BE17A00B8F155 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB2648DE1C7BE17A00B8F155 /* ReactNativeConfig */,
+				3DF7F6AB203AA09B00D0EAB7 /* ReactNativeConfig-tvOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DF7F6B5203AA0A900D0EAB7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./ReactNativeConfig/BuildDotenvConfig.rb\n";
+		};
+		EBE4E8281C7BF689000F8875 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ReactNativeConfig/BuildDotenvConfig.rb",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -xe\necho \"$SRCROOT\"\n./ReactNativeConfig/BuildDotenvConfig.rb \"$SRCROOT/../../..\" \"$SRCROOT/ReactNativeConfig/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DF7F6A8203AA09B00D0EAB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DF7F6B6203AA0C200D0EAB7 /* RNCConfig.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB2648DB1C7BE17A00B8F155 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07BF4DBD2476FBED00E59829 /* RNCConfigModule.m in Sources */,
+				EBE4E8471C7D2456000F8875 /* RNCConfig.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3DF7F6B2203AA09B00D0EAB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SYMROOT}",
+					"$(SRCROOT)/../../../ios/Pods/Headers/Public",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		3DF7F6B3203AA09B00D0EAB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SYMROOT}",
+					"$(SRCROOT)/../../../ios/Pods/Headers/Public",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		EB2648E61C7BE17A00B8F155 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EB2648E71C7BE17A00B8F155 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB2648E91C7BE17A00B8F155 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SYMROOT}",
+					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EB2648EA1C7BE17A00B8F155 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SYMROOT}",
+					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3DF7F6B4203AA09B00D0EAB7 /* Build configuration list for PBXNativeTarget "ReactNativeConfig-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DF7F6B2203AA09B00D0EAB7 /* Debug */,
+				3DF7F6B3203AA09B00D0EAB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB2648DA1C7BE17A00B8F155 /* Build configuration list for PBXProject "ReactNativeConfig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB2648E61C7BE17A00B8F155 /* Debug */,
+				EB2648E71C7BE17A00B8F155 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB2648E81C7BE17A00B8F155 /* Build configuration list for PBXNativeTarget "ReactNativeConfig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB2648E91C7BE17A00B8F155 /* Debug */,
+				EB2648EA1C7BE17A00B8F155 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB2648D71C7BE17A00B8F155 /* Project object */;
+}

@@ -7,6 +7,8 @@
 
 #import <React/RCTAppSetupUtils.h>
 
+#import <RNCConfig.h>
+
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
 #import <React/RCTCxxBridgeDelegate.h>
@@ -14,8 +16,6 @@
 #import <React/RCTSurfacePresenter.h>
 #import <React/RCTSurfacePresenterBridgeAdapter.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
-
-#import <HBReactNativeConfig.h>
 
 #import <react/config/ReactNativeConfig.h>
 
@@ -34,8 +34,8 @@
 {
   RCTAppSetupPrepareApp(application);
   
-  NSString *env = [HBReactNativeConfig envFor:@"ENV"];
-  NSString *apiUrl = [HBReactNativeConfig envFor:@"API_URL"];
+  NSString *env = [RNCConfig envFor:@"ENV"];
+  NSString *apiUrl = [RNCConfig envFor:@"API_URL"];
   RCTLogInfo(@"ENV: %@", env);
   RCTLogInfo(@"API_URL: %@", apiUrl);
 

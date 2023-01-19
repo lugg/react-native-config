@@ -28,7 +28,7 @@
     "windows/",
     "index.js",
     "index.d.ts",
-    "hb-react-native-config.podspec",
+    "react-native-config.podspec",
     "!.*ignore"
   ],
   "types": "./index.d.ts",
