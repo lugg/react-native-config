@@ -8,8 +8,8 @@
 #include "RNCConfigValues.h"
 namespace RNCConfig
 {
-  REACT_MODULE(ReactNativeConfigModule);
-  struct ReactNativeConfigModule
+  REACT_MODULE(RNCConfigModule);
+  struct RNCConfigModule
   {
 #include "RNCConfigValuesModule.inc.g.h"
   };

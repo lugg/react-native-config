@@ -51,7 +51,7 @@ HOST_PATH="$SRCROOT/../.."
       input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb'],
       output_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/GeneratedDotEnv.m']
     }
-    ext.source_files = ['ios/**/ReactNativeConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
+    ext.source_files = ['ios/**/RNCConfig.{h,m}', 'ios/**/GeneratedDotEnv.m']
   end
 
 end

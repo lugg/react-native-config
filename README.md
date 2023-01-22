@@ -179,13 +179,13 @@ Read variables declared in `.env` from your Obj-C classes like:
 
 ```objective-c
 // import header
-#import "ReactNativeConfig.h"
+#import "RNCConfig.h"
 
 // then read individual keys like:
-NSString *apiUrl = [ReactNativeConfig envFor:@"API_URL"];
+NSString *apiUrl = [RNCConfig envFor:@"API_URL"];
 
 // or just fetch the whole config
-NSDictionary *config = [ReactNativeConfig env];
+NSDictionary *config = [RNCConfig env];
 ```
 
 ### Windows
