@@ -84,7 +84,7 @@ if cocoapods are used in the project then pod has to be installed as well:
 	protected List<ReactPackage> getPackages() {
 		   return Arrays.asList(
            		new MainReactPackage()
-	+      		new ReactNativeConfigPackage()
+	+      		new RNCConfigPackage()
 	    );
 	}
 	```
