@@ -78,13 +78,13 @@ if cocoapods are used in the project then pod has to be installed as well:
 	**MainApplication.java**
 	
 	```diff
-	+ import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+	+ import com.lugg.RNCConfig.RNCConfigPackage;
 	
 	@Override
 	protected List<ReactPackage> getPackages() {
 		   return Arrays.asList(
            		new MainReactPackage()
-	+      		new ReactNativeConfigPackage()
+	+      		new RNCConfigPackage()
 	    );
 	}
 	```
