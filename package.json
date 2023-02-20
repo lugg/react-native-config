@@ -38,6 +38,8 @@
     "semantic-release": "^17.0.4"
   },
   "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
     "react-native-windows": ">=0.61"
   },
   "peerDependenciesMeta": {
