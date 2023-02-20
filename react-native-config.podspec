@@ -4,6 +4,8 @@ require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
+fabric_enabled = ENV['RCT_NEW_ARCH_ENABLED'] == '1'
+
 Pod::Spec.new do |s|
   s.name         = 'react-native-config'
   s.version      = package['version']
@@ -33,8 +35,27 @@ HOST_PATH="$SRCROOT/../.."
   s.default_subspec = 'App'
 
     s.subspec 'App' do |app|
-    app.source_files = 'ios/**/*.{h,m}'
-    app.dependency 'React-Core'
+    app.source_files = 'ios/**/*.{h,m,mm}'
+    
+    if fabric_enabled
+      folly_compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32'
+
+      app.pod_target_xcconfig = {
+        'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/boost" "$(PODS_ROOT)/boost-for-react-native" "$(PODS_ROOT)/RCT-Folly"',
+        'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
+      }
+      app.compiler_flags  = folly_compiler_flags + ' -DRCT_NEW_ARCH_ENABLED'
+
+      app.dependency "React"
+      app.dependency "React-RCTFabric" # This is for fabric component
+      app.dependency "React-Codegen"
+      app.dependency "RCT-Folly"
+      app.dependency "RCTRequired"
+      app.dependency "RCTTypeSafety"
+      app.dependency "ReactCommon/turbomodule/core"
+    else
+      app.dependency 'React-Core'
+    end
   end
 
   # Use this subspec for iOS extensions that cannot use React dependency
