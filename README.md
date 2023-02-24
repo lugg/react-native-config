@@ -391,6 +391,10 @@ export default {
 };
 ```
 
+## TypeScript
+
+To automatically generate types declaration for `.env` files, you can use community libraries such as [react-native-config-codegen](https://github.com/jackstudd/react-native-config-codegen).
+
 ## Meta
 
 Created by Pedro Belo at [Lugg](https://lugg.com/).
