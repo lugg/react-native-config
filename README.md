@@ -136,6 +136,28 @@ defaultConfig {
 }
 ```
 
+## TypeScript declaration for your .env file
+
+If you want to get autocompletion and typesafety for your .env files. Create a file named `react-native-config.d.ts` in the same directory where you put your type declarations, and add the following contents:
+
+```ts
+declare module 'react-native-config' {
+  export interface NativeConfig {
+      HOSTNAME?: string;
+  }
+  
+  export const Config: NativeConfig
+  export default Config
+}
+```
+
+Then when you want to use it, you just write:
+
+```
+import Config from 'react-native-config';
+console.log(Config.HOSTNAME);
+```
+
 ## Native Usage
 
 ### Android
