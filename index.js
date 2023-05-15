@@ -1,9 +1,10 @@
 'use strict';
 
-// Bridge to:
-// Android: buildConfigField vars set in build.gradle, and exported via ReactConfig
-// iOS: config vars set in xcconfig and exposed via RNCConfig.m
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
-export const Config = NativeModules.RNCConfigModule || {}
+// new arch is not supported on Windows yet
+export const Config = Platform.OS === 'windows'
+    ? NativeModules.RNCConfigModule
+    : require('./codegen/NativeConfigModule').default.getConstants().constants;
+
 export default Config;
