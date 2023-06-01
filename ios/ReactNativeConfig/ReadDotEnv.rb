@@ -48,8 +48,8 @@ def read_dot_env(envs_root)
         abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
       end
 
-      # Skip if key starts with "ANDROID_"
-      next h if key.start_with?("ANDROID_")
+      # Skip if m[:key] starts with "ANDROID_"
+      next h if m[:key].start_with?("ANDROID_")
       # Strip IOS_ prefix if exists
       key = m[:key].sub(/^IOS_/, '')
       # Ensure string (in case of empty value) and escape any quotes present in the value.
