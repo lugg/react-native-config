@@ -269,6 +269,10 @@ The same environment variable can be used to assemble releases with a different 
 ```
 $ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
 ```
+Note: When trying to release the bundle you need to export with a different config
+```
+$ cd android && export ENVFILE=.env.staging ./gradlew bundleRelease
+```
 
 Alternatively, you can define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
 
