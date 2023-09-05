@@ -52,9 +52,9 @@ if cocoapods are used in the project then pod has to be installed as well:
  - Manual Link (iOS)
 
 	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
-	2. Go to `node_modules` ➜ `react-native-config` and add 		`ReactNativeConfig.xcodeproj`
+	2. Go to `node_modules` ➜ `react-native-config` ➜ `ios`  and add 		`ReactNativeConfig.xcodeproj`
 	3. Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
-	4. In the project navigator, select your project. Add 		`libReactNativeConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+	4. In the project navigator, select your project. Add 		`libRNCConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 	5. And go the Build Settings tab. Make sure All is toggled on (instead of Basic)
 	6. Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
 
