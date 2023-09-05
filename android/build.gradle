@@ -16,6 +16,11 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
+    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+      namespace "com.lugg.RNCConfig"
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
