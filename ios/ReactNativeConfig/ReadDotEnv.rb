@@ -48,6 +48,7 @@ def read_dot_env(envs_root)
         abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
       end
 
+      next h if m[:key].start_with?("SECRET_")
       key = m[:key]
       # Ensure string (in case of empty value) and escape any quotes present in the value.
       val = m[:val].to_s.gsub('"', '\"')
