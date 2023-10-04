@@ -24,6 +24,15 @@ Config.GOOGLE_MAPS_API_KEY; // 'abcdefgh'
 
 Keep in mind this module doesn't obfuscate or encrypt secrets for packaging, so **do not store sensitive keys in `.env`**. It's [basically impossible to prevent users from reverse engineering mobile app secrets](https://rammic.github.io/2015/07/28/hiding-secrets-in-android-apps/), so design your app (and APIs) with that in mind.
 
+## Excluding vars
+
+Sometimes you will need to include vars in your `.env` not required for your app to run but rather for a CI process and so you can prefix the key name with `SECRET` to exclude it.
+
+```
+API_URL=https://myapi.com
+SECRET_CI_API_KEY=abcdefgh # this will not be available in the app
+```
+
 ## Setup
 
 Install the package:
