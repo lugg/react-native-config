@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
+  s.macos.deployment_target = '10.15'
   s.visionos.deployment_target = '1.0'
 
   s.source       = { git: 'https://github.com/luggit/react-native-config.git', tag: "v#{s.version.to_s}" }

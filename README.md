@@ -1,6 +1,6 @@
 # Config variables for React Native apps
 
-Module to expose config variables to your javascript code in React Native, supporting iOS, Android and Windows.
+Module to expose config variables to your javascript code in React Native, supporting iOS, Android, macOS and Windows.
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
@@ -49,7 +49,7 @@ if cocoapods are used in the project then pod has to be installed as well:
 (cd ios; pod install)
 ```
 
- - Manual Link (iOS)
+ - Manual Link (iOS / macOS)
 
 	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
 	2. Go to `node_modules` ➜ `react-native-config` ➜ `ios`  and add 		`ReactNativeConfig.xcodeproj`
@@ -195,7 +195,7 @@ versionCode project.env.get("VERSION_CODE").toInteger()
 
 Once again, remember variables stored in `.env` are published with your code, so **DO NOT put anything sensitive there like your app `signingConfigs`.**
 
-### iOS
+### iOS / macOS
 
 Read variables declared in `.env` from your Obj-C classes like:
 
@@ -312,7 +312,7 @@ Also note that besides requiring lowercase, the matching is done with `buildFlav
 
 <a name="ios-multi-scheme"></a>
 
-#### iOS
+#### iOS / macOS
 
 The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
 
