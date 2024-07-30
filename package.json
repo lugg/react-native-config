@@ -1,6 +1,6 @@
 {
   "name": "react-native-config",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
@@ -14,7 +14,8 @@
   ],
   "homepage": "https://github.com/luggit/react-native-config",
   "contributors": [
-    "Luan Curti <luancurti@gmail.com> (https://github.com/luancurti)"
+    "Luan Curti <luancurti@gmail.com> (https://github.com/luancurti)",
+    "Amer Lotfi Orimi <amerllica@gmail.com> (https://github.com/amerllica)"
   ],
   "repository": {
     "type": "git",
@@ -34,8 +35,8 @@
   "types": "./index.d.ts",
   "license": "MIT",
   "devDependencies": {
-    "@semantic-release/git": "^9.0.0",
-    "semantic-release": "^17.0.4"
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^19.0.5"
   },
   "peerDependencies": {
     "react-native-windows": ">=0.61"
