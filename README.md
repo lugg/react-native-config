@@ -1,6 +1,6 @@
 # Config variables for React Native apps
 
-Module to expose config variables to your javascript code in React Native, supporting iOS, Android and Windows.
+Module to expose config variables to your javascript code in React Native, supporting iOS, Android, macOS and Windows.
 
 Bring some [12 factor](http://12factor.net/config) love to your mobile apps!
 
@@ -49,12 +49,12 @@ if cocoapods are used in the project then pod has to be installed as well:
 (cd ios; pod install)
 ```
 
- - Manual Link (iOS)
+ - Manual Link (iOS / macOS)
 
 	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
-	2. Go to `node_modules` ➜ `react-native-config` and add 		`ReactNativeConfig.xcodeproj`
+	2. Go to `node_modules` ➜ `react-native-config` ➜ `ios`  and add 		`ReactNativeConfig.xcodeproj`
 	3. Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
-	4. In the project navigator, select your project. Add 		`libReactNativeConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+	4. In the project navigator, select your project. Add 		`libRNCConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 	5. And go the Build Settings tab. Make sure All is toggled on (instead of Basic)
 	6. Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
 
@@ -136,6 +136,28 @@ defaultConfig {
 }
 ```
 
+## TypeScript declaration for your .env file
+
+If you want to get autocompletion and typesafety for your .env files. Create a file named `react-native-config.d.ts` in the same directory where you put your type declarations, and add the following contents:
+
+```ts
+declare module 'react-native-config' {
+  export interface NativeConfig {
+      HOSTNAME?: string;
+  }
+  
+  export const Config: NativeConfig
+  export default Config
+}
+```
+
+Then when you want to use it, you just write:
+
+```
+import Config from 'react-native-config';
+console.log(Config.HOSTNAME);
+```
+
 ## Native Usage
 
 ### Android
@@ -173,7 +195,7 @@ versionCode project.env.get("VERSION_CODE").toInteger()
 
 Once again, remember variables stored in `.env` are published with your code, so **DO NOT put anything sensitive there like your app `signingConfigs`.**
 
-### iOS
+### iOS / macOS
 
 Read variables declared in `.env` from your Obj-C classes like:
 
@@ -269,6 +291,10 @@ The same environment variable can be used to assemble releases with a different 
 ```
 $ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
 ```
+Note: When trying to release the bundle you need to export with a different config
+```
+$ cd android && export ENVFILE=.env.staging ./gradlew bundleRelease
+```
 
 Alternatively, you can define a map in `build.gradle` associating builds with env files. Do it before the `apply from` call, and use build cases in lowercase, like:
 
@@ -286,7 +312,7 @@ Also note that besides requiring lowercase, the matching is done with `buildFlav
 
 <a name="ios-multi-scheme"></a>
 
-#### iOS
+#### iOS / macOS
 
 The basic idea in iOS is to have one scheme per environment file, so you can easily alternate between them.
 

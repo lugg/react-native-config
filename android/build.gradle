@@ -15,43 +15,6 @@ def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
-def resolveReactNativeDirectory() {
-    def reactNativeLocation = safeExtGet("REACT_NATIVE_NODE_MODULES_DIR", null)
-    if (reactNativeLocation != null) {
-        return file(reactNativeLocation)
-    }
-
-    // monorepo workaround
-    // react-native can be hoisted or in project's own node_modules
-    def reactNativeFromProjectNodeModules = file("${rootProject.projectDir}/../node_modules/react-native")
-    if (reactNativeFromProjectNodeModules.exists()) {
-        return reactNativeFromProjectNodeModules
-    }
-
-    def reactNativeFromNodeModulesWithRNCConfig = file("${projectDir}/../../react-native")
-    if (reactNativeFromNodeModulesWithRNCConfig.exists()) {
-        return reactNativeFromNodeModulesWithRNCConfig
-    }
-
-    throw new Exception(
-            "[react-native-config] Unable to resolve react-native location in " +
-                    "node_modules. You should add project extension property (in app/build.gradle) " +
-                    "`REACT_NATIVE_NODE_MODULES_DIR` with path to react-native."
-    )
-}
-
-def getReactNativeMinorVersion() {
-    def REACT_NATIVE_DIR = resolveReactNativeDirectory()
-
-    def reactProperties = new Properties()
-    file("$REACT_NATIVE_DIR/ReactAndroid/gradle.properties").withInputStream { reactProperties.load(it) }
-
-    def REACT_NATIVE_VERSION = reactProperties.getProperty("VERSION_NAME")
-    def REACT_NATIVE_MINOR_VERSION = REACT_NATIVE_VERSION.startsWith("0.0.0-") ? 1000 : REACT_NATIVE_VERSION.split("\\.")[1].toInteger()
-
-    return REACT_NATIVE_MINOR_VERSION
-}
-
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:
     // - Set `newArchEnabled` to true inside the `gradle.properties` file
@@ -64,7 +27,28 @@ if (isNewArchitectureEnabled()) {
     apply plugin: "com.facebook.react"
 }
 
+def supportsNamespace() {
+  def parsed = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.');
+  def major = parsed[0].toInteger();
+  def minor = parsed[1].toInteger();
+
+  // Namespace support was added in 7.3.0
+  if (major == 7 && minor >= 3) {
+    return true;
+  }
+
+  return major >= 8;
+}
+
 android {
+    if(supportsNamespace()) {
+        namespace = "com.lugg.RNCConfig"
+        sourceSets {
+            main {
+                manifest.srcFile "src/main/AndroidManifestNew.xml"
+            }
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
@@ -96,9 +80,5 @@ repositories {
 }
 
 dependencies {
-    if (isNewArchitectureEnabled() && getReactNativeMinorVersion() < 71) {
-        implementation project(":ReactAndroid")
-    } else {
-        implementation 'com.facebook.react:react-native:+'
-    }
+    implementation 'com.facebook.react:react-native:+'
 }

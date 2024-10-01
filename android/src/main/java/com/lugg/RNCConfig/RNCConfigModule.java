@@ -3,10 +3,8 @@ package com.lugg.RNCConfig;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
-
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-
 import java.lang.ClassNotFoundException;
 import java.lang.IllegalAccessException;
 import java.lang.reflect.Field;
