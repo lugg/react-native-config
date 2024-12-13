@@ -27,7 +27,7 @@ HOST_PATH="$SRCROOT/../.."
 "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
 ),
     execution_position: :before_compile,
-    based_on_dependency_analysis: false,
+    always_out_of_date: "1",
     input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb'],
     output_files: ['$BUILD_DIR/GeneratedInfoPlistDotEnv.h', '$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/GeneratedDotEnv.m']
   }
@@ -51,6 +51,7 @@ HOST_PATH="$SRCROOT/../.."
         "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig/BuildDotenvConfig.rb" "$HOST_PATH" "${PODS_TARGET_SRCROOT}/ios/ReactNativeConfig"
         ),
       execution_position: :before_compile,
+      always_out_of_date: "1",
       input_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/BuildDotenvConfig.rb'],
       output_files: ['$PODS_TARGET_SRCROOT/ios/ReactNativeConfig/GeneratedDotEnv.m']
     }
