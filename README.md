@@ -116,7 +116,13 @@ if cocoapods are used in the project then pod has to be installed as well:
 	Add `PackageProviders().Append(winrt::RNCConfig::ReactPackageProvider());` before `InitializeComponent();`.
 
 ### Extra step for Android
+#### Using RN-Integrate
+Apply extra steps automatically:
+```sh
+npx react-native-integrate react-native-config
+```
 
+#### Manual
 You'll also need to manually apply a plugin to your app, from `android/app/build.gradle`:
 
 ```
