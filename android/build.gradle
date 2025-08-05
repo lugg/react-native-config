@@ -15,6 +15,18 @@ def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
+def isNewArchitectureEnabled() {
+    // To opt-in for the New Architecture, you can either:
+    // - Set `newArchEnabled` to true inside the `gradle.properties` file
+    // - Invoke gradle with `-newArchEnabled=true`
+    // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+}
+
+if (isNewArchitectureEnabled()) {
+    apply plugin: "com.facebook.react"
+}
+
 def supportsNamespace() {
   def parsed = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.');
   def major = parsed[0].toInteger();
@@ -44,9 +56,22 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
     }
     lintOptions {
         abortOnError false
+    }
+
+    sourceSets.main {
+        java {
+            if (!isNewArchitectureEnabled()) {
+                 srcDirs += 'src/paper/java'
+            } else {
+                // This should be done by the RN gradle plugin, for some reason it sometimes doesn't work
+                srcDirs += 'build/generated/source/codegen/java'
+            }
+        }
     }
 }
 
@@ -55,5 +80,5 @@ repositories {
 }
 
 dependencies {
-    implementation "com.facebook.react:react-native:${safeExtGet("reactNative", "+")}" // from node_modules
+    implementation 'com.facebook.react:react-native:+'
 }
