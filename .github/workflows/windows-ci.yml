@@ -34,6 +34,9 @@ jobs:
       run: |
         cd Example
         yarn --pure-lockfile
+        
+    - name: Install MSBuild
+      uses: microsoft/setup-msbuild@v1.1
 
     - name: Build x64 release
       run: |
