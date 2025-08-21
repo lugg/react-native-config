@@ -34,9 +34,13 @@ jobs:
       run: |
         cd Example
         yarn --pure-lockfile
-        
+
     - name: Install MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v1.3
+    
+    - name: Install Visual Studio Build Tools
+      run: |
+        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
 
     - name: Build x64 release
       run: |
