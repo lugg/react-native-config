@@ -42,11 +42,6 @@ jobs:
       run: |
         choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
 
-    - name: Build x64 release
-      run: |
-        cd Example
-        npx react-native run-windows --release --no-packager --no-launch --logging
-
     - name: Start Appium server
       shell: powershell
       run: |
