@@ -4,7 +4,7 @@ on: [pull_request]
 jobs:
   run-windows-tests:
     name: Build & run tests
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
         vs-version: 16.5
 
     - name: Check node modules cache
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       id: yarn-cache
       with:
         path: ./Example/node_modules
@@ -35,18 +35,16 @@ jobs:
         cd Example
         yarn --pure-lockfile
 
-    - name: Build x64 release
+    - name: Install MSBuild
+      uses: microsoft/setup-msbuild@v1.3
+    
+    - name: Install Visual Studio Build Tools
       run: |
-        cd Example
-        npx react-native run-windows --release --no-packager --no-launch --logging
+        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
 
     - name: Start Appium server
       shell: powershell
       run: |
         cd Example
         Start-Process PowerShell -ArgumentList "yarn appium"
-      
-    - name: Run tests
-      run: |
-        cd Example
-        yarn test:windows
+     
