@@ -1,6 +1,6 @@
 {
   "name": "react-native-config",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
@@ -42,7 +42,7 @@
     "@types/jest": "^29.5.12"
   },
   "dependencies": {
-    "@babel/core": "^7.25.2",
+  "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.0",
     "@babel/preset-react": "^7.24.7",
     "babel-jest": "^29.7.0"
