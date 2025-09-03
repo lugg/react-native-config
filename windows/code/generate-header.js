@@ -34,12 +34,6 @@ function generateFiles(vars) {
   let nativeCode = '';
   // React Native Module code: attribute-based constants block
   let rnCode = '';
-  // Snippets for building a JS object with all constants
-  let objectBuilder = '';
-  // Snippet for a key-based getter switch/if chain
-  let keyGetter = '';
-  // Snippet for ReactConstantProvider
-  let constantsProvider = '';
   nativeCode += '#include<string>\n'
   nativeCode += 'namespace ReactNativeConfig {\n'
   for (let {key, value} of vars) {
@@ -54,9 +48,6 @@ function generateFiles(vars) {
   nativeCode +='}\n'
   updateFile(nativeCode, path.join(outDir, 'RNCConfigValues.h'))
   updateFile(rnCode, path.join(outDir, 'RNCConfigValuesModule.inc.g.h'))
-  updateFile(objectBuilder, path.join(outDir, 'RNCConfigValuesObject.inc.g.h'))
-  updateFile(keyGetter, path.join(outDir, 'RNCConfigValuesGet.inc.g.h'))
-  updateFile(constantsProvider, path.join(outDir, 'RNCConfigValuesConstants.inc.g.h'))
 }
 
 // Escape the string so it will work with C++
