@@ -27,7 +27,7 @@
     "android/",
     "ios/",
     "windows/",
-    "src",
+    "src/",
     "index.js",
     "index.d.ts",
     "react-native-config.podspec",
