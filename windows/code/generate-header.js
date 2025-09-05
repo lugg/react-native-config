@@ -34,6 +34,8 @@ function generateFiles(vars) {
   let nativeCode = '';
   // React Native Module code: attribute-based constants block
   let rnCode = '';
+  // React Native Module code: attribute-based constants block
+  let rnCode = '';
   // Snippets for building a JS object with all constants
   let objectBuilder = '';
   // Snippet for a key-based getter switch/if chain
