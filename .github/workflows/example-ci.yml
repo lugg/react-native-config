@@ -59,8 +59,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug
+        run: ENVFILE=.env.android-escaping ./gradlew assembleDebug
         working-directory: Example/android
+
+      - name: Verify compiled percent resource
+        run: |
+          AAPT2=$(find "$ANDROID_HOME/build-tools" -name aapt2 -type f | sort -V | tail -1)
+          "$AAPT2" dump resources android/app/build/outputs/apk/debug/app-debug.apk | grep -F '"100% %s"'
 
   ios:
     name: iOS build
