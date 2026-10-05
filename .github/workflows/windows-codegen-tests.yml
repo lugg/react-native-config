@@ -1,0 +1,29 @@
+name: Windows string codegen tests
+
+on:
+  pull_request:
+    paths:
+      - 'windows/code/**'
+      - 'test/windows_string_literals_test.js'
+      - '.github/workflows/windows-codegen-tests.yml'
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Check C++ toolchain
+        run: clang++ --version
+      - name: Compile generated constants and verify UTF-8 bytes
+        run: node --test test/windows_string_literals_test.js

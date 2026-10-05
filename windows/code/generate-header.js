@@ -51,19 +51,22 @@ function generateFiles(vars) {
   updateFile(objectBuilder, path.join(outDir, 'RNCConfigValuesObject.inc.g.h'))
 }
 
-// Escape the string so it will work with C++
-// assume the string is UTF-8
-const escapeRegex = /[a-zA-Z0-9`~!@#$%^&*()_=\-\+\{\}\];:'|<,.>?/\ ]/
-function escapeString(string) {
+// Keep printable ASCII readable and encode all other UTF-8 bytes numerically.
+function escapeString(string = '') {
+  const bytes = Buffer.from(string, 'utf8');
   let escaped = '"';
-  for (let i = 0;  i < string.length; ++i) {
-    if (!string.substr(i,1).match(escapeRegex))
-      escaped += `\\u${string.charCodeAt(i).toString(16)}`
-    else
-      escaped += string[i]
+  for (const byte of bytes) {
+    // Quotes and backslashes affect C++ syntax; question marks can form trigraphs.
+    if (byte >= 0x20 && byte <= 0x7e && byte !== 0x22 && byte !== 0x5c && byte !== 0x3f) {
+      escaped += String.fromCharCode(byte);
+    } else {
+      // Three digits prevent an adjacent digit from extending the escape.
+      escaped += '\\' + byte.toString(8).padStart(3, '0');
+    }
   }
   escaped += '"';
-  return escaped;
+  // An explicit byte count preserves embedded NULs as part of the string.
+  return `std::string(${escaped}, ${bytes.length})`;
 }
 
 // Make sure to not alter mtime of a file if its content did not change
