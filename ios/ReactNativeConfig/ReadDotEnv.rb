@@ -40,6 +40,30 @@ def select_env_file(default_env_file)
   { name: expanded, source: :envfile, unset: unset, custom: false, requested: requested }
 end
 
+# A whitespace-separated # starts a comment outside a quoted value. Keep URL fragments.
+def strip_inline_comment(line)
+  index = line.index('=')
+  return line if index.nil?
+
+  index += 1
+  index += 1 while index < line.length && [" ", "\t"].include?(line[index])
+  quote = ["'", '"'].include?(line[index]) ? line[index] : nil
+  index += 1 if quote
+  escaped = false
+
+  while index < line.length
+    character = line[index]
+    if quote
+      quote = nil if character == quote && !escaped
+      escaped = character == '\\' && !escaped
+    elsif character == '#' && [" ", "\t"].include?(line[index - 1])
+      return line[0...index].rstrip
+    end
+    index += 1
+  end
+  line
+end
+
 # TODO: introduce a parameter which controls how to build relative path
 def read_dot_env(envs_root)
   defaultEnvFile = '.env'
@@ -68,7 +92,7 @@ def read_dot_env(envs_root)
 
   dotenv = begin
     # https://regex101.com/r/cbm5Tp/1
-    dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)\s*=\s*((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
+    dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)\s*=\s*((?<quote>["'])?(?<val>.*?)(?<!\\)\k<quote>?|)$/
 
     # The paths that satisfy what was asked for. Anything found beyond these is a fallback.
     requested_paths = [
@@ -104,7 +128,7 @@ def read_dot_env(envs_root)
       next if line.strip.empty?
       next if line.match(/^\s*#/)
 
-      m = line.match(dotenv_pattern)
+      m = strip_inline_comment(line).match(dotenv_pattern)
       if m.nil?
         abort('Invalid entry in .env file. Please verify your .env file is correctly formatted.')
       end

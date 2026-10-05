@@ -55,6 +55,10 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Test dotenv reader
+        run: ./Example/android/gradlew -p test/gradle testInlineComments --no-daemon
+        working-directory: .
+
       - name: Install node modules
         run: yarn install --frozen-lockfile
 

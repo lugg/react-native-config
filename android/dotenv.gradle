@@ -21,6 +21,30 @@ def getCurrentFlavor() {
     return flavor
 }
 
+// A whitespace-separated # starts a comment outside a quoted value. Keep URL fragments.
+def stripInlineComment(String line) {
+    def index = line.indexOf('=')
+    if (index < 0) return line
+
+    index++
+    while (index < line.length() && (line[index] == ' ' || line[index] == '\t')) index++
+    def quote = index < line.length() && (line[index] == '"' || line[index] == "'") ? line[index] : null
+    if (quote != null) index++
+    def escaped = false
+
+    while (index < line.length()) {
+        def character = line[index]
+        if (quote != null) {
+            if (character == quote && !escaped) quote = null
+            escaped = character == '\\' && !escaped
+        } else if (character == '#' && (line[index - 1] == ' ' || line[index - 1] == '\t')) {
+            return line.substring(0, index).stripTrailing()
+        }
+        index++
+    }
+    return line
+}
+
 def loadDotEnv(flavor = getCurrentFlavor()) {
 
     def envFile = project.hasProperty("defaultEnvFile") ? project.defaultEnvFile : ".env"
@@ -49,7 +73,7 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     if (f.exists()) {
         f.eachLine { line ->
             // https://regex101.com/r/cbm5Tp/1
-            def matcher = (line =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
+            def matcher = (stripInlineComment(line) =~ /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/)
             // TODO: Fail Android builds if line doesn't match
             if (matcher.getCount() == 1 && matcher[0].size() == 3) {
                 env.put(matcher[0][1], matcher[0][2].replace('"', '\\"'))

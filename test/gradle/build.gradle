@@ -1,0 +1,48 @@
+import groovy.json.JsonSlurper
+
+// Run the real dotenv.gradle reader without downloading the Android Gradle plugin.
+// These are the two Android DSL calls that consume the resulting values.
+class AndroidConfig {
+    Map fields = [:]
+    Map resources = [:]
+
+    void defaultConfig(Closure configure) {
+        configure.delegate = this
+        configure.resolveStrategy = Closure.DELEGATE_FIRST
+        configure.call()
+    }
+
+    void buildConfigField(String type, String name, String value) {
+        fields[name] = value
+    }
+
+    void resValue(String type, String name, String value) {
+        resources[name] = value
+    }
+}
+
+ext.androidConfig = new AndroidConfig()
+ext.android = { Closure configure ->
+    configure.delegate = androidConfig
+    configure.resolveStrategy = Closure.DELEGATE_FIRST
+    configure.call()
+}
+
+def fixtures = new JsonSlurper().parse(file('../fixtures/inline_comments.json'))
+def envFile = layout.buildDirectory.file('fixtures.env').get().asFile
+envFile.parentFile.mkdirs()
+envFile.setText(fixtures.collect { it.line }.join('\n') + '\n', 'UTF-8')
+ext.defaultEnvFile = envFile.absolutePath
+
+apply from: '../../android/dotenv.gradle'
+
+tasks.register('testInlineComments') {
+    doLast {
+        fixtures.each { fixture ->
+            assert project.env[fixture.key] == fixture.value : fixture.key
+            assert androidConfig.fields[fixture.key] == '"' + fixture.value + '"' : fixture.key
+            assert androidConfig.resources[fixture.key] == '"' + fixture.value + '"' : fixture.key
+        }
+        println("Verified ${fixtures.size()} dotenv fixtures through Gradle")
+    }
+}

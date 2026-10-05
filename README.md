@@ -27,6 +27,16 @@ API_URL=https://myapi.com
 GOOGLE_MAPS_API_KEY=abcdefgh
 ```
 
+Inline comments start with a space or tab followed by `#`, outside a quoted value.
+Use single or double quotes to keep a literal `#` after whitespace. Hashes without a preceding
+space or tab, such as URL fragments, remain part of the value:
+
+```dotenv
+API_URL=https://myapi.com/#section # endpoint
+APP_NAME="My app #1" # display name
+OPTIONAL_VALUE= # empty value
+```
+
 Then access variables defined there from your app:
 
 ```js

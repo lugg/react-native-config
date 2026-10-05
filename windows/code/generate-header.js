@@ -13,12 +13,12 @@ if (!fs.existsSync(outDir)) {
 
 if (fs.existsSync(envFile)) {
   const vars = []
-  const regex = /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)?['"]?\s*$/
+  const regex = /^\s*(?:export\s+|)([\w\d\.\-_]+)\s*=\s*['"]?(.*?)['"]?\s*$/
   readline.createInterface({
     input: fs.createReadStream(envFile),
     console: false
   }).on('line', (line)=>{
-    const matches = line.match(regex)
+    const matches = stripInlineComment(line).match(regex)
     if (matches)
       vars.push({key: matches[1], value: matches[2]})
   }).on('close', ()=> {
@@ -27,6 +27,30 @@ if (fs.existsSync(envFile)) {
 } else {
   console.warn(`waring: env file ${envFile} does not exit`)
   generateFiles([])
+}
+
+// A whitespace-separated # starts a comment outside a quoted value. Keep URL fragments.
+function stripInlineComment(line) {
+  let index = line.indexOf('=');
+  if (index < 0) return line;
+
+  index++;
+  while (index < line.length && (line[index] === ' ' || line[index] === '\t')) index++;
+  let quote = line[index] === '"' || line[index] === "'" ? line[index] : null;
+  if (quote !== null) index++;
+  let escaped = false;
+
+  while (index < line.length) {
+    const character = line[index];
+    if (quote !== null) {
+      if (character === quote && !escaped) quote = null;
+      escaped = character === '\\' && !escaped;
+    } else if (character === '#' && (line[index - 1] === ' ' || line[index - 1] === '\t')) {
+      return line.slice(0, index).trimEnd();
+    }
+    index++;
+  }
+  return line;
 }
 
 function generateFiles(vars) {

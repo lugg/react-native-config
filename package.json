@@ -42,7 +42,8 @@
   "types": "./index.d.ts",
   "license": "MIT",
   "scripts": {
-    "test": "ruby test/run.rb"
+    "test": "ruby test/run.rb && node --test test/windows_inline_comments_test.js",
+    "test:android": "./Example/android/gradlew -p test/gradle testInlineComments --no-daemon"
   },
   "devDependencies": {
     "@react-native-community/cli": "^20.0.2",

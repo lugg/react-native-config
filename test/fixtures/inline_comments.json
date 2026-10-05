@@ -1,0 +1,18 @@
+[
+  {"key":"PLAIN","line":"PLAIN=value # discarded","value":"value"},
+  {"key":"TAB","line":"TAB=value\t# discarded","value":"value"},
+  {"key":"DOUBLE","line":"DOUBLE=\"value # literal\" # discarded","value":"value # literal"},
+  {"key":"SINGLE","line":"SINGLE='value # literal' # discarded","value":"value # literal"},
+  {"key":"MIXED","line":"MIXED=\"it's # literal\" # discarded","value":"it's # literal"},
+  {"key":"APOSTROPHE","line":"APOSTROPHE=it's fine # discarded","value":"it's fine"},
+  {"key":"HASH","line":"HASH=value#literal # discarded","value":"value#literal"},
+  {"key":"URL","line":"URL=https://example.test/#fragment # discarded","value":"https://example.test/#fragment"},
+  {"key":"COLOR","line":"COLOR=#123abc # discarded","value":"#123abc"},
+  {"key":"EMPTY","line":"EMPTY= # discarded","value":""},
+  {"key":"QUOTED_EMPTY","line":"QUOTED_EMPTY=\"\" # discarded","value":""},
+  {"key":"EXPORTED","line":"export EXPORTED=value # discarded","value":"value"},
+  {"key":"SPACES","line":"SPACES=\"  value # literal  \" # discarded","value":"  value # literal  "},
+  {"key":"UNICODE","line":"UNICODE=\"中文 # 保留\" # discarded","value":"中文 # 保留"},
+  {"key":"NO_COMMENT","line":"NO_COMMENT=value#literal","value":"value#literal"},
+  {"key":"QUOTED_NO_COMMENT","line":"QUOTED_NO_COMMENT=\"value # literal\"","value":"value # literal"}
+]

@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'ios/**'
+      - 'windows/code/**'
       - 'test/**'
       - 'package.json'
       - '.github/workflows/ios-codegen-tests.yml'
@@ -23,7 +24,9 @@ jobs:
       - name: Show toolchain
         run: |
           ruby --version
+          node --version
           clang --version
+          clang++ --version
 
       # Written by Xcode scheme pre-actions and read before ENVFILE. A copy on the runner would
       # override every fixture in the suite, so the run refuses to start with one present.
@@ -32,3 +35,6 @@ jobs:
 
       - name: Run tests
         run: ruby test/run.rb
+
+      - name: Test Windows generator and portable C++ constants
+        run: node --test test/windows_inline_comments_test.js
